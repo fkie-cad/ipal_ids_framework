@@ -1,0 +1,5 @@
+#!/usr/bin/env python3
+from ipal_iids import iids
+
+if __name__ == "__main__":
+    iids.main()

@@ -1,0 +1,28 @@
+image: "asaillard/python-gsl:latest"
+
+before_script:
+  - python3 --version
+  - pip3 install numpy
+  - pip3 install -r requirements.txt
+  - pip3 install numpy==1.20.0
+  - pip3 install pomegranate==0.14.5
+  - pip3 install -r requirements-dev.txt
+
+stages:
+  - Static Analysis
+  - Test
+
+black:
+  stage: Static Analysis
+  script:
+  - black --check --config pyproject.toml .
+
+flake8:
+  stage: Static Analysis
+  script:
+  - flake8
+
+pytest:
+  stage: Test
+  script:
+  - python3 -m pytest -v
