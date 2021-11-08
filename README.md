@@ -24,7 +24,7 @@ The IIDS framework contains implementations of the following IIDSs. Note that we
 ###### Publications
 
 - Wolsing, Konrad, Eric Wagner, and Martin Henze. "Facilitating Protocol-independent Industrial Intrusion Detection Systems." *Proceedings of the 2020 ACM SIGSAC Conference on Computer and Communications Security*. 2020 (https://doi.org/10.1145/3372297.3420019)
-- Konrad Wolsing, Eric Wagner, Antoine Saillard, and Martin Henze. "IPAL: Breaking up Silos of Protocol-dependent and Domain-specific Industrial Intrusion Detection Systems." *Under Review*. 2021 (ArXiv: https://arxiv.org)
+- Konrad Wolsing, Eric Wagner, Antoine Saillard, and Martin Henze. "IPAL: Breaking up Silos of Protocol-dependent and Domain-specific Industrial Intrusion Detection Systems." *Under Review*. 2021 (ArXiv: https://arxiv.org/abs/2111.03438)
 
 ## Getting started
 
