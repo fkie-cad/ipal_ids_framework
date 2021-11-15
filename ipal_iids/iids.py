@@ -248,13 +248,6 @@ def load_settings(args):  # noqa: C901
         settings.logger.error("Could not find config file at {}".format(config_file))
         exit(1)
 
-    # translate model-file paths, they are given as relative to the
-    # config file's location, parse them into resolved absolute paths
-    for entry in settings.idss.keys():
-        settings.idss[entry]["model-file"] = str(
-            (config_file.parent / Path(settings.idss[entry]["model-file"])).resolve()
-        )
-
 
 def train_idss(idss):
     # Try to load an existing model from file

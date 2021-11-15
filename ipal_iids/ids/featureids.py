@@ -117,7 +117,9 @@ class FeatureIDS(MetaIDS):
         )
 
         if "save-training" in self.settings and self.settings["save-training"]:
-            with self._open_file(self.settings["save-training"], mode="wt") as f:
+            with self._open_file(
+                self._relative_to_config(self.settings["save-training"]), mode="wt"
+            ) as f:
                 for e, a, t in zip(events[:N], annotations[:N], timestamps[:N]):
                     f.write(
                         json.dumps(

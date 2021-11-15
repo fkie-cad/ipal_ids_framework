@@ -3,6 +3,8 @@ import hashlib
 import json
 import sys
 
+from pathlib import Path
+
 import ipal_iids.settings as settings
 
 
@@ -31,6 +33,7 @@ class MetaIDS:
                 self.settings[key] = value
 
     def _open_file(self, filename, mode="r"):
+        filename = str(filename)
         if filename is None:
             return None
         elif filename.endswith(".gz"):
@@ -39,6 +42,24 @@ class MetaIDS:
             return sys.stdin
         else:
             return open(filename, mode)
+
+    def _relative_to_config(self, file: str) -> Path:
+        """
+        translate string of a file path to the resolved Path when
+        interpreting it as relative to the config file's location
+        """
+        config_file = Path(settings.config).resolve()
+        file_path = Path(file)
+        return (config_file.parent / file_path).resolve()
+
+    def _resolve_model_file_path(self) -> Path:
+        """
+        translate model-file path into absolute Path using
+        config file location
+        """
+        if self.settings["model-file"] is None:
+            raise Exception("Can't resolve model file since no model file was provided")
+        return self._relative_to_config(self.settings["model-file"])
 
     def _add_msg_hash(self, msg, nbytes=2):
         fingerprint = json.dumps(

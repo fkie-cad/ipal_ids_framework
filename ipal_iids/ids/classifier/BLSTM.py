@@ -202,9 +202,9 @@ class BLSTM(FeatureIDS):
             "history": self.history,
         }
 
-        with open(self.settings["model-file"], "wt") as f:
+        with self._open_file(self._resolve_model_file_path(), "wt") as f:
             f.write(json.dumps(model, indent=4))
-        self.blstm.save(self.settings["model-file"] + ".kreas")
+        self.blstm.save(str(self._resolve_model_file_path()) + ".kreas")
 
         return True
 
@@ -213,7 +213,7 @@ class BLSTM(FeatureIDS):
             return False
 
         try:  # Open model file
-            with open(self.settings["model-file"], "rt") as f:
+            with self._open_file(self._resolve_model_file_path(), mode="rt") as f:
                 model = json.load(f)
 
         except FileNotFoundError:

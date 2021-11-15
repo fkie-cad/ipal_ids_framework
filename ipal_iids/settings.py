@@ -7,7 +7,7 @@ from .ids.utils import get_all_iidss
 compresslevel = 9  # 0 no compress, 1 large/fast, 9 small/slow
 
 # In and output
-config = None
+config: str
 train_ipal = None
 train_state = None
 live_ipal = None

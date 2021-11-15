@@ -127,7 +127,7 @@ class SVM(FeatureIDS):
             "classes": self.classes,
         }
 
-        joblib.dump(model, self.settings["model-file"], compress=3)
+        joblib.dump(model, self._resolve_model_file_path(), compress=3)
 
         return True
 
@@ -136,10 +136,10 @@ class SVM(FeatureIDS):
             return False
 
         try:  # Open model file
-            model = joblib.load(self.settings["model-file"])
+            model = joblib.load(self._resolve_model_file_path())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(self.settings["model-file"])
+                "Model file {} not found.".format(str(self._resolve_model_file_path()))
             )
             return False
 

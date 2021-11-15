@@ -160,7 +160,7 @@ class InterArrivalTimeRange(MetaIDS):
             "range_model": self.range_model,
         }
 
-        with open(self.settings["model-file"], "w") as f:
+        with self._open_file(self._resolve_model_file_path(), mode="wt") as f:
             f.write(json.dumps(model, indent=4) + "\n")
 
         return True
@@ -170,11 +170,11 @@ class InterArrivalTimeRange(MetaIDS):
             return False
 
         try:  # Open model file
-            with open(self.settings["model-file"], "r") as f:
+            with self._open_file(self._resolve_model_file_path(), mode="rt") as f:
                 model = json.load(f)
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(self.settings["model-file"])
+                "Model file {} not found.".format(str(self._resolve_model_file_path()))
             )
             return False
 
