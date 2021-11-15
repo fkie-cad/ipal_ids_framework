@@ -39,7 +39,6 @@ Use the following commands to install the `ipal-iids` on your system, or install
 ```bash
 python3 -m pip install numpy
 python3 -m pip install .
-python3 -m pip install pomegranate
 ```
 
 ## Usage

@@ -12,8 +12,6 @@ python3 -m pip install --upgrade pip
 echo "Installing python packages"
 pip3 install numpy # for ar to install correctly
 pip3 install -r requirements.txt
-pip3 install numpy==1.20.0 # for pomegranate
-pip3 install pomegranate==0.14.5
 
 read -n1 -p "Setup developer tools too? [y,n]" doit 
 case $doit in  

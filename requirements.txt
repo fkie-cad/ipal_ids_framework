@@ -1,8 +1,9 @@
-numpy==1.19.3
-tensorflow==2.5.1
-graphviz==0.17
-sklearn==0.0
-keras==2.6.0
-torch==1.10.0
+numpy
+tensorflow
+graphviz
+sklearn
+keras
+torch
 git+https://github.com/RhysU/ar.git
-matplotlib==3.4.2
+matplotlib
+pomegranate
