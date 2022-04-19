@@ -131,17 +131,19 @@ The IIDS framework allows for using multiple IIDSs in parallel. Each entry in th
 
 #### Usage `ipal-visualize-model`
 
-This tool allows for visualizing the trained models for an IIDS configuration. To plot a specific model use `ipal-visualize-model --config [path-to-config-file]`.
+This tool allows for visualizing the trained models for an IIDS configuration. To plot a specific model use `ipal-visualize-model [path-to-config-file]`.
 
 ```bash
 ipal-visualize-model  -h
-usage: ipal-visualize-model [-h] --config FILE [--log STR] [--logfile FILE]
+usage: ipal-visualize-model [-h] [--log STR] [--logfile FILE] FILE
+
+positional arguments:
+  FILE            load the IDS configuration of the trained model ('*.gz' compressed).
 
 optional arguments:
   -h, --help      show this help message and exit
-  --config FILE   load the IDS configuration of the trained model ('*.gz' compressed).
-  --log STR       define logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL). Default is
-                  WARNING.
+  --log STR       define logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL).
+                  Default is WARNING.
   --logfile FILE  File to log to. Default is stderr.
 ```
 
