@@ -1,6 +1,11 @@
-image: "asaillard/python-gsl:latest"
+default:
+  image: "ubuntu:22.04"
 
 before_script:
+  - apt-get update
+  - apt-get -y install software-properties-common sudo g++
+  - apt-get -y install pip vim
+  - apt-get -y install libgsl-dev git
   - python3 --version
   - pip3 install numpy
   - pip3 install -r requirements.txt

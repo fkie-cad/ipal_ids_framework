@@ -3,10 +3,10 @@ import argparse
 import gzip
 import json
 import logging
+import sys
 
 import ipal_iids.settings as settings
-
-from ipal_iids.ids.utils import get_all_iidss
+from ids.utils import get_all_iidss
 
 
 # Wrapper for hiding .gz files
@@ -41,11 +41,9 @@ def initialize_logger(args):
 def prepare_arg_parser(parser):
 
     parser.add_argument(
-        "--config",
-        dest="config",
+        "config",
         metavar="FILE",
         help="load the IDS configuration of the trained model ('*.gz' compressed).",
-        required=True,
     )
 
     # Logging
@@ -81,7 +79,13 @@ def load_settings(args):
     # Initialize IDSs
     idss = []
     for name, config in settings.idss.items():
-        idss.append(get_all_iidss()[config["_type"]](args, name=name))
+        try:
+            idss.append(get_all_iidss()[config["_type"]](name=name))
+        except TypeError:
+            settings.logger.error(
+                "Failed loading model. Make sure you provide a config file, not a model file!"
+            )
+            sys.exit(1)
 
     return idss
 

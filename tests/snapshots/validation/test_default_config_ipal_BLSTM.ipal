@@ -1,0 +1,667 @@
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 0,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 100,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 1,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 101,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 2,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 102,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 3,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 103,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 4,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 104,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 5,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 105,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 6,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 106,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 7,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 107,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 8,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 108,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 9,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 109,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 10,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 110,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 11,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 111,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 12,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 112,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 13,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 113,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 14,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 114,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 15,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 115,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 16,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 116,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 17,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 117,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 18,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 118,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 19,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 119,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 20,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 120,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 21,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": true,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 121,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 22,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": true,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 122,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 23,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": true,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 123,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 24,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": true,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 124,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 25,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 125,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 26,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 126,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 27,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": true,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 127,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 28,
+###IGNORE-LINE###
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+###IGNORE-LINE###
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 128,
+    "type": 1
+}

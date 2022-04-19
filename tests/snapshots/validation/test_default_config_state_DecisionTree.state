@@ -1,0 +1,667 @@
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 0,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 100,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 1,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 101,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 2,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 102,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 3,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 103,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 4,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 104,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 5,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 105,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 6,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 106,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 7,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 107,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 8,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 108,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 9,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 109,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 10,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 110,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 11,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 111,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 12,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 112,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 13,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 113,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 14,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 114,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 15,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 115,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 16,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 116,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 17,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 117,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 18,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 118,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 19,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 119,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 20,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 120,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 21,
+    "ids": false,
+    "length": 12,
+    "malicious": true,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 121,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 22,
+    "ids": false,
+    "length": 12,
+    "malicious": true,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 122,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 23,
+    "ids": false,
+    "length": 12,
+    "malicious": true,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 123,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 24,
+    "ids": false,
+    "length": 12,
+    "malicious": true,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 124,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 25,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 125,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 26,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 126,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 27,
+    "ids": false,
+    "length": 12,
+    "malicious": true,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 127,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 28,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "metrics": {
+        "DecisionTree": 0
+    },
+    "protocol": "modbus",
+    "responds to": [],
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 128,
+    "type": 1
+}

@@ -16,30 +16,53 @@ The IIDS framework contains implementations of the following IIDSs. Note that we
 
 | IDSs                   | Type          | Publication/Source Code                                      | Description                                                  |
 | ---------------------- | ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Autoregression         | State         | [Paper](https://doi.org/10.1145/3243734.3243781), [Paper](https://doi.org/10.1145/2664243.2664277), [Code](https://github.com/RhysU/ar) | Process prediction (not reproduced)                                     |
 | BLSTM                  | Message/State | [Paper](https://doi.org/10.1109/TrustCom%2FBigDataSE.2018.00094), [Code](https://github.com/Rocionightwater/ML-NIDS-for-SCADA) | Machine Learning - Bidirectional Long Short Term Memory      |
+| Decision Trees |Message/State | [Paper](https://dl.acm.org/doi/10.1145/3387940.3391486) [Code](https://zenodo.org/record/3699088) | (not reproduced) |
+| Dummy                | Message/State | --                                                           | Implements a Dummy IDS that always or never alerts. |
+| DTMC*                   | Message       | [Paper](https://doi.org/10.1007/978-3-319-74947-1_4), [Code](https://github.com/jjchromik/intravis) | Packet Sequences - Discrete-time Markov Chains               |
+| Extra Trees |Message/State | [Paper](https://dl.acm.org/doi/10.1145/3387940.3391486) [Code](https://zenodo.org/record/3699088) | (not reproduced) |
 | Inter-arrival time     | Message       | [Paper](https://doi.org/10.1007/978-3-319-99843-5_5)         | Packet Inter-arrival time |
+| Isolation Forest |Message/State | [Paper](https://dl.acm.org/doi/10.1145/3387940.3391486) [Code](https://zenodo.org/record/3699088) | (not reproduced) |
+| Naive Bayes    | Message/State | [Paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7573322) | (not reproduced)
+| Optimal                | Message/State | --                                                           | Implements a "Oracle" that always classifies correctly (or always incorrect if desired). |
+| PASAD*                  | State         | [Paper](https://doi.org/10.1145/3243734.3243781), [Code](https://github.com/mikeliturbe/pasad), [Code](https://github.com/rahulrajpl/PyPASAD) | Process prediction - Process-Aware Stealthy Attack Detector |
 | Random Forest          | Message/State | [Paper](https://doi.org/10.1109/TrustCom%2FBigDataSE.2018.00094), [Code](https://github.com/Rocionightwater/ML-NIDS-for-SCADA) | Machine Learning - Random Forest |
+| Seq2SeqNN*              | State         | [Paper](https://doi.org/10.1007/978-3-030-42048-2_1), [Code](https://github.com/jukworks/swat-seq2seq) | Process Prediction - Sequence-to-Sequence Neural Networks    |
 | Support Vector Machine | Message/State | [Paper](https://doi.org/10.1109/TrustCom%2FBigDataSE.2018.00094), [Code](https://github.com/Rocionightwater/ML-NIDS-for-SCADA) | Machine Learning - Support Vector Machine                    |
+| TABOR*                  | State         | [Paper](https://doi.org/10.1145/3196494.3196546)             | Process Sequences - Time Automata and Bayesian netwORk |
+Note: IDSs marked with * are not available publically, but can be obtained on request.
 
 ###### Publications
 
-- Wolsing, Konrad, Eric Wagner, and Martin Henze. "Facilitating Protocol-independent Industrial Intrusion Detection Systems." *Proceedings of the 2020 ACM SIGSAC Conference on Computer and Communications Security*. 2020 (https://doi.org/10.1145/3372297.3420019)
+- Wolsing, Konrad, Eric Wagner, and Martin Henze. "Poster: Facilitating Protocol-independent Industrial Intrusion Detection Systems." *Proceedings of the 2020 ACM SIGSAC Conference on Computer and Communications Security*. 2020 (https://doi.org/10.1145/3372297.3420019)
 - Konrad Wolsing, Eric Wagner, Antoine Saillard, and Martin Henze. "IPAL: Breaking up Silos of Protocol-dependent and Domain-specific Industrial Intrusion Detection Systems." *Under Review*. 2021 (ArXiv: https://arxiv.org/abs/2111.03438)
 
 ## Getting started
 
 ###### Prerequisites
 
-`ipal-iids` requires `libgsl` to be installed. See https://www.gnu.org/software/gsl/doc/html/index.html for further information.
+- `ipal-iids` requires `libgsl` (or `libgsl-dev`) to be installed. See https://www.gnu.org/software/gsl/doc/html/index.html for further information.
 
-###### Installation
+###### Installation (pip)
 
-Use the following commands to install the `ipal-iids` on your system, or install it alternatively locally with `misc/install.sh`:
+Use `pip install .`  to install system-wide.
+
+###### Installation (venv)
+
+Install it locally with `misc/install.sh` or manually with:
 
 ```bash
-python3 -m pip install numpy
-python3 -m pip install .
+python3 -m venv venv
+source venv/bin/activate
+
+pip3 install numpy
+pip3 install -r requirements.txt
 ```
+
+###### Installation (docker)
+
+Use `docker build -t ipal-ids-framework:latest .` to build a Docker image.
 
 ## Usage
 
@@ -71,7 +94,7 @@ optional arguments:
                         ('*.gz' compressed).
   --default.config IDS  dump the default configuration for the specified IDS to stdout and
                         exit, can be used as a basis for writing IDS config files. Available
-                        IIDSs are: BLSTM,inter-arrival-mean,inter-arrival
+                        IIDSs are: BLSTM,inter-arrival-mean,inter-arrival-
                         range,RandomForest,SVM
   --retrain             retrain regardless of a trained model file being present.
   --log STR             define logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
@@ -87,12 +110,14 @@ The preprocessors are useful for IIDSs, that require a certain input format. E.g
 
 | Preprocessor  | Description                                                  |
 | ------------- | ------------------------------------------------------------ |
+| aggregate     | Aggregates multiple feature vectors into a single vector     |
 | categorical   | Encode, usually strings, as an array of binary indicators    |
 | gradient      | Calculates the derivative of a process value                 |
 | indicate-none | Extend each feature with a binary value indicating whether the feature is none or not |
 | label         | Encode, usually strings, as numeric labels                   |
 | mean          | Subtract mean and scale by the standard deviation            |
 | minmax        | Scale by minimum and maximum from 0 to 1                     |
+| pca           | Performs a principal component analysis on the input vector |
 
 Multiple preprocessors can be used in series. The following example shows how preprocessors are defined in the configuration file:
 
@@ -182,29 +207,30 @@ More information on the black and flake8 setup can be found at https://ljvmirand
 The process for adding support for a new IIDS is the following:
 
 1. Add a new folder and IIDS module in `ipal_iids/ids/[ids name]/[ids name].py `
-1. Create a new IIDS class inheriting the MetaIDS class (see ```ids/ids.py```) or inheriting the FeatureIDS class (see `ipial_iids/ids/featureids.py`) for preprocessor support. The IIDS class may implement:
+2. Create a new IIDS class inheriting the MetaIDS class (see ```ids/ids.py```) or inheriting the FeatureIDS class (see `ipial_iids/ids/featureids.py`) for preprocessor support. The IIDS class may implement:
    - `train`: given some training data, the IIDS should learn its internal model
    - `new_ipal_msg`: given a new IPAL message, return whether the IIDS detected an anomaly
    - `new_state_msg`: given a new IPAL state message, return whether the IIDS detected an anomaly
    - `save_trained_model`: save the trained model to disc
    - `load_trained_model`: load a trained model from disc
    - `visualize_model`: create a Matplotlib visualization of the model for debugging purposes
-1. Add the new IIDS to the list in ```ipal_iids/ids/utils.py```
-1. Add the new IIDS to the [implemented IIDSs](#implemented-iidss) table above
+3. Add the new IIDS to the list in ```ipal_iids/ids/utils.py```
+4. Add the new IIDS to the list in ```tests/conftest.py```
+5. Add the new IIDS to the [implemented IIDSs](#implemented-iidss) table above
 
 ##### Add a preprocessor
 
 The process for adding a new state extraction method is the following:
 
 1. Add a new preprocessor module in ```ipal_iids/preprocessors/```
-1. Create a new preprocessor class inheriting the Preprocessor class (see ```ipal_iids/preprocessors/preprocessor.py```). The preprocessor class may implement:
+2. Create a new preprocessor class inheriting the Preprocessor class (see ```ipal_iids/preprocessors/preprocessor.py```). The preprocessor class may implement:
    - `fit`: given a set of training data, train the preprocessor on it
    - `transform`: preprocess a given data sample based on the fitted model
    - `reset`: reset the preprocessor between individual dataset
    - `get_fitted_model`: return a representation of the fitted mode, which can be saved to disc
    - `from_fitted_model`: return an initialized preprocessor based on a previously saved model
-1. Add the new preprocessor to the list in ```ipal_iids/preprocessors/utils.py```
-1. Add the new preprocessor to the [preprocessor list](#usage-preprocessor) table above
+3. Add the new preprocessor to the list in ```ipal_iids/preprocessors/utils.py```
+4. Add the new preprocessor to the [preprocessor list](#usage-preprocessor) table above
 
 ## License
 

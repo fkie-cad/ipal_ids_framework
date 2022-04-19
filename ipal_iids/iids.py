@@ -11,7 +11,7 @@ from pathlib import Path
 
 import ipal_iids.settings as settings
 
-from .ids.utils import get_all_iidss
+from ids.utils import get_all_iidss
 
 
 # Wrapper for hiding .gz files
@@ -53,7 +53,7 @@ def dump_ids_default_config(name):
     config = {
         name: {
             "_type": name,
-            **get_all_iidss()[name](None, name=name)._default_settings,
+            **get_all_iidss()[name](name=name)._default_settings,
         }
     }
     config[name]["model-file"] = "./model"
@@ -162,7 +162,7 @@ def parse_ids_arguments(args):
 
     # IDS defined by config file
     for name, config in settings.idss.items():
-        idss.append(get_all_iidss()[config["_type"]](args, name=name))
+        idss.append(get_all_iidss()[config["_type"]](name=name))
     return idss
 
 
@@ -276,7 +276,9 @@ def train_idss(idss):
         if ids.requires("train.state") and settings.train_state:
             continue
 
-        settings.logger.error("Required arguement: train.ipal or train.state")
+        settings.logger.error(
+            "Required arguement: {} for IDS {}".format(ids._requires, ids._name)
+        )
         exit(1)
 
     # Give the various IDSs the dataset they need in their learning phase
@@ -338,7 +340,6 @@ def live_idss(idss):
         if is_ipal_smaller:
             ipal_msg["metrics"] = {}
             ipal_msg["ids"] = False
-            # TODO save ids result independently for each ids and call one aggregate function for metaids ;)
 
             for ids in idss:
                 if ids.requires("live.ipal"):
@@ -355,7 +356,6 @@ def live_idss(idss):
         else:
             state_msg["metrics"] = {}
             state_msg["ids"] = False
-            # TODO save ids result independently for each ids and call one aggregate function for metaids ;)
 
             for ids in idss:
                 if ids.requires("live.state"):

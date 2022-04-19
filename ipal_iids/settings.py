@@ -1,7 +1,7 @@
 from io import TextIOWrapper
 import logging
 
-from .ids.utils import get_all_iidss
+from ids.utils import get_all_iidss
 
 # Gzip options
 compresslevel = 9  # 0 no compress, 1 large/fast, 9 small/slow

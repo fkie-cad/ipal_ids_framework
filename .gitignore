@@ -1,5 +1,9 @@
 *.ipal
 *.state
+!tests/snapshots/validation/*.ipal
+!tests/snapshots/validation/*.state
+tests/snapshots/output
+tests/snapshots/tmp
 
 # Editors
 .vscode/
