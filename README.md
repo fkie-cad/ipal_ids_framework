@@ -206,7 +206,7 @@ More information on the black and flake8 setup can be found at https://ljvmirand
 
 The process for adding support for a new IIDS is the following:
 
-1. Add a new folder and IIDS module in `ipal_iids/ids/[ids name]/[ids name].py `
+1. Add a new folder and IIDS module in `ids/[ids name]/[ids name].py `
 2. Create a new IIDS class inheriting the MetaIDS class (see ```ids/ids.py```) or inheriting the FeatureIDS class (see `ipial_iids/ids/featureids.py`) for preprocessor support. The IIDS class may implement:
    - `train`: given some training data, the IIDS should learn its internal model
    - `new_ipal_msg`: given a new IPAL message, return whether the IIDS detected an anomaly
@@ -214,7 +214,7 @@ The process for adding support for a new IIDS is the following:
    - `save_trained_model`: save the trained model to disc
    - `load_trained_model`: load a trained model from disc
    - `visualize_model`: create a Matplotlib visualization of the model for debugging purposes
-3. Add the new IIDS to the list in ```ipal_iids/ids/utils.py```
+3. Add the new IIDS to the list in ```ids/utils.py```
 4. Add the new IIDS to the list in ```tests/conftest.py```
 5. Add the new IIDS to the [implemented IIDSs](#implemented-iidss) table above
 
@@ -222,14 +222,14 @@ The process for adding support for a new IIDS is the following:
 
 The process for adding a new state extraction method is the following:
 
-1. Add a new preprocessor module in ```ipal_iids/preprocessors/```
-2. Create a new preprocessor class inheriting the Preprocessor class (see ```ipal_iids/preprocessors/preprocessor.py```). The preprocessor class may implement:
+1. Add a new preprocessor module in ```preprocessors/```
+2. Create a new preprocessor class inheriting the Preprocessor class (see ```preprocessors/preprocessor.py```). The preprocessor class may implement:
    - `fit`: given a set of training data, train the preprocessor on it
    - `transform`: preprocess a given data sample based on the fitted model
    - `reset`: reset the preprocessor between individual dataset
    - `get_fitted_model`: return a representation of the fitted mode, which can be saved to disc
    - `from_fitted_model`: return an initialized preprocessor based on a previously saved model
-3. Add the new preprocessor to the list in ```ipal_iids/preprocessors/utils.py```
+3. Add the new preprocessor to the list in ```preprocessors/utils.py```
 4. Add the new preprocessor to the [preprocessor list](#usage-preprocessor) table above
 
 ## License
