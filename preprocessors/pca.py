@@ -31,6 +31,9 @@ class PCAPreprocessor(Preprocessor):
 
         return self.encoder.transform([value])[0]
 
+    def reset(self):
+        pass  # Nothing to reset
+
     def get_fitted_model(self):
         # Save model to temprary file
         tmp = ".tmp-{}".format(random.randint(1000, 9999))

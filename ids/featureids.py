@@ -128,6 +128,9 @@ class FeatureIDS(MetaIDS):
         events = [list(self.__flatten(e)) for e in events]
         settings.logger.info("Final features: {}".format(events[0]))
 
+        end2 = time.time()
+        settings.logger.info("Preprocessing ended at {} ({}s)".format(end2, end2 - end))
+
         # Train IDS only on first x% of the data
         N = int(len(events) * self.settings["trainon"])
         settings.logger.info(

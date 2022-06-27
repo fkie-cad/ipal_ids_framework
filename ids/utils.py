@@ -8,6 +8,9 @@ from .classifier.RandomForest import RandomForest
 from .classifier.SVM import SVM
 from .interarrivaltime.Mean import InterArrivalTimeMean
 from .interarrivaltime.Range import InterArrivalTimeRange
+from .simple.histogram import Histogram
+from .simple.minmax import MinMax
+from .simple.steadytime import SteadyTime
 from .oracles.OptimalIDS import OptimalIDS
 from .oracles.DummyIDS import DummyIDS
 
@@ -17,13 +20,16 @@ idss = [
     DecisionTree,
     DummyIDS,
     ExtraTrees,
+    Histogram,
     InterArrivalTimeMean,
     InterArrivalTimeRange,
     IsolationForest,
+    MinMax,
     NaiveBayes,
     OptimalIDS,
     RandomForest,
     SVM,
+    SteadyTime,
 ]
 
 

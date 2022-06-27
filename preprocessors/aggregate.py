@@ -25,12 +25,15 @@ class AggregatePreprocessor(Preprocessor):
 
         if self.N == self.num:
             buf = self.aggregate
-            self.aggregate = []
-            self.N = 0
+            self.reset()
             return buf
 
         else:
             return None
+
+    def reset(self):
+        self.N = 0
+        self.aggregate = []
 
     def get_fitted_model(self):
         return {"features": self.features, "num": self.num}

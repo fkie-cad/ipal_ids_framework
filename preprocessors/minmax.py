@@ -61,6 +61,9 @@ class MinMaxPreprocessor(Preprocessor):
 
         return value
 
+    def reset(self):
+        pass  # Nothing to reset
+
     def get_fitted_model(self):
         return {"features": self.features, "mins": self.mins, "maxs": self.maxs}
 

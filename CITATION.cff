@@ -13,7 +13,7 @@ authors:
   given-names: "Henze"
   orcid: "https://orcid.org/0000-0001-8717-2523"
 title: "IPAL - Industrial Intrusion Detection Framework"
-version: 1.1.0
+version: 1.2.1
 doi: TODO
 date-released: 2022-04-20
 url: "https://github.com/fkie-cad/ipal_ids_framework"

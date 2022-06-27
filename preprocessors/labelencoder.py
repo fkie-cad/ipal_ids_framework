@@ -47,6 +47,9 @@ class LabelEncoderPreprocessor(Preprocessor):
 
         return value
 
+    def reset(self):
+        pass  # Nothing to reset
+
     def get_fitted_model(self):
         return {"features": self.features, "fitdata": self.fitdata}
 
