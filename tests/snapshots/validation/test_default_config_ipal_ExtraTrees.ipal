@@ -1,4 +1,82 @@
 {
+    "_iids-config": {
+        "compresslevel": 9,
+        "config": "misc/configs/ExtraTrees.config",
+        "idss": {
+            "ExtraTrees": {
+                "_type": "ExtraTrees",
+                "allow-none": false,
+                "bootstrap": [
+                    false
+                ],
+                "ccp_alpha": [
+                    0.0
+                ],
+                "class_weight": [
+                    null
+                ],
+                "criterion": [
+                    "gini"
+                ],
+                "features": [
+                    "state;switch"
+                ],
+                "jobs": 4,
+                "max_depth": [
+                    null
+                ],
+                "max_features": [
+                    "auto"
+                ],
+                "max_leaf_nodes": [
+                    null
+                ],
+                "max_samples": [
+                    null
+                ],
+                "min_impurity_decrease": [
+                    0.0
+                ],
+                "min_samples_leaf": [
+                    1
+                ],
+                "min_samples_split": [
+                    2
+                ],
+                "min_weight_fraction_leaf": [
+                    0
+                ],
+                "model-file": null,
+                "n_estimators": [
+                    100
+                ],
+                "oob_score": [
+                    false
+                ],
+                "preprocessors": [],
+                "random_state": [
+                    null
+                ],
+                "save-training": null,
+                "scoring": null,
+                "trainon": 1.0,
+                "verbose": 0,
+                "warm_start": [
+                    false
+                ]
+            }
+        },
+        "live_ipal": "misc/ipal/test.ipal",
+        "live_state": null,
+        "log": 30,
+        "logfile": null,
+        "logformat": "%(levelname)s:%(name)s:%(message)s",
+        "output": "-",
+        "retrain": true,
+        "train_ipal": "misc/ipal/train.ipal",
+        "train_state": null,
+###IGNORE-LINE###
+    },
     "activity": "interrogate",
     "crc": true,
     "data": {

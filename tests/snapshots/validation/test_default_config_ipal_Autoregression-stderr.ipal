@@ -1,1 +1,1 @@
-ERROR:IDS:Required arguement: ['train.state', 'live.state'] for IDS Autoregression
+ERROR:ipal-iids:Required arguement: ['train.state', 'live.state'] for IDS Autoregression

@@ -1,4 +1,73 @@
 {
+    "_iids-config": {
+        "compresslevel": 9,
+        "config": "misc/configs/SVM.config",
+        "idss": {
+            "SVM": {
+                "C": [
+                    1
+                ],
+                "_type": "SVM",
+                "allow-none": false,
+                "break_ties": [
+                    false
+                ],
+                "cache_size": [
+                    1024
+                ],
+                "class_weight": [
+                    null
+                ],
+                "coef0": [
+                    0.0
+                ],
+                "decision_function_shape": [
+                    "ovr"
+                ],
+                "degree": [
+                    3
+                ],
+                "features": [
+                    "state;switch"
+                ],
+                "gamma": [
+                    "auto"
+                ],
+                "jobs": 4,
+                "kernel": [
+                    "rbf"
+                ],
+                "max_iter": [
+                    -1
+                ],
+                "model-file": null,
+                "preprocessors": [],
+                "random_state": [
+                    null
+                ],
+                "save-training": null,
+                "scoring": null,
+                "shrinking": [
+                    true
+                ],
+                "tol": [
+                    0.001
+                ],
+                "trainon": 1.0,
+                "verbose": 0
+            }
+        },
+        "live_ipal": null,
+        "live_state": "misc/ipal/test.ipal",
+        "log": 30,
+        "logfile": null,
+        "logformat": "%(levelname)s:%(name)s:%(message)s",
+        "output": "-",
+        "retrain": true,
+        "train_ipal": null,
+        "train_state": "misc/ipal/train.ipal",
+###IGNORE-LINE###
+    },
     "activity": "interrogate",
     "crc": true,
     "data": {

@@ -1,1 +1,1 @@
-ERROR:IDS:Required arguement: ['train.ipal', 'live.ipal'] for IDS inter-arrival-range
+ERROR:ipal-iids:Required arguement: ['train.ipal', 'live.ipal'] for IDS inter-arrival-range

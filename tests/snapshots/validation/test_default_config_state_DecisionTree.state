@@ -1,4 +1,70 @@
 {
+    "_iids-config": {
+        "compresslevel": 9,
+        "config": "misc/configs/DecisionTree.config",
+        "idss": {
+            "DecisionTree": {
+                "_type": "DecisionTree",
+                "allow-none": false,
+                "ccp_alpha": [
+                    0.0
+                ],
+                "class_weight": [
+                    null
+                ],
+                "criterion": [
+                    "gini"
+                ],
+                "features": [
+                    "state;switch"
+                ],
+                "jobs": 4,
+                "max_depth": [
+                    null
+                ],
+                "max_features": [
+                    null
+                ],
+                "max_leaf_nodes": [
+                    null
+                ],
+                "min_impurity_decrease": [
+                    0.0
+                ],
+                "min_samples_leaf": [
+                    1
+                ],
+                "min_samples_split": [
+                    2
+                ],
+                "min_weight_fraction_leaf": [
+                    0
+                ],
+                "model-file": null,
+                "preprocessors": [],
+                "random_state": [
+                    null
+                ],
+                "save-training": null,
+                "scoring": null,
+                "splitter": [
+                    "best"
+                ],
+                "trainon": 1.0,
+                "verbose": 0
+            }
+        },
+        "live_ipal": null,
+        "live_state": "misc/ipal/test.ipal",
+        "log": 30,
+        "logfile": null,
+        "logformat": "%(levelname)s:%(name)s:%(message)s",
+        "output": "-",
+        "retrain": true,
+        "train_ipal": null,
+        "train_state": "misc/ipal/train.ipal",
+###IGNORE-LINE###
+    },
     "activity": "interrogate",
     "crc": true,
     "data": {

@@ -1,4 +1,25 @@
 {
+    "_iids-config": {
+        "compresslevel": 9,
+        "config": "misc/configs/Optimal.config",
+        "idss": {
+            "Optimal": {
+                "_type": "Optimal",
+                "invert": false,
+                "model-file": null
+            }
+        },
+        "live_ipal": null,
+        "live_state": "misc/ipal/test.ipal",
+        "log": 30,
+        "logfile": null,
+        "logformat": "%(levelname)s:%(name)s:%(message)s",
+        "output": "-",
+        "retrain": true,
+        "train_ipal": null,
+        "train_state": "misc/ipal/train.ipal",
+###IGNORE-LINE###
+    },
     "activity": "interrogate",
     "crc": true,
     "data": {

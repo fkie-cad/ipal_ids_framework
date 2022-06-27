@@ -1,23 +1,30 @@
 {
     "_iids-config": {
         "compresslevel": 9,
-        "config": "misc/configs/Dummy.config",
+        "config": "misc/configs/NaiveBayes.config",
         "idss": {
-            "Dummy": {
-                "_type": "Dummy",
-                "ids-value": false,
-                "model-file": "./model"
+            "NaiveBayes": {
+                "_type": "NaiveBayes",
+                "allow-none": false,
+                "features": [
+                    "state;switch"
+                ],
+                "model-file": "./model",
+                "nb-classifier": "Gaussian",
+                "preprocessors": [],
+                "save-training": null,
+                "trainon": 1.0
             }
         },
-        "live_ipal": null,
-        "live_state": "misc/ipal/test.ipal",
+        "live_ipal": "misc/ipal/test.ipal",
+        "live_state": null,
         "log": 30,
         "logfile": null,
         "logformat": "%(levelname)s:%(name)s:%(message)s",
         "output": "-",
         "retrain": true,
-        "train_ipal": null,
-        "train_state": "misc/ipal/train.ipal",
+        "train_ipal": "misc/ipal/train.ipal",
+        "train_state": null,
 ###IGNORE-LINE###
     },
     "activity": "interrogate",
@@ -27,11 +34,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 0,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -50,11 +57,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 1,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -73,11 +80,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 2,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -96,11 +103,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 3,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -119,11 +126,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 4,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -142,11 +149,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 5,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -165,11 +172,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 6,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -188,11 +195,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 7,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -211,11 +218,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 8,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -234,11 +241,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 9,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -257,11 +264,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 10,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -280,11 +287,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 11,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -303,11 +310,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 12,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -326,11 +333,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 13,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -349,11 +356,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 14,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -372,11 +379,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 15,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -395,11 +402,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 16,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -418,11 +425,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 17,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -441,11 +448,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 18,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -464,11 +471,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 19,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -487,11 +494,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 20,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -514,7 +521,7 @@
     "length": 12,
     "malicious": true,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 0
     },
     "protocol": "modbus",
     "responds to": [],
@@ -537,7 +544,7 @@
     "length": 12,
     "malicious": true,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 0
     },
     "protocol": "modbus",
     "responds to": [],
@@ -560,7 +567,7 @@
     "length": 12,
     "malicious": true,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 0
     },
     "protocol": "modbus",
     "responds to": [],
@@ -583,7 +590,7 @@
     "length": 12,
     "malicious": true,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 0
     },
     "protocol": "modbus",
     "responds to": [],
@@ -602,11 +609,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 25,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -625,11 +632,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 26,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],
@@ -652,7 +659,7 @@
     "length": 12,
     "malicious": true,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 0
     },
     "protocol": "modbus",
     "responds to": [],
@@ -671,11 +678,11 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 28,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": false,
     "metrics": {
-        "Dummy": 1
+        "NaiveBayes": 1
     },
     "protocol": "modbus",
     "responds to": [],

@@ -9,7 +9,7 @@ def test_metaids_empty():
     errno, stdout, stderr = metaids([])
     assert stdout == b""
     assert errno == 1
-    assert b"ERROR:IDS:no IDS configuration provided, exiting\n" in stderr
+    assert b"ERROR:ipal-iids:no IDS configuration provided, exiting\n" in stderr
 
 
 @pytest.mark.parametrize("idsname", IDSNAMES)

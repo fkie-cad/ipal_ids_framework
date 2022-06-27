@@ -10,12 +10,13 @@ IDSNAMES = [
     "DecisionTree",
     "Dummy",
     "ExtraTrees",
-    "inter-arrival-mean",
-    "inter-arrival-range",
     "IsolationForest",
+    "NaiveBayes",
     "Optimal",
     "RandomForest",
     "SVM",
+    "inter-arrival-mean",
+    "inter-arrival-range",
 ]
 
 

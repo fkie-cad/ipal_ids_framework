@@ -29,7 +29,7 @@ def initialize_logger(args):
         settings.log = getattr(logging, args.log.upper(), None)
 
         if not isinstance(settings.log, int):
-            logging.getLogger("IDS").error("Option '--log' parameter not found")
+            logging.getLogger("ipal-iids").error("Option '--log' parameter not found")
             exit(1)
 
     if args.logfile:
@@ -40,7 +40,7 @@ def initialize_logger(args):
     else:
         logging.basicConfig(level=settings.log, format=settings.logformat)
 
-    settings.logger = logging.getLogger("IDS")
+    settings.logger = logging.getLogger("ipal-iids")
 
 
 def dump_ids_default_config(name):
@@ -312,6 +312,8 @@ def live_idss(idss):
     # Keep track of the last state and message information. Then we are capable of delivering them in the right order.
     ipal_msg = None
     state_msg = None
+    _first_ipal_msg = True
+    _first_state_msg = True
 
     while True:
         # load a new ipal message
@@ -350,6 +352,11 @@ def live_idss(idss):
                     ipal_msg["metrics"][ids._name] = metric
 
             if settings.output:
+
+                if _first_ipal_msg:
+                    ipal_msg["_iids-config"] = settings.iids_settings_to_dict()
+                    _first_ipal_msg = False
+
                 settings.outputfd.write(json.dumps(ipal_msg) + "\n")
                 settings.outputfd.flush()
             ipal_msg = None
@@ -366,6 +373,11 @@ def live_idss(idss):
                     state_msg["metrics"][ids._name] = metric
 
             if settings.output:
+
+                if _first_state_msg:
+                    state_msg["_iids-config"] = settings.iids_settings_to_dict()
+                    _first_state_msg = False
+
                 settings.outputfd.write(json.dumps(state_msg) + "\n")
                 settings.outputfd.flush()
             state_msg = None

@@ -25,7 +25,7 @@ def initialize_logger(args):
         settings.log = getattr(logging, args.log.upper(), None)
 
         if not isinstance(settings.log, int):
-            logging.getLogger("Extend Alarms").error(
+            logging.getLogger("ipal-extend-alarms").error(
                 "Option '--log' parameter not found"
             )
             exit(1)
@@ -38,7 +38,7 @@ def initialize_logger(args):
     else:
         logging.basicConfig(level=settings.log, format=settings.logformat)
 
-    settings.logger = logging.getLogger("Extend Alarms")
+    settings.logger = logging.getLogger("ipal-extend-alarms")
 
 
 def prepare_arg_parser(parser):

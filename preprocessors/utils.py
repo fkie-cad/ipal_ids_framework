@@ -5,6 +5,7 @@ from .indicatenone import IndicateNonePreprocessor
 from .labelencoder import LabelEncoderPreprocessor
 from .mean import MeanPreprocessor
 from .minmax import MinMaxPreprocessor
+from .pca import PCAPreprocessor
 
 preprocessors = [
     AggregatePreprocessor,
@@ -14,6 +15,7 @@ preprocessors = [
     LabelEncoderPreprocessor,
     MeanPreprocessor,
     MinMaxPreprocessor,
+    PCAPreprocessor,
 ]
 
 
