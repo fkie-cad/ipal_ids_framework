@@ -38,8 +38,8 @@ Note: IDSs marked with * are not available publically, but can be obtained on re
 
 ###### Publications
 
-- Wolsing, Konrad, Eric Wagner, and Martin Henze. "Poster: Facilitating Protocol-independent Industrial Intrusion Detection Systems." *Proceedings of the 2020 ACM SIGSAC Conference on Computer and Communications Security*. 2020 (https://doi.org/10.1145/3372297.3420019)
-- Konrad Wolsing, Eric Wagner, Antoine Saillard, and Martin Henze. "IPAL: Breaking up Silos of Protocol-dependent and Domain-specific Industrial Intrusion Detection Systems." *Under Review*. 2021 (ArXiv: https://arxiv.org/abs/2111.03438)
+- Konrad Wolsing, Eric Wagner, Antoine Saillard, and Martin Henze. 2022. IPAL: Breaking up Silos of Protocol-dependent and Domain-specific In- dustrial Intrusion Detection Systems. In 25th International Symposium on Research in Attacks, Intrusions and Defenses (RAID 2022), October 26–28, 2022, Limassol, Cyprus. ACM, New York, NY, USA, 17 pages. [https://doi.org/10.1145/3545948.3545968 ](https://doi.org/10.1145/3545948.3545968)
+- Wolsing, Konrad, Eric Wagner, and Martin Henze. "Poster: Facilitating Protocol-independent Industrial Intrusion Detection Systems." *Proceedings of the 2020 ACM SIGSAC Conference on Computer and Communications Security*. 2020 [https://doi.org/10.1145/3372297.3420019](https://doi.org/10.1145/3372297.3420019)
 
 ## Getting started
 
@@ -234,6 +234,14 @@ The process for adding a new state extraction method is the following:
    - `from_fitted_model`: return an initialized preprocessor based on a previously saved model
 3. Add the new preprocessor to the list in ```preprocessors/utils.py```
 4. Add the new preprocessor to the [preprocessor list](#usage-preprocessor) table above
+
+## Contributors
+
+- Antoine Saillard (RWTH Aachen University & Fraunhofer FKIE)
+- Eric Wagner (Fraunhofer FKIE & RWTH Aachen University)
+- Konrad Wolsing (Fraunhofer FKIE & RWTH Aachen University)
+- Lea Thiemt (RWTH Aachen University)
+- Sven Zemanek (Fraunhofer FKIE)
 
 ## License
 
