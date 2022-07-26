@@ -219,8 +219,10 @@ class BLSTM(FeatureIDS):
         if self.settings["model-file"] is None:
             return False
 
+        model_file_path = self._resolve_model_file_path()
+
         try:  # Open model file
-            with self._open_file(self._resolve_model_file_path(), mode="rt") as f:
+            with self._open_file(model_file_path, mode="rt") as f:
                 model = json.load(f)
 
         except FileNotFoundError:
@@ -235,9 +237,7 @@ class BLSTM(FeatureIDS):
         super().load_trained_model(model["preprocessors"])
         self.parameters = model["parameters"]
         self.history = model["history"]
-        self.blstm = tensorflow.keras.models.load_model(
-            self.settings["model-file"] + ".kreas"
-        )
+        self.blstm = tensorflow.keras.models.load_model(str(model_file_path) + ".kreas")
 
         return True
 

@@ -242,6 +242,7 @@ The process for adding a new state extraction method is the following:
 - Konrad Wolsing (Fraunhofer FKIE & RWTH Aachen University)
 - Lea Thiemt (RWTH Aachen University)
 - Sven Zemanek (Fraunhofer FKIE)
+- Dominik Kus (RWTH Aachen University)
 
 ## License
 
