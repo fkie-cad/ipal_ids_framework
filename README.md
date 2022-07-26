@@ -38,7 +38,7 @@ Note: IDSs marked with * are not available publically, but can be obtained on re
 
 ###### Publications
 
-- Konrad Wolsing, Eric Wagner, Antoine Saillard, and Martin Henze. 2022. IPAL: Breaking up Silos of Protocol-dependent and Domain-specific In- dustrial Intrusion Detection Systems. In 25th International Symposium on Research in Attacks, Intrusions and Defenses (RAID 2022), October 26–28, 2022, Limassol, Cyprus. ACM, New York, NY, USA, 17 pages. [https://doi.org/10.1145/3545948.3545968 ](https://doi.org/10.1145/3545948.3545968)
+- Konrad Wolsing, Eric Wagner, Antoine Saillard, and Martin Henze. 2022. IPAL: Breaking up Silos of Protocol-dependent and Domain-specific Industrial Intrusion Detection Systems. In 25th International Symposium on Research in Attacks, Intrusions and Defenses (RAID 2022), October 26–28, 2022, Limassol, Cyprus. ACM, New York, NY, USA, 17 pages. [https://doi.org/10.1145/3545948.3545968 ](https://doi.org/10.1145/3545948.3545968)
 - Wolsing, Konrad, Eric Wagner, and Martin Henze. "Poster: Facilitating Protocol-independent Industrial Intrusion Detection Systems." *Proceedings of the 2020 ACM SIGSAC Conference on Computer and Communications Security*. 2020 [https://doi.org/10.1145/3372297.3420019](https://doi.org/10.1145/3372297.3420019)
 
 ## Getting started
@@ -46,6 +46,7 @@ Note: IDSs marked with * are not available publically, but can be obtained on re
 ###### Prerequisites
 
 - `ipal-iids` requires `libgsl` (or `libgsl-dev`) to be installed. See https://www.gnu.org/software/gsl/doc/html/index.html for further information.
+- The Autoregression IIDS requires `ar`. Please make sure that `python-dev` or the corresponding version (e.g. `python3.9-dev`) is installed on your system
 
 ###### Installation (pip)
 
