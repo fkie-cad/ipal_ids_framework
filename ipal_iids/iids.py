@@ -204,7 +204,7 @@ def load_settings(args):  # noqa: C901
         settings.logger.error("no IDS configuration provided, exiting")
         exit(1)
 
-    # Parse training input
+    # Parse training input (TODO: its probably better if these also were file handles like live input for consistency. file handles can also be reset (e.g. fd.seek(0,0)))
     if args.train_ipal:
         settings.train_ipal = args.train_ipal
     if args.train_state:
