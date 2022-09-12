@@ -15,6 +15,7 @@ setup(
         "ar @ git+https://github.com/RhysU/ar.git",
         "matplotlib",
         "pomegranate",
+        "prometheus-client"
     ],
     tests_require=["pytest"],
     url="https://github.com/fkie-cad/ipal_ids_framework",
