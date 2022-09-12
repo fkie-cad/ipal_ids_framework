@@ -289,7 +289,7 @@ def train_idss(idss):
             continue
 
         settings.logger.error(
-            "Required arguement: {} for IDS {}".format(ids._requires, ids._name)
+            "Required argument: {} for IDS {}".format(ids._requires, ids._name)
         )
         exit(1)
 
