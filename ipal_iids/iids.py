@@ -87,6 +87,12 @@ def prepare_arg_parser(parser):
         required=False,
     )
     parser.add_argument(
+        "--train.time",
+        dest="train_time",
+        metavar="INT",
+        help="[UNUSED] initial training time for the IDS - only effective when train.ipal==live.ipal or train.state==live.ipal. When both are a simple file, IDS will re-inspect trained data"
+    )
+    parser.add_argument(
         "--live.ipal",
         dest="live_ipal",
         metavar="FILE",
