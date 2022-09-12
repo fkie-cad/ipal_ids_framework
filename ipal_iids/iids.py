@@ -326,13 +326,19 @@ def live_idss(idss):
         if ipal_msg is None and settings.live_ipal:
             line = settings.live_ipalfd.readline()
             if line:
-                ipal_msg = json.loads(line)
+                try:
+                    ipal_msg = json.loads(line)
+                except:
+                    continue # dump broken data - e.g. broken pipe recovery 
 
         # load a new state
         if state_msg is None and settings.live_state:
             line = settings.live_statefd.readline()
             if line:
-                state_msg = json.loads(line)
+                try:
+                    state_msg = json.loads(line)
+                except:
+                    continue # dump broken data - e.g. broken pipe recovery 
 
         # Determine smallest timestamp ipal or state?
         if ipal_msg and state_msg:
