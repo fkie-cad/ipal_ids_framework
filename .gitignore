@@ -5,6 +5,9 @@
 tests/snapshots/output
 tests/snapshots/tmp
 
+# Prometheus node_exporter
+node_exporter
+
 # Editors
 .vscode/
 .idea/

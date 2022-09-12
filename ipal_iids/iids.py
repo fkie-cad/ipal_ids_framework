@@ -13,6 +13,12 @@ import ipal_iids.settings as settings
 
 from ids.utils import get_all_iidss
 
+# Prometheus Client
+from ipal_iids.tools.prometheus import PrometheusClient
+from prometheus_client import Enum, Summary, Counter
+IDS_STATE = Enum('ids_state', 'Current IDS state', states=['starting','training','operating'])
+PACKET_TIME = Summary('ids_packet_inspection_seconds', 'Time spent inspecting packet', ['method','ids'])
+IDS_ALERT = Counter('ids_alert', 'Counts the alert that occur while inspecting', ["ids"])
 
 # Wrapper for hiding .gz files
 def open_file(filename, mode):
@@ -79,6 +85,12 @@ def prepare_arg_parser(parser):
         metavar="FILE",
         help="input file of IPAL state messages to train the IDS on ('-' stdin, '*.gz' compressed).",
         required=False,
+    )
+    parser.add_argument(
+        "--train.time",
+        dest="train_time",
+        metavar="INT",
+        help="[UNUSED] initial training time for the IDS - only effective when train.ipal==live.ipal or train.state==live.ipal. When both are a simple file, IDS will re-inspect trained data"
     )
     parser.add_argument(
         "--live.ipal",
@@ -192,7 +204,7 @@ def load_settings(args):  # noqa: C901
         settings.logger.error("no IDS configuration provided, exiting")
         exit(1)
 
-    # Parse training input
+    # Parse training input (TODO: its probably better if these also were file handles like live input for consistency. file handles can also be reset (e.g. fd.seek(0,0)))
     if args.train_ipal:
         settings.train_ipal = args.train_ipal
     if args.train_state:
@@ -277,7 +289,7 @@ def train_idss(idss):
             continue
 
         settings.logger.error(
-            "Required arguement: {} for IDS {}".format(ids._requires, ids._name)
+            "Required argument: {} for IDS {}".format(ids._requires, ids._name)
         )
         exit(1)
 
@@ -320,13 +332,19 @@ def live_idss(idss):
         if ipal_msg is None and settings.live_ipal:
             line = settings.live_ipalfd.readline()
             if line:
-                ipal_msg = json.loads(line)
+                try:
+                    ipal_msg = json.loads(line)
+                except:
+                    continue # dump broken data - e.g. broken pipe recovery 
 
         # load a new state
         if state_msg is None and settings.live_state:
             line = settings.live_statefd.readline()
             if line:
-                state_msg = json.loads(line)
+                try:
+                    state_msg = json.loads(line)
+                except:
+                    continue # dump broken data - e.g. broken pipe recovery 
 
         # Determine smallest timestamp ipal or state?
         if ipal_msg and state_msg:
@@ -339,51 +357,60 @@ def live_idss(idss):
             break
 
         # Process next message
-        if is_ipal_smaller:
-            ipal_msg["metrics"] = {}
-            ipal_msg["ids"] = False
+        with PACKET_TIME.labels(method="combined", ids="all").time():
+            if is_ipal_smaller:
+                ipal_msg["metrics"] = {}
+                ipal_msg["ids"] = False
 
-            for ids in idss:
-                if ids.requires("live.ipal"):
-                    alert, metric = ids.new_ipal_msg(ipal_msg)
-                    ipal_msg["ids"] = (
-                        ipal_msg["ids"] or alert
-                    )  # combine alerts with or (TODO config ?)
-                    ipal_msg["metrics"][ids._name] = metric
+                for ids in idss:
+                    with PACKET_TIME.labels(method="ipal", ids=ids._name).time():
+                        if ids.requires("live.ipal"):
+                            alert, metric = ids.new_ipal_msg(ipal_msg)
+                            ipal_msg["ids"] = (
+                                ipal_msg["ids"] or alert
+                            )  # combine alerts with or (TODO config ?)
+                            ipal_msg["metrics"][ids._name] = metric
+                            if alert:
+                                IDS_ALERT.labels(ids=ids._name).inc()
 
-            if settings.output:
+                if settings.output:
 
-                if _first_ipal_msg:
-                    ipal_msg["_iids-config"] = settings.iids_settings_to_dict()
-                    _first_ipal_msg = False
+                    if _first_ipal_msg:
+                        ipal_msg["_iids-config"] = settings.iids_settings_to_dict()
+                        _first_ipal_msg = False
 
-                settings.outputfd.write(json.dumps(ipal_msg) + "\n")
-                settings.outputfd.flush()
-            ipal_msg = None
-        else:
-            state_msg["metrics"] = {}
-            state_msg["ids"] = False
+                    settings.outputfd.write(json.dumps(ipal_msg) + "\n")
+                    settings.outputfd.flush()
+                ipal_msg = None
+            else:
+                state_msg["metrics"] = {}
+                state_msg["ids"] = False
 
-            for ids in idss:
-                if ids.requires("live.state"):
-                    alert, metric = ids.new_state_msg(state_msg)
-                    state_msg["ids"] = (
-                        state_msg["ids"] or alert
-                    )  # combine alerts with or (TODO config ?)
-                    state_msg["metrics"][ids._name] = metric
+                for ids in idss:
+                    with PACKET_TIME.labels(method="state", ids=ids._name).time():
+                        if ids.requires("live.state"):
+                            alert, metric = ids.new_state_msg(state_msg)
+                            state_msg["ids"] = (
+                                state_msg["ids"] or alert
+                            )  # combine alerts with or (TODO config ?)
+                            state_msg["metrics"][ids._name] = metric
+                            if alert:
+                                IDS_ALERT.labels(ids=ids._name).inc()
 
-            if settings.output:
+                if settings.output:
 
-                if _first_state_msg:
-                    state_msg["_iids-config"] = settings.iids_settings_to_dict()
-                    _first_state_msg = False
+                    if _first_state_msg:
+                        state_msg["_iids-config"] = settings.iids_settings_to_dict()
+                        _first_state_msg = False
 
-                settings.outputfd.write(json.dumps(state_msg) + "\n")
-                settings.outputfd.flush()
-            state_msg = None
+                    settings.outputfd.write(json.dumps(state_msg) + "\n")
+                    settings.outputfd.flush()
+                state_msg = None
 
 
 def main():
+    _prom = PrometheusClient()
+    IDS_STATE.state('starting')
     # Argument parser and settings
     parser = argparse.ArgumentParser()
     prepare_arg_parser(parser)
@@ -395,10 +422,12 @@ def main():
     try:
         # Train IDSs
         settings.logger.info("Start IDS training...")
+        IDS_STATE.state('training')
         train_idss(idss)
 
         # Live IDS
         settings.logger.info("Start IDS live...")
+        IDS_STATE.state('operating')
         live_idss(idss)
     except BrokenPipeError:
         devnull = os.open(os.devnull, os.O_WRONLY)

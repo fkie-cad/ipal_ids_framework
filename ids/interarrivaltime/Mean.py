@@ -45,7 +45,10 @@ class InterArrivalTimeMean(MetaIDS):
         # Load timestamps for each identifier
         with self._open_file(ipal) as f:
             for line in f.readlines():
-                ipal_msg = json.loads(line)
+                try:
+                    ipal_msg = json.loads(line)
+                except:
+                    continue # dump broken data - e.g. broken pipe recovery 
 
                 timestamp = ipal_msg["timestamp"]
                 identifier = self._get_identifier(ipal_msg)
