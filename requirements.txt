@@ -7,3 +7,4 @@ torch
 git+https://github.com/RhysU/ar.git
 matplotlib
 pomegranate
+tr
