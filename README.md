@@ -24,9 +24,9 @@ The IIDS framework contains implementations of the following IIDSs. Note that we
 | Extra Trees |Message/State | [Paper](https://dl.acm.org/doi/10.1145/3387940.3391486) [Code](https://zenodo.org/record/3699088) | (not reproduced) |
 | Inter-arrival time     | Message       | [Paper](https://doi.org/10.1007/978-3-319-99843-5_5)         | Packet Inter-arrival time |
 | Isolation Forest |Message/State | [Paper](https://dl.acm.org/doi/10.1145/3387940.3391486) [Code](https://zenodo.org/record/3699088) | (not reproduced) |
-| SIMPLE-Histogram              | Message/State | --                                                           | Histogramm of a sensor over time.                            |
-| SIMPLE-MinMax                 | Message/State | --                                                           | Minimum and Maximum of a value plus threshold                |
-| SIMPLE-Steadytime              | Message/State | --                                                           | Compares longest or shortest time in a single state of a sensor.  |
+| SIMPLE-Histogram              | Message/State | [Paper](https://doi.org/10.1007/978-3-031-17143-7_28)                                                           | Histogramm of a sensor over time.                            |
+| SIMPLE-MinMax                 | Message/State | [Paper](https://doi.org/10.1007/978-3-031-17143-7_28)                                                           | Minimum and Maximum of a value plus threshold                |
+| SIMPLE-Steadytime              | Message/State | [Paper](https://doi.org/10.1007/978-3-031-17143-7_28)                                                           | Compares longest or shortest time in a single state of a sensor.  |
 | Naive Bayes    | Message/State | [Paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7573322) | (not reproduced)
 | Optimal                | Message/State | --                                                           | Implements a "Oracle" that always classifies correctly (or always incorrect if desired). |
 | PASAD*                  | State         | [Paper](https://doi.org/10.1145/3243734.3243781), [Code](https://github.com/mikeliturbe/pasad), [Code](https://github.com/rahulrajpl/PyPASAD) | Process prediction - Process-Aware Stealthy Attack Detector |
