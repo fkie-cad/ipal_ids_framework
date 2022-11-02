@@ -8,11 +8,11 @@ from .classifier.RandomForest import RandomForest
 from .classifier.SVM import SVM
 from .interarrivaltime.Mean import InterArrivalTimeMean
 from .interarrivaltime.Range import InterArrivalTimeRange
+from .oracles.DummyIDS import DummyIDS
+from .oracles.OptimalIDS import OptimalIDS
 from .simple.histogram import Histogram
 from .simple.minmax import MinMax
 from .simple.steadytime import SteadyTime
-from .oracles.OptimalIDS import OptimalIDS
-from .oracles.DummyIDS import DummyIDS
 
 idss = [
     Autoregression,

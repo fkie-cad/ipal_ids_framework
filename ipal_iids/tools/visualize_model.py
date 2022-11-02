@@ -113,9 +113,12 @@ def plot_models(idss):
             )
             continue
 
-        fig.suptitle(ids._name)
-        plt.show()
-        plt.close()
+        if plt is None or fig is None:
+            settings.logger.warning("Nothing to render")
+        else:
+            fig.suptitle(ids._name)
+            plt.show()
+            plt.close()
 
 
 def main():
