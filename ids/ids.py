@@ -13,7 +13,7 @@ class MetaIDS:
     _name = None
     _description = ""
     _requires = []
-    _metaids_default_settings = {"model-file": None}
+    _metaids_default_settings = {"model-file": "./model"}
     _supports_preprocessor = False
 
     def __init__(self, name=None):

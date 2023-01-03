@@ -31,6 +31,7 @@ class SVM(FeatureIDS):
         "scoring": None,  # accuracy ..
         "jobs": 4,
         "verbose": 10,
+        "no-probability": False,
     }
 
     def __init__(self, name=None):
@@ -61,7 +62,7 @@ class SVM(FeatureIDS):
             "gamma": self.settings["gamma"],
             "coef0": self.settings["coef0"],
             "shrinking": self.settings["shrinking"],
-            "probability": [False],
+            "probability": [not self.settings["no-probability"]],
             "tol": self.settings["tol"],
             "cache_size": self.settings["cache_size"],
             "class_weight": self.settings["class_weight"],
@@ -100,12 +101,13 @@ class SVM(FeatureIDS):
             return False, None
 
         alert = bool(self.svm.predict([state])[0])
-        return alert, 1 if alert else 0
 
-        # alternative - set probability to True (takes more time!)
-        # prediction = self.rfc.predict_proba([state])[0][self.classes.index(True)]
-        # alert = bool(prediction > 0.5)
-        # return alert, prediction
+        if self.settings["no-probability"]:  # takes less time
+            return alert, 1 if alert else 0
+
+        else:
+            probability = self.svm.predict_proba([state])[0][self.classes.index(True)]
+            return alert, probability
 
     def new_ipal_msg(self, msg):
         # There is no difference for this IDS in state or message format! It only depends on the configuration which features are used.

@@ -75,7 +75,12 @@ class InterArrivalTimeMean(MetaIDS):
             ll = mu - self.settings["N"] * sigma
             ll = max(0, ll)  # Only positive inter-arrival times
 
-            self.mean_model[k] = {"ll": ll, "ul": ul, "mu": mu, "sigma": sigma}
+            self.mean_model[k] = {
+                "ll": float(ll),
+                "ul": float(ul),
+                "mu": float(mu),
+                "sigma": float(sigma),
+            }
             self.sliding_windows[k] = {
                 "timestamp": [],
                 "malicious": [],

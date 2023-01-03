@@ -20,10 +20,12 @@ class DummyIDS(MetaIDS):
         pass
 
     def new_ipal_msg(self, msg):
-        return self.settings["ids-value"], 1
+        score = 1 if self.settings["ids-value"] else 0
+        return self.settings["ids-value"], score
 
     def new_state_msg(self, msg):
-        return self.settings["ids-value"], 1
+        score = 1 if self.settings["ids-value"] else 0
+        return self.settings["ids-value"], score
 
     def save_trained_model(self):
         if self.settings["model-file"] is None:

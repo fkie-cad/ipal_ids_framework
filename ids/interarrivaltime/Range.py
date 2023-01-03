@@ -83,7 +83,12 @@ class InterArrivalTimeRange(MetaIDS):
             ul = mu + self.settings["N"] * sigma
             ll = np.min(Rj)
 
-            self.range_model[k] = {"ll": ll, "ul": ul, "mu": mu, "sigma": sigma}
+            self.range_model[k] = {
+                "ll": float(ll),
+                "ul": float(ul),
+                "mu": float(mu),
+                "sigma": float(sigma),
+            }
             self.sliding_windows[k] = {
                 "timestamp": [],
                 "malicious": [],

@@ -20,7 +20,7 @@ class ExtraTrees(FeatureIDS):
         "min_samples_split": [2],
         "min_samples_leaf": [1],
         "min_weight_fraction_leaf": [0],
-        "max_features": ["auto", "sqrt", "log2"],
+        "max_features": ["sqrt", "log2"],
         "max_leaf_nodes": [None],
         "min_impurity_decrease": [0.0],
         "bootstrap": [True, False],
@@ -34,6 +34,7 @@ class ExtraTrees(FeatureIDS):
         "scoring": None,  # accuracy ..
         "jobs": 4,
         "verbose": 10,
+        "no-probability": False,
     }
 
     def __init__(self, name=None):
@@ -68,7 +69,7 @@ class ExtraTrees(FeatureIDS):
             "max_leaf_nodes": self.settings["max_leaf_nodes"],
             "min_impurity_decrease": self.settings["min_impurity_decrease"],
             "bootstrap": self.settings["bootstrap"],
-            "oob_score": self.settings["min_impurity_decrease"],
+            "oob_score": self.settings["oob_score"],
             "random_state": self.settings["random_state"],
             "warm_start": self.settings["warm_start"],
             "class_weight": self.settings["class_weight"],
@@ -105,12 +106,13 @@ class ExtraTrees(FeatureIDS):
             return False, None
 
         alert = bool(self.etc.predict([state])[0])
-        return alert, 1 if alert else 0
 
-        # alternative - set probability to True (takes more time!)
-        # prediction = self.etc.predict_proba([state])[0][self.classes.index(True)]
-        # alert = bool(prediction > 0.5)
-        # return alert, prediction
+        if self.settings["no-probability"]:  # takes less time
+            return alert, 1 if alert else 0
+
+        else:
+            probability = self.etc.predict_proba([state])[0][self.classes.index(True)]
+            return alert, probability
 
     def new_ipal_msg(self, msg):
         # There is no difference for this IDS in state or message format! It only depends on the configuration which features are used.

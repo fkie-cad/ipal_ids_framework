@@ -20,10 +20,14 @@ class OptimalIDS(MetaIDS):
         pass
 
     def new_ipal_msg(self, msg):
-        return (msg["malicious"] not in [False, None]) ^ self.settings["invert"], 1
+        alert = (msg["malicious"] not in [False, None]) ^ self.settings["invert"]
+        score = 1 if alert else 0
+        return alert, score
 
     def new_state_msg(self, msg):
-        return (msg["malicious"] not in [False, None]) ^ self.settings["invert"], 1
+        alert = (msg["malicious"] not in [False, None]) ^ self.settings["invert"]
+        score = 1 if alert else 0
+        return alert, score
 
     def save_trained_model(self):
         if self.settings["model-file"] is None:

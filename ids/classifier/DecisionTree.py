@@ -30,6 +30,7 @@ class DecisionTree(FeatureIDS):
         "scoring": None,  # accuracy ..
         "jobs": 4,
         "verbose": 10,
+        "no-probability": False,
     }
 
     def __init__(self, name=None):
@@ -97,12 +98,13 @@ class DecisionTree(FeatureIDS):
             return False, None
 
         alert = bool(self.dtc.predict([state])[0])
-        return alert, 1 if alert else 0
 
-        # alternative - set probability to True (takes more time!)
-        # prediction = self.dtc.predict_proba([state])[0][self.classes.index(True)]
-        # alert = bool(prediction > 0.5)
-        # return alert, prediction
+        if self.settings["no-probability"]:  # takes less time
+            return alert, 1 if alert else 0
+
+        else:
+            probability = self.dtc.predict_proba([state])[0][self.classes.index(True)]
+            return alert, probability
 
     def new_ipal_msg(self, msg):
         # There is no difference for this IDS in state or message format! It only depends on the configuration which features are used.
