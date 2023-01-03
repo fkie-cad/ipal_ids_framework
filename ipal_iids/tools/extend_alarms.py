@@ -93,9 +93,8 @@ def extend_alarms(file):
                 offset = -i
 
             ipal[i + offset]["ids"] = alert
-            ipal[i + offset]["metrics"] = {
-                k: metric for k in ipal[i + offset]["metrics"]
-            }
+            ipal[i + offset]["alerts"] = {k: metric for k in ipal[i + offset]["alerts"]}
+            ipal[i + offset]["scores"] = {k: metric for k in ipal[i + offset]["scores"]}
 
         del ipal[i]["adjust"]
 

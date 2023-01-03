@@ -51,23 +51,36 @@ Note: IDSs marked with * are not available publically, but can be obtained on re
 
 ###### Installation (pip)
 
-Use `pip install .`  to install system-wide.
+Use `python3 -m pip install .` to install the scripts and dependencies system-wide using the `pip` [python package installer](https://pip.pypa.io/en/stable/installation/). This will install dependencies and the `iids` modules to the local site packages and add the `ipal-iids`, `ipal-visualize-model` and `ipal-extend-alarms` scripts to the `PATH`. The scripts can then be invoked system-wide (e.g. `ipal-iids -h`).
 
 ###### Installation (venv)
 
-Install it locally with `misc/install.sh` or manually with:
+Alternatively, the project's dependencies can be installed locally in a virtual environment using the `misc/install.sh` script or manually with:
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 
-pip3 install numpy
-pip3 install -r requirements.txt
+python3 -m pip install numpy
+python3 -m pip install -r requirements.txt
+```
+
+The scripts can then be invoked after activating the virtual environment from the root of the project repository, e.g.:
+
+```bash
+source venv/bin/activate
+./ipal-evaluate -h
+deactivate
 ```
 
 ###### Installation (docker)
 
-Use `docker build -t ipal-ids-framework:latest .` to build a Docker image.
+Use `docker build -t ipal-ids-framework:latest .` to build a Docker image with a `pip` installation of the project and development dependencies. The scripts can then be used within containers using the built image, e.g.:
+
+```bash
+docker run -it ipal-ids-framework:latest /bin/bash
+ipal-ids -h
+```
 
 ## Usage
 
@@ -224,10 +237,10 @@ The `ipal-extend-alarms` works as an online tool - meaning IIDSs have to decide 
 
 ##### Tooling
 
-We use different tools for development, code formatting, style checking, and testing. You can install all tools with the following command:
+The set of tools used for development, code formatting, style checking, and testing can be installed with the following command:
 
 ```bash
-pip3 install -r requirements-dev.txt
+python3 -m pip install -r requirements-dev.txt
 ```
 
 All tools can be executed manually with the following commands and report errors if encountered:
@@ -238,7 +251,7 @@ flake8
 python3 -m pytest
 ```
 
-You can also enforce black and flake8 to check the code before any commit with Git's pre-commit.
+A `black` and `flake8` check of modified files before any commit can also be forced using Git's pre-commit hook functionality:
 
 ```bash
 pre-commit install
