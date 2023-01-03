@@ -17,6 +17,7 @@ setup(
         "pomegranate",
         "tr",
         "pandas",
+        "gurobipy",
     ],
     tests_require=["pytest"],
     url="https://github.com/fkie-cad/ipal_ids_framework",

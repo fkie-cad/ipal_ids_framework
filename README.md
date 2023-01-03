@@ -109,6 +109,63 @@ optional arguments:
                         slow/tiny. (Default: 9)
 ```
 
+#### Usage configuration files
+
+The configuration file determines the parameters for each IIDS. A default configuration for each IIDS can be obtained with `ipal-iids --default.config [IIDS name]`:
+
+```bash
+ipal-iids --default.config inter-arrival-mean
+{
+    "inter-arrival-mean": {
+        "_type": "inter-arrival-mean",
+        "model-file": "./model",
+        "N": 4,
+        "W": 5
+    }
+}
+```
+
+The IIDS framework allows for using multiple IIDSs in parallel. Each entry in the configuration file can have a different name, e.g., one IIDS for each sensor of a physical system. Currently, the output of multiple IIDSs is combined with 'or' - meaning an alert is emitted if at least one IIDS detected an anomaly.
+
+#### Usage Combiner
+
+If multiple IIDSs are used in parallel, it is possible to specifcy a combiner that fuses the results of the individual approaches into a unified alert. Therefore different strategies can be used as listed in the following table:
+
+| Combiner  | Description                                                  |
+| ------------- | ------------------------------------------------------------ |
+| All     | Alerts if all IDSs emit an alert.   |
+| Any     | Alerts if any IDS emits an alert.   |
+| Gurobi     | Solves an optimization problem with Gurobi to find optimal weights for IDSs. This combiner may require a Gurobi license.  |
+| Heuristic     | This combiner implements a heuristic that minimizes the number of misclassifications, which maximizes accuracy.   |
+| LogisticRegression     | Learns a logistic regression combiner.   |
+| Majority     | Alerts if the majority of IDSs emit an alert.   |
+| SVM     | Learns a SVM combiner.   |
+| Weights     | Each IDS gets assigned a dedicated weight. The combiner alerts if a weighted sum of alerts/scores is greater than a threshold.   |
+
+To utilize a combiner, the IIDS framework requires a dedicated configuration file. A default configuration for each combiner can be obtained with `ipal-iids --combiner.default.config [Combiner name]`:
+
+```bash
+ipal-iids --combiner.default.config Weights
+{
+    "_type": "Weights",
+    "model-file": null,
+    "weights": {},
+    "threshold": 1,
+    "use_scores": false
+}
+```
+
+This configuration file must be provided in addition to the regular IIDS configuration file. An exemplary command would be:
+
+```bash
+ipal-iids \
+  --config [IDS config file] --train.state [IDS training file] \
+  --combiner.config [combiner config file] --train.combiner [Combiner training file] \
+  --live.state [live file] --output [output file]
+```
+
+Note that some combiners require dedicated training files. It is recommended to use a separate training file for the combiner.
+
 #### Usage Preprocessor
 
 The preprocessors are useful for IIDSs, that require a certain input format. E.g., some machine-learning IIDSs work best if their data is scaled between 0 and 1. Only IIDSs inheriting from the `FeatureIDS` can use the preprocessors. Initially, the preprocessors are fitted to the training data. Currently, the following preprocessors are implemented:
@@ -140,24 +197,6 @@ Multiple preprocessors can be used in series. The following example shows how pr
     }
 }
 ```
-
-#### Usage configuration files
-
-The configuration file determines the parameters for each IIDS. A default configuration for each IIDS can be obtained with `ipal-iids --default.config [IIDS name]`:
-
-```bash
-ipal-iids --default.config inter-arrival-mean
-{
-    "inter-arrival-mean": {
-        "_type": "inter-arrival-mean",
-        "model-file": "./model",
-        "N": 4,
-        "W": 5
-    }
-}
-```
-
-The IIDS framework allows for using multiple IIDSs in parallel. Each entry in the configuration file can have a different name, e.g., one IIDS for each sensor of a physical system. Currently, the output of multiple IIDSs is combined with 'or' - meaning an alert is emitted if at least one IIDS detected an anomaly.
 
 #### Usage `ipal-visualize-model`
 
@@ -236,6 +275,11 @@ The process for adding a new state extraction method is the following:
    - `from_fitted_model`: return an initialized preprocessor based on a previously saved model
 3. Add the new preprocessor to the list in ```preprocessors/utils.py```
 4. Add the new preprocessor to the [preprocessor list](#usage-preprocessor) table above
+
+
+##### Add a combiner
+
+Adding a combiner is analog to adding a new preprocessor.
 
 ## Contributors
 

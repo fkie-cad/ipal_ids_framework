@@ -9,3 +9,4 @@ matplotlib
 pomegranate
 tr
 pandas
+gurobipy
