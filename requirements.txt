@@ -1,7 +1,7 @@
 numpy
 tensorflow
 graphviz
-sklearn
+scikit-learn
 keras
 torch
 git+https://github.com/RhysU/ar.git
