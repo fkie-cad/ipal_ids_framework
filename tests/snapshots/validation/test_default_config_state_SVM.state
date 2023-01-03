@@ -1,5 +1,10 @@
 {
     "_iids-config": {
+        "combiner": {
+            "_type": "Any",
+            "model-file": null
+        },
+        "combiner_config": null,
         "compresslevel": 9,
         "config": "misc/configs/SVM.config",
         "idss": {
@@ -40,7 +45,8 @@
                 "max_iter": [
                     -1
                 ],
-                "model-file": null,
+                "model-file": "./model",
+                "no-probability": true,
                 "preprocessors": [],
                 "random_state": [
                     null
@@ -64,11 +70,15 @@
         "logformat": "%(levelname)s:%(name)s:%(message)s",
         "output": "-",
         "retrain": true,
+        "train_combiner": null,
         "train_ipal": null,
         "train_state": "misc/ipal/train.ipal",
 ###IGNORE-LINE###
     },
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -78,11 +88,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -92,6 +102,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -101,11 +114,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -115,6 +128,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -124,11 +140,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -138,6 +154,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -147,11 +166,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -161,6 +180,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -170,11 +192,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -184,6 +206,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -193,11 +218,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -207,6 +232,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -216,11 +244,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -230,6 +258,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -239,11 +270,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -253,6 +284,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -262,11 +296,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -276,6 +310,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -285,11 +322,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -299,6 +336,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -308,11 +348,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -322,6 +362,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -331,11 +374,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -345,6 +388,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -354,11 +400,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -368,6 +414,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -377,11 +426,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -391,6 +440,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -400,11 +452,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -414,6 +466,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -423,11 +478,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -437,6 +492,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -446,11 +504,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -460,6 +518,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -469,11 +530,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -483,6 +544,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -492,11 +556,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -506,6 +570,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -515,11 +582,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -529,6 +596,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -538,11 +608,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -552,6 +622,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -561,11 +634,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -575,6 +648,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -584,11 +660,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -598,6 +674,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -607,11 +686,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -621,6 +700,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -630,11 +712,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -644,6 +726,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -653,11 +738,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -667,6 +752,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -676,11 +764,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -690,6 +778,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -699,11 +790,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -713,6 +804,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "SVM": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -722,11 +816,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "SVM": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "SVM": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0

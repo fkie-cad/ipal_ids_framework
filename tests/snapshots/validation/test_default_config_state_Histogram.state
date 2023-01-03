@@ -1,5 +1,10 @@
 {
     "_iids-config": {
+        "combiner": {
+            "_type": "Any",
+            "model-file": null
+        },
+        "combiner_config": null,
         "compresslevel": 9,
         "config": "misc/configs/Histogram.config",
         "idss": {
@@ -9,7 +14,7 @@
                 "bins": 10,
                 "discrete_threshold": 10,
                 "features": [],
-                "model-file": null,
+                "model-file": "./model",
                 "preprocessors": [],
                 "save-training": null,
                 "threshold": 0,
@@ -24,11 +29,15 @@
         "logformat": "%(levelname)s:%(name)s:%(message)s",
         "output": "-",
         "retrain": true,
+        "train_combiner": null,
         "train_ipal": null,
         "train_state": "misc/ipal/train.ipal",
 ###IGNORE-LINE###
     },
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -38,11 +47,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -52,6 +61,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -61,11 +73,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -75,6 +87,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -84,11 +99,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -98,6 +113,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -107,11 +125,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -121,6 +139,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -130,11 +151,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -144,6 +165,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -153,11 +177,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -167,6 +191,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -176,11 +203,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -190,6 +217,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -199,11 +229,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -213,6 +243,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -222,11 +255,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -236,6 +269,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -245,11 +281,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -259,6 +295,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -268,11 +307,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -282,6 +321,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -291,11 +333,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -305,6 +347,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -314,11 +359,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -328,6 +373,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -337,11 +385,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -351,6 +399,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -360,11 +411,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -374,6 +425,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -383,11 +437,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -397,6 +451,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -406,11 +463,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -420,6 +477,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -429,11 +489,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -443,6 +503,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -452,11 +515,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -466,6 +529,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -475,11 +541,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -489,6 +555,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -498,11 +567,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -512,6 +581,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -521,11 +593,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -535,6 +607,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -544,11 +619,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -558,6 +633,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -567,11 +645,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -581,6 +659,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -590,11 +671,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -604,6 +685,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -613,11 +697,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -627,6 +711,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -636,11 +723,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -650,6 +737,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -659,11 +749,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -673,6 +763,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Histogram": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -682,11 +775,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Histogram": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Histogram": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0

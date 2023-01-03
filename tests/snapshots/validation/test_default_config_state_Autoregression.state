@@ -1,5 +1,10 @@
 {
     "_iids-config": {
+        "combiner": {
+            "_type": "Any",
+            "model-file": null
+        },
+        "combiner_config": null,
         "compresslevel": 9,
         "config": "misc/configs/Autoregression.config",
         "idss": {
@@ -11,7 +16,7 @@
                 "firstN": 3,
                 "maxorder": 500,
                 "minorder": 1,
-                "model-file": null,
+                "model-file": "./model",
                 "sensor": "switch",
                 "subtractMean": false
             }
@@ -23,11 +28,15 @@
         "logformat": "%(levelname)s:%(name)s:%(message)s",
         "output": "-",
         "retrain": true,
+        "train_combiner": null,
         "train_ipal": null,
         "train_state": "misc/ipal/train.ipal",
 ###IGNORE-LINE###
     },
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -37,11 +46,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -51,20 +60,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 1,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -74,20 +86,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 2,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -97,20 +112,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 3,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -120,20 +138,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 4,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -143,20 +164,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 5,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -166,20 +190,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 6,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -189,20 +216,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 7,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -212,20 +242,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 8,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -235,20 +268,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 9,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -258,20 +294,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 10,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -281,20 +320,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 11,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -304,20 +346,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 12,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -327,20 +372,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 13,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -350,20 +398,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 14,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -373,20 +424,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 15,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -396,20 +450,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 16,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -419,20 +476,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 17,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -442,20 +502,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 18,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -465,20 +528,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 19,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -488,20 +554,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 20,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -511,20 +580,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 1
     },
     "dest": "2.2.2.2:502:1",
     "id": 21,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -534,20 +606,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 1
     },
     "dest": "2.2.2.2:502:1",
     "id": 22,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -557,20 +632,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 1
     },
     "dest": "2.2.2.2:502:1",
     "id": 23,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -580,20 +658,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 1
     },
     "dest": "2.2.2.2:502:1",
     "id": 24,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -603,20 +684,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 25,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -626,20 +710,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 26,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -649,20 +736,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 1
     },
     "dest": "2.2.2.2:502:1",
     "id": 27,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -672,20 +762,23 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "Autoregression": null
+    },
     "crc": true,
     "data": {
         "switch": 0
     },
     "dest": "2.2.2.2:502:1",
     "id": 28,
-    "ids": null,
+    "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "Autoregression": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "Autoregression": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0

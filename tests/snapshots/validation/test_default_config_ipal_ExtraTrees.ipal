@@ -1,5 +1,10 @@
 {
     "_iids-config": {
+        "combiner": {
+            "_type": "Any",
+            "model-file": null
+        },
+        "combiner_config": null,
         "compresslevel": 9,
         "config": "misc/configs/ExtraTrees.config",
         "idss": {
@@ -26,7 +31,7 @@
                     null
                 ],
                 "max_features": [
-                    "auto"
+                    "sqrt"
                 ],
                 "max_leaf_nodes": [
                     null
@@ -46,10 +51,11 @@
                 "min_weight_fraction_leaf": [
                     0
                 ],
-                "model-file": null,
+                "model-file": "./model",
                 "n_estimators": [
                     100
                 ],
+                "no-probability": true,
                 "oob_score": [
                     false
                 ],
@@ -73,11 +79,15 @@
         "logformat": "%(levelname)s:%(name)s:%(message)s",
         "output": "-",
         "retrain": true,
+        "train_combiner": null,
         "train_ipal": "misc/ipal/train.ipal",
         "train_state": null,
 ###IGNORE-LINE###
     },
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -87,11 +97,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -101,6 +111,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -110,11 +123,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -124,6 +137,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -133,11 +149,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -147,6 +163,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -156,11 +175,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -170,6 +189,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -179,11 +201,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -193,6 +215,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -202,11 +227,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -216,6 +241,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -225,11 +253,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -239,6 +267,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -248,11 +279,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -262,6 +293,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -271,11 +305,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -285,6 +319,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -294,11 +331,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -308,6 +345,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -317,11 +357,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -331,6 +371,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -340,11 +383,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -354,6 +397,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -363,11 +409,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -377,6 +423,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -386,11 +435,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -400,6 +449,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -409,11 +461,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -423,6 +475,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -432,11 +487,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -446,6 +501,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -455,11 +513,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -469,6 +527,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -478,11 +539,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -492,6 +553,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -501,11 +565,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -515,6 +579,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -524,11 +591,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -538,6 +605,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -547,11 +617,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -561,6 +631,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -570,11 +643,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -584,6 +657,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -593,11 +669,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -607,6 +683,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -616,11 +695,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -630,6 +709,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -639,11 +721,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -653,6 +735,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -662,11 +747,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -676,6 +761,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -685,11 +773,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0
@@ -699,6 +787,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 1
@@ -708,11 +799,11 @@
     "ids": false,
     "length": 12,
     "malicious": true,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 1
@@ -722,6 +813,9 @@
 }
 {
     "activity": "interrogate",
+    "alerts": {
+        "ExtraTrees": false
+    },
     "crc": true,
     "data": {
         "switch": 0
@@ -731,11 +825,11 @@
     "ids": false,
     "length": 12,
     "malicious": false,
-    "metrics": {
-        "ExtraTrees": 0
-    },
     "protocol": "modbus",
     "responds to": [],
+    "scores": {
+        "ExtraTrees": 0
+    },
     "src": "1.1.1.1:1",
     "state": {
         "switch": 0

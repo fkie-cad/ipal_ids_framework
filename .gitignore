@@ -4,6 +4,8 @@
 !tests/snapshots/validation/*.state
 tests/snapshots/output
 tests/snapshots/tmp
+misc/configs/model
+misc/configs/model.kreas/
 
 # Editors
 .vscode/
