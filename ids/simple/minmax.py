@@ -49,18 +49,35 @@ class MinMax(FeatureIDS):
             )
 
     def new_state_msg(self, msg):
+        likelihood = 0
+        alert = False
+
         state = super().new_state_msg(msg)
         if state is None:
-            return False, 0
+            return alert, likelihood
 
-        for value, min, max, delta in zip(
+        for value, minimum, maximum, delta in zip(
             state, self.mins.values(), self.maxs.values(), self.deltas.values()
         ):
             err = delta * self.settings["threshold"]
-            if value is not None and (value < min - err or max + err < value):
-                return True, 1
 
-        return False, 0
+            if value is None:  # None is not malicious
+                likelihood = max(likelihood, 0)
+
+            elif minimum <= value and value <= maximum:  # 0: if within min/max region
+                likelihood = max(likelihood, 0)
+
+            else:  # scale from 0 - 1 in error region
+                overshoot = (
+                    abs(((maximum + minimum) * 0.5 - value)) - (maximum - minimum) * 0.5
+                )
+                likelihood = max(likelihood, overshoot / (1 if err == 0 else err))
+
+            # Trigger alert
+            if value is not None and (value < minimum - err or maximum + err < value):
+                alert |= True
+
+        return alert, likelihood
 
     def new_ipal_msg(self, msg):
         # There is no difference for this IDS in state or message format! It only depends on the configuration which features are used.

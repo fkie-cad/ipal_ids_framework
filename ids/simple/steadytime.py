@@ -114,31 +114,46 @@ class SteadyTime(FeatureIDS):
         self._reset()
 
     def _is_valid(self, sensor, val, time):
+        likelihood = 0
+
         if self.time[sensor][val] is None:  # No data is valid
-            return True
+            return True, likelihood
 
         tmin, tmax = self.time[sensor][val]
         err = self.deltas[sensor][val] * self.settings["threshold"]
-        return tmin - err <= time and time <= tmax + err
+
+        if time < tmin or tmax < time:  # outside normal bounary
+            overshoot = abs(((tmax + tmin) * 0.5 - time)) - (tmax - tmin) * 0.5
+            likelihood = max(likelihood, overshoot / (1 if err == 0 else err))
+
+        return tmin - err <= time and time <= tmax + err, likelihood
 
     def new_state_msg(self, msg):
+        likelihood = 0
+        alert = False
+
         state = super().new_state_msg(msg)
         if state is None:
-            return False, 0
-
-        alert = False
+            return alert, likelihood
 
         for i in range(len(state)):
             if self.time[i] is None:  # Ignore sensors with too many values
                 continue
 
             if state[i] not in self.time[i]:  # Alert unknown value
-                alert = True
+                alert |= True
+                likelihood = max(likelihood, 1)
                 continue
 
             complete, val, time = self._update(i, state[i])
-            if complete and not self._is_valid(i, val, time):
-                alert = True
+            if not complete:  # state not changed yet
+                continue
+
+            is_valid, local_likelihood = self._is_valid(i, val, time)
+            likelihood = max(likelihood, local_likelihood)
+
+            if not is_valid:  # found a violation
+                alert |= True
 
                 # Add alarm adjustment information if required
                 if self.settings["adjust"]:
@@ -146,10 +161,12 @@ class SteadyTime(FeatureIDS):
                     if time > self.time[i][val][1]:  # only alert excess
                         time -= self.time[i][val][1]
 
-                    msg["adjust"] = [[t, True, 1] for t in range(-int(time), 0)]
+                    msg["adjust"] = [
+                        [t, True, likelihood] for t in range(-int(time), 0)
+                    ]
                     msg["adjust"] += [[0, False, 0]]  # Reset current alarm
 
-        return alert, 1 if alert else 0
+        return alert, likelihood
 
     def new_ipal_msg(self, msg):
         # There is no difference for this IDS in state or message format! It only depends on the configuration which features are used.

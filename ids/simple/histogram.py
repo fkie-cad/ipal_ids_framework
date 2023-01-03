@@ -106,36 +106,48 @@ class Histogram(FeatureIDS):
         self._reset()
 
     def _is_valid(self, sensor):
+        likelihood = 0
+
         for val in self.hist[sensor]:  # One failed bucket suffices
             tmin, tmax = self.hist[sensor][val]
             err = self.deltas[sensor][val] * self.settings["threshold"]
             cur = self._cur[sensor][val]
 
-            if cur < tmin - err or tmax + err < cur:  # Outside the histogram
-                return False
+            if cur < tmin or tmax < cur:  # outside normal bounary
+                overshoot = abs(((tmax + tmin) * 0.5 - cur)) - (tmax - tmin) * 0.5
+                likelihood = max(likelihood, overshoot / (1 if err == 0 else err))
 
-        return True
+            if cur < tmin - err or tmax + err < cur:  # Outside the histogram
+                return False, likelihood
+
+        return True, likelihood
 
     def new_state_msg(self, msg):
+        likelihood = 0
+        alert = False
+
         state = super().new_state_msg(msg)
         if state is None:
-            return False, 0
-
-        alert = False
+            return alert, likelihood
 
         for i in range(len(state)):
             if self.hist[i] is None:  # Ignore sensors with too many values
                 continue
 
             if state[i] not in self.hist[i]:  # Alert unknown value
-                alert = True
+                alert |= True
+                likelihood = max(likelihood, 1)
+                continue
 
-            else:
-                complete = self._update(i, state[i])
-                if complete and not self._is_valid(i):
-                    alert = True
+            complete = self._update(i, state[i])
+            if not complete:  # histogram not full yet
+                continue
 
-        return alert, 1 if alert else 0
+            is_valid, local_likelihood = self._is_valid(i)
+            likelihood = max(likelihood, local_likelihood)
+            alert |= not is_valid
+
+        return alert, likelihood
 
     def new_ipal_msg(self, msg):
         # There is no difference for this IDS in state or message format! It only depends on the configuration which features are used.
