@@ -18,6 +18,7 @@ setup(
         "tr",
         "pandas",
         "gurobipy",
+        "scikit-learn",
     ],
     tests_require=["pytest"],
     url="https://github.com/fkie-cad/ipal_ids_framework",
