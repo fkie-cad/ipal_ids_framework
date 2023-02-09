@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="ipal-iids",
-    version="1.4.2",
+    version="1.4.3",
     packages=find_packages(exclude="tests"),
     scripts=["ipal-iids", "ipal-extend-alarms", "ipal-visualize-model"],
     install_requires=[

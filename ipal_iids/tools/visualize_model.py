@@ -65,6 +65,11 @@ def prepare_arg_parser(parser):
         required=False,
     )
 
+    # Version number
+    parser.add_argument(
+        "--version", action="version", version=f"%(prog)s {settings.version}"
+    )
+
 
 def load_settings(args):
 

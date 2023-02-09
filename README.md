@@ -277,6 +277,8 @@ The process for adding support for a new IIDS is the following:
 4. Add the new IIDS to the list in ```tests/conftest.py```
 5. Add the new IIDS to the [implemented IIDSs](#implemented-iidss) table above
 
+Note: The name of an IIDS may not begin with "_"!
+
 ##### Add a preprocessor
 
 The process for adding a new state extraction method is the following:

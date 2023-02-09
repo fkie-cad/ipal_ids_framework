@@ -4,6 +4,7 @@ import gzip
 import json
 import logging
 import os
+import random
 import sys
 import time
 
@@ -17,10 +18,28 @@ from combiner.utils import get_all_combiner
 
 # Wrapper for hiding .gz files
 def open_file(filename, mode):
-    if filename.endswith(".gz"):
+    if filename is None:
+        return None
+    elif filename.endswith(".gz"):
         return gzip.open(filename, mode=mode, compresslevel=settings.compresslevel)
+    elif filename == "-":
+        return sys.stdin
     else:
         return open(filename, mode=mode, buffering=1)
+
+
+def copy_file_to_tmp_file(filein):
+    # Generate temprary file and read stdin to it
+    filename = "tmp-{}.gz".format(random.randint(1000, 9999))
+    with open_file(filename, "wt") as ftmp:
+        try:
+            with open_file(filein, "r") as filein:
+                ftmp.write(filein.read())
+        except:  # noqa: E722
+            # Remove tmpfile upon failure
+            os.remove(filename)
+            raise Exception("Failed copying stdin to temporary file")
+    return filename
 
 
 # Initialize logger
@@ -196,6 +215,11 @@ def prepare_arg_parser(parser):
         required=False,
     )
 
+    # Version number
+    parser.add_argument(
+        "--version", action="version", version=f"%(prog)s {settings.version}"
+    )
+
 
 # Returns IDS according to the arguments
 def parse_ids_arguments():
@@ -203,6 +227,9 @@ def parse_ids_arguments():
 
     # IDS defined by config file
     for name, config in settings.idss.items():
+        if name.startswith("_"):
+            settings.logger.info(f"Ignored {name} since it starts with '_'")
+            continue
         idss.append(get_all_iidss()[config["_type"]](name=name))
     return idss
 
@@ -319,7 +346,7 @@ def load_settings(args):  # noqa: C901
             exit(1)
 
     else:
-        settings.logger.warning("No combiner define. Using default Any combiner!")
+        settings.logger.warning("No combiner defined. Using default Any combiner!")
         settings.combiner = {"_type": "Any"}
 
 
@@ -355,31 +382,57 @@ def train_idss(idss):
         )
         exit(1)
 
-    # Give the various IDSs the dataset they need in their learning phase
-    for ids in idss:
-        if ids in loaded_from_file:
-            continue
+    # If training file is stdin, read stdin and save it to a temporary file
+    # Because training multiple IIDSs on stdin is not possible since stdin can only be read once
+    if settings.train_ipal == "-" and len(idss) > 1:
+        settings.logger.info("Copying training stdin to temporary file.")
+        tmpipalfile = copy_file_to_tmp_file(settings.train_ipal)
+        settings.train_ipal = tmpipalfile
+    else:
+        tmpipalfile = None
 
-        start = time.time()
-        settings.logger.info("Training of {} started at {}".format(ids._name, start))
+    if settings.train_state == "-" and len(idss) > 1:
+        settings.logger.info("Copying training stdin to temporary file.")
+        tmpstatefile = copy_file_to_tmp_file(settings.train_state)
+        settings.train_state = tmpstatefile
+    else:
+        tmpstatefile = None
 
-        ids.train(ipal=settings.train_ipal, state=settings.train_state)
+    try:
+        # Give the various IDSs the dataset they need in their learning phase
+        for ids in idss:
+            if ids in loaded_from_file:
+                continue
 
-        end = time.time()
-        settings.logger.info(
-            "Training of {} ended at {} ({}s)".format(ids._name, end, end - start)
-        )
-
-        # Try to save the trained model
-        try:
-            if ids.save_trained_model():
-                settings.logger.info(
-                    "Saved trained model of {} to file.".format(ids._name)
-                )
-        except NotImplementedError:
+            start = time.time()
             settings.logger.info(
-                "Saving model to file not implemented for {}.".format(ids._name)
+                "Training of {} started at {}".format(ids._name, start)
             )
+
+            ids.train(ipal=settings.train_ipal, state=settings.train_state)
+
+            end = time.time()
+            settings.logger.info(
+                "Training of {} ended at {} ({}s)".format(ids._name, end, end - start)
+            )
+
+            # Try to save the trained model
+            try:
+                if ids.save_trained_model():
+                    settings.logger.info(
+                        "Saved trained model of {} to file.".format(ids._name)
+                    )
+            except NotImplementedError:
+                settings.logger.info(
+                    "Saving model to file not implemented for {}.".format(ids._name)
+                )
+
+    finally:
+        # Remove temporary files
+        if tmpipalfile is not None:
+            os.remove(tmpipalfile)
+        if tmpstatefile is not None:
+            os.remove(tmpstatefile)
 
 
 def train_combiner(combiner):
@@ -517,7 +570,10 @@ def live_idss(idss, combiner):
 
 def main():
     # Argument parser and settings
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        prog="ipal-iids",
+        description="This program contains the ipal-iids framework together with implementations of several IIDSs based on the IPAL message and state format.",
+    )
     prepare_arg_parser(parser)
     args = parser.parse_args()
     initialize_logger(args)
