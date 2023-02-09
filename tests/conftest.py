@@ -10,6 +10,7 @@ IDSNAMES = [
     "DecimalPlaces",
     "DecisionTree",
     "Dummy",
+    "Exists",
     "ExtraTrees",
     "Histogram",
     "IsolationForest",

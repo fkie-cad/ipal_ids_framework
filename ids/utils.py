@@ -11,6 +11,7 @@ from .interarrivaltime.Range import InterArrivalTimeRange
 from .oracles.DummyIDS import DummyIDS
 from .oracles.OptimalIDS import OptimalIDS
 from .simple.decimal import DecimalPlaces
+from .simple.exists import ExistsIDS
 from .simple.histogram import Histogram
 from .simple.minmax import MinMax
 from .simple.steadytime import SteadyTime
@@ -21,6 +22,7 @@ idss = [
     DecimalPlaces,
     DecisionTree,
     DummyIDS,
+    ExistsIDS,
     ExtraTrees,
     Histogram,
     InterArrivalTimeMean,

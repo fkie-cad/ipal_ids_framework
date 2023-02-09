@@ -3,7 +3,7 @@ import logging
 
 from ids.utils import get_all_iidss
 
-version = "v1.4.4"
+version = "v1.4.5"
 
 # Gzip options
 compresslevel = 9  # 0 no compress, 1 large/fast, 9 small/slow
