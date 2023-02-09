@@ -7,7 +7,6 @@ from .conftest import check_with_validation_file
 
 @pytest.mark.parametrize("idsname", IDSNAMES)
 def test_default_config_ipal(idsname):
-
     args = [
         "--retrain",
         "--train.ipal",
@@ -38,7 +37,6 @@ def test_default_config_ipal(idsname):
 
 @pytest.mark.parametrize("idsname", IDSNAMES)
 def test_default_config_state(idsname):
-
     args = [
         "--retrain",
         "--train.state",

@@ -8,7 +8,6 @@ from ids.featureids import FeatureIDS
 
 
 class ExtraTrees(FeatureIDS):
-
     _name = "ExtraTrees"
     _description = "Extra-trees classifier."
     _extratrees_default_settings = {

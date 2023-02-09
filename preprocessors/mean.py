@@ -8,7 +8,6 @@ from .preprocessor import Preprocessor
 
 
 class MeanPreprocessor(Preprocessor):
-
     _name = "mean"
     _description = "Scale by mean-standard deviation"
     means: List[float]

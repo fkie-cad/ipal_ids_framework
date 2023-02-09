@@ -3,7 +3,6 @@ from .preprocessor import Preprocessor
 
 
 class IndicateNonePreprocessor(Preprocessor):
-
     _name = "indicate-none"
     _description = "Set None to 0 and indicate with new feature"
 

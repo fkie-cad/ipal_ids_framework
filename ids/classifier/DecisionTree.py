@@ -8,7 +8,6 @@ from ids.featureids import FeatureIDS
 
 
 class DecisionTree(FeatureIDS):
-
     _name = "DecisionTree"
     _description = "Decision tree classifier."
     _decisiontree_default_settings = {

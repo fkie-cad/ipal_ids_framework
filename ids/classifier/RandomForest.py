@@ -8,7 +8,6 @@ from ids.featureids import FeatureIDS
 
 
 class RandomForest(FeatureIDS):
-
     _name = "RandomForest"
     _description = "Random forest classifier."
     _randomforest_default_settings = {

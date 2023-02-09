@@ -44,7 +44,6 @@ def copy_file_to_tmp_file(filein):
 
 # Initialize logger
 def initialize_logger(args):
-
     if args.log:
         settings.log = getattr(logging, args.log.upper(), None)
 
@@ -101,7 +100,6 @@ def dump_combiner_default_config(name):
 
 
 def prepare_arg_parser(parser):
-
     # Input and output
     parser.add_argument(
         "--train.ipal",
@@ -240,7 +238,6 @@ def parse_combiner_arguments():
 
 
 def load_settings(args):  # noqa: C901
-
     if args.defaultconfig:
         dump_ids_default_config(args.defaultconfig)
 
@@ -438,7 +435,6 @@ def train_idss(idss):
 def train_combiner(combiner):
     # Try to load an existing model from file
     if not settings.retrain:
-
         try:
             if combiner.load_trained_model():
                 settings.logger.info(
@@ -534,7 +530,6 @@ def live_idss(idss, combiner):
             ipal_msg["ids"] = alert
 
             if settings.output:
-
                 if _first_ipal_msg:
                     ipal_msg["_iids-config"] = settings.iids_settings_to_dict()
                     _first_ipal_msg = False
@@ -558,7 +553,6 @@ def live_idss(idss, combiner):
             state_msg["ids"] = alert
 
             if settings.output:
-
                 if _first_state_msg:
                     state_msg["_iids-config"] = settings.iids_settings_to_dict()
                     _first_state_msg = False

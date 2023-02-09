@@ -42,7 +42,6 @@ def initialize_logger(args):
 
 
 def prepare_arg_parser(parser):
-
     parser.add_argument(
         "files",
         metavar="FILE",
@@ -74,7 +73,6 @@ def prepare_arg_parser(parser):
 
 
 def extend_alarms(file):
-
     ipal = []
 
     # Load file into memory

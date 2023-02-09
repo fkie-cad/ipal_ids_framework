@@ -5,7 +5,6 @@ from ids.ids import MetaIDS
 
 
 class DummyIDS(MetaIDS):
-
     _name = "Dummy"
     _description = "Dummy IDS returns either True or False."
     _requires = ["train.ipal", "live.ipal", "train.state", "live.state"]

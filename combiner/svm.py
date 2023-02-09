@@ -7,7 +7,6 @@ from .combiner import Combiner
 
 
 class SVMCombiner(Combiner):
-
     _name = "SVM"
     _description = "Learns a SVM combiner."
     _requires_training = True
@@ -56,7 +55,6 @@ class SVMCombiner(Combiner):
         return alert, 1 if alert else 0
 
     def save_trained_model(self):
-
         if self.settings["model-file"] is None:
             return False
 

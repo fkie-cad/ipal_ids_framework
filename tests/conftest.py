@@ -7,6 +7,7 @@ METAIDS = "./ipal-iids"
 IDSNAMES = [
     "Autoregression",
     "BLSTM",
+    "DecimalPlaces",
     "DecisionTree",
     "Dummy",
     "ExtraTrees",

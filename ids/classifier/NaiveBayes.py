@@ -13,7 +13,6 @@ from ids.featureids import FeatureIDS
 
 
 class NaiveBayes(FeatureIDS):
-
     _name = "NaiveBayes"
     _description = "Naive bayes classifier."
     _naivebayes_default_settings = {

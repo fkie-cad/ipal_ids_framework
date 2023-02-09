@@ -8,7 +8,6 @@ from ids.featureids import FeatureIDS
 
 
 class SVM(FeatureIDS):
-
     _name = "SVM"
     _description = "SVM forest classifier."
     _svm_default_settings = {

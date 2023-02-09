@@ -7,7 +7,6 @@ from ids.featureids import FeatureIDS
 
 
 class IsolationForest(FeatureIDS):
-
     _name = "IsolationForest"
     _description = "Isolation forest classifier."
     _isolationforest_default_settings = {

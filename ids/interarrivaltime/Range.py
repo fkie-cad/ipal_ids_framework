@@ -14,7 +14,6 @@ from ids.ids import MetaIDS
 
 
 class InterArrivalTimeRange(MetaIDS):
-
     _name = "inter-arrival-range"
     _description = "Range of mean inter-arrival time"
     _requires = ["train.ipal", "live.ipal"]
@@ -58,7 +57,6 @@ class InterArrivalTimeRange(MetaIDS):
         settings.logger.info("Inter-arrival-time range models:")
 
         for k in events.keys():
-
             interevent_times = []
 
             for i in range(len(events[k]) - 1):
@@ -100,14 +98,12 @@ class InterArrivalTimeRange(MetaIDS):
             )
 
     def new_ipal_msg(self, msg):
-
         identifier = self._get_identifier(msg)
 
         if identifier not in self.sliding_windows:  # Unknown message
             return self.settings["alert_unknown"], None
 
         else:  # Known message
-
             # Slide window
             if len(self.sliding_windows[identifier]["timestamp"]) == self.settings["W"]:
                 del self.sliding_windows[identifier]["timestamp"][0]

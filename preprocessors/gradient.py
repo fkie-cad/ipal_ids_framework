@@ -2,7 +2,6 @@ from .preprocessor import Preprocessor
 
 
 class GradientPreprocessor(Preprocessor):
-
     _name = "gradient"  # NOTE Does not consider time!
     _description = "Calculate gradient"
 
@@ -17,7 +16,6 @@ class GradientPreprocessor(Preprocessor):
         pass
 
     def transform(self, value):
-
         for i in range(len(self.features)):
             if not self.features[i]:
                 continue
@@ -25,7 +23,6 @@ class GradientPreprocessor(Preprocessor):
             out = None  # None if buffer not full yet
 
             if self.last_value[i] is not None:  # Skip if first value
-
                 # calculate new gradient
                 self.sliding_window[i].append(value[i] - self.last_value[i])
 

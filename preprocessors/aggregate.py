@@ -4,7 +4,6 @@ from .preprocessor import Preprocessor
 
 
 class AggregatePreprocessor(Preprocessor):
-
     _name = "aggregate"
     _description = "Aggregates multiple vectors into one feature"
 
@@ -19,7 +18,6 @@ class AggregatePreprocessor(Preprocessor):
         pass
 
     def transform(self, value):
-
         self.aggregate += value
         self.N += 1
 

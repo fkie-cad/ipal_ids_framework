@@ -3,7 +3,6 @@ from .combiner import Combiner
 
 
 class AnyCombiner(Combiner):
-
     _name = "Any"
     _description = "Alerts if any IDS emits an alert."
     _requires_training = False
@@ -30,7 +29,6 @@ class AnyCombiner(Combiner):
 
 
 class AllCombiner(Combiner):
-
     _name = "All"
     _description = "Alerts if all IDSs emit an alert."
     _requires_training = False
@@ -57,7 +55,6 @@ class AllCombiner(Combiner):
 
 
 class MajorityCombiner(Combiner):
-
     _name = "Majority"
     _description = "Alerts if the majority of IDSs emit an alert."
     _requires_training = False
@@ -87,7 +84,6 @@ class MajorityCombiner(Combiner):
 
 
 class WeightsCombiner(Combiner):
-
     _name = "Weights"
     _description = "Each IDS gets assigned a dedicated weight. The combiner alerts if a weighted sum of alerts/scores is greater than a threshold."
     _requires_training = False

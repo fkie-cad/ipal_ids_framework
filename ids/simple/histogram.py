@@ -5,7 +5,6 @@ from ids.featureids import FeatureIDS
 
 
 class Histogram(FeatureIDS):
-
     _name = "Histogram"
     _description = "The Histogram approach tracks the process values' distribution within a fixed-sized window and tests whether it is in line with a histogram seen during training. The underlying intuition expects a similar distribution of reoccurring values between process cycles. This approach can detect the existence and absence of frequent value changes. The histograms are created by counting the number of times each distinct value appears in a sliding window. We merge them into a single histogram that covers each value's minimum and maximum occurrences across all distinct fixed-sized windows. The window size should match the duration of a process cycle, which could be automatically determined in an additional run over the dataset prior to training the histograms. Histogram only applies for process values with a few distinct values, as comparing two histograms value-by-value is unfeasible for noisy sensor data."
     _requires = ["train.ipal", "live.ipal", "train.state", "live.state"]
@@ -29,7 +28,6 @@ class Histogram(FeatureIDS):
         self._buffer = {}
 
     def _update(self, sensor, value):
-
         if sensor not in self._cur:
             self._cur[sensor] = {i: 0 for i in self.hist[sensor].keys()}
             self._buffer[sensor] = []
@@ -58,7 +56,6 @@ class Histogram(FeatureIDS):
         # Prepare data structures and find non-discrete values
         hist = {}
         for i in range(len(events[0])):
-
             vals = set([e[i] for e in events])
             if len(vals) > self.settings["discrete_threshold"]:  # Skip non-discrete
                 hist[i] = None
@@ -83,7 +80,6 @@ class Histogram(FeatureIDS):
 
         # Calculate deltas and real values
         for i in range(len(events[0])):
-
             if self.hist[i] is None:  # Skip non-discrete sensors
                 settings.logger.info("Sensor {} ignored".format(i))
                 continue
@@ -221,7 +217,6 @@ class Histogram(FeatureIDS):
             axs = [axs]
 
         for i, ax in zip(histkeys, axs):
-
             xs = np.arange(len(self.hist[i]))
             mins = np.array([v[0] for _, v in self.hist[i].items()])
             maxs = np.array([v[1] for _, v in self.hist[i].items()])

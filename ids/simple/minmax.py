@@ -5,7 +5,6 @@ from ids.featureids import FeatureIDS
 
 
 class MinMax(FeatureIDS):
-
     _name = "MinMax"
     _description = "The MinMax detects whether a sensor's/actuator's current value exceeds the range observed in the training data and raises an alarm if any observation falls outside that range. This approach is motivated by the intuition that process values of industrial systems relate to physical measurements or setpoints and thus usually obey certain limits. E.g., temperatures below the freezing point of a liquid are not desirable for pumping it through pipes. Even if the physical setup does not limit the value range, operational requirements may impose restrictions on the allowed data range, e.g., the pH value of a liquid may not exceed a specific range to be non-hazardous. Thus, we assume that an industrial system exhibits a class of values inside defined minimum and maximum limits."
     _requires = ["train.ipal", "live.ipal", "train.state", "live.state"]

@@ -8,7 +8,6 @@ from .combiner import Combiner
 
 
 class LogisticRegressionCombiner(Combiner):
-
     _name = "LogisticRegression"
     _description = "Learns a logistic regression combiner."
     _requires_training = True
@@ -57,7 +56,6 @@ class LogisticRegressionCombiner(Combiner):
         return alert, 1 if alert else 0
 
     def save_trained_model(self):
-
         if self.settings["model-file"] is None:
             return False
 

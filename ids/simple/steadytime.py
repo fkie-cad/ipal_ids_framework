@@ -5,7 +5,6 @@ from ids.featureids import FeatureIDS
 
 
 class SteadyTime(FeatureIDS):
-
     _name = "Steadytime"
     _description = "The Steadytime approach detects whether a sensor/actuator remains static, i.e., does not change its value, for a shorter or longer time than seen during training. This approach is motivated by the observation that an attack, e.g., freezing a sensor/actuator such as a pressure relief valve, cannot be detected by checking whether a value or the velocity of a value change remains within certain boundaries. Since a steady state is difficult to define for noisy sensor data, Steadytime takes only process values into account if the number of distinct values during training is sufficiently small."
     _requires = ["train.ipal", "live.ipal", "train.state", "live.state"]
@@ -29,7 +28,6 @@ class SteadyTime(FeatureIDS):
         self._cur_time = {}
 
     def _update(self, sensor, value):
-
         if sensor not in self._cur:
             self._cur[sensor] = value
             self._cur_time[sensor] = 0
@@ -65,7 +63,6 @@ class SteadyTime(FeatureIDS):
         # Prepare data structures and find non-discrete values
         time = {}
         for i in range(len(events[0])):
-
             vals = set([e[i] for e in events])
             if len(vals) > self.settings["discrete_threshold"]:  # Skip non-discrete
                 time[i] = None
@@ -89,7 +86,6 @@ class SteadyTime(FeatureIDS):
 
         # Calculate deltas and real values
         for i in range(len(events[0])):
-
             if self.time[i] is None:  # Skip non-discrete sensors
                 settings.logger.info("Sensor {} ignored".format(i))
                 continue
@@ -242,7 +238,6 @@ class SteadyTime(FeatureIDS):
             axs = [axs]
 
         for i, ax in zip(timekeys, axs):
-
             xs = np.arange(len(self.time[i]))
             mins = np.array(
                 [v[0] if v is not None else np.nan for _, v in self.time[i].items()]

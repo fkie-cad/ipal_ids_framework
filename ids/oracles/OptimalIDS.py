@@ -5,7 +5,6 @@ from ids.ids import MetaIDS
 
 
 class OptimalIDS(MetaIDS):
-
     _name = "Optimal"
     _description = "Optimal IDS returns the malicious field as classification."
     _requires = ["train.ipal", "live.ipal", "train.state", "live.state"]

@@ -8,7 +8,6 @@ import ipal_iids.settings as settings
 
 
 class Combiner:
-
     _name = None
     _description = ""
     _requires_training = True

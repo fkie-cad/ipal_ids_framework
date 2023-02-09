@@ -8,7 +8,6 @@ from ids.ids import MetaIDS
 
 
 class Autoregression(MetaIDS):
-
     _name = "Autoregression"
     _description = "Autoregression and CUSUM"
     _requires = ["train.state", "live.state"]
@@ -41,7 +40,6 @@ class Autoregression(MetaIDS):
 
         # Load training data for each sensor
         with self._open_file(state) as f:
-
             for line in f.readlines():
                 cur_state = json.loads(line)
 
@@ -81,7 +79,6 @@ class Autoregression(MetaIDS):
         self.delta = 0
 
         for v in training_data[self.settings["firstN"] :]:
-
             self.previous.append(v)
             if self.model.submean:
                 self.previous[-1] -= self.model.mu[0]
@@ -108,7 +105,6 @@ class Autoregression(MetaIDS):
         self.cusum = 0
 
     def new_state_msg(self, msg):
-
         if self.settings["sensor"] not in msg["state"]:  # Sensor not available
             return False, 0
         value = msg["state"][self.settings["sensor"]]

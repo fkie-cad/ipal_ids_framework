@@ -8,7 +8,6 @@ from .preprocessor import Preprocessor
 
 
 class CategoricalPreprocessor(Preprocessor):
-
     _name = "categorical"
     _description = "Encode as categorical"
     encoder: List[Union[Dict[str, Any], None]]

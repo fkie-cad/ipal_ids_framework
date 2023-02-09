@@ -8,7 +8,6 @@ from .preprocessor import Preprocessor
 
 
 class MinMaxPreprocessor(Preprocessor):
-
     _name = "minmax"
     _description = "Scale by mininum and maximum"
     mins: List[float]

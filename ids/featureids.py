@@ -11,7 +11,6 @@ from .ids import MetaIDS
 
 
 class FeatureIDS(MetaIDS):
-
     _requires = ["train.ipal", "train.state", "live.ipal", "live.state"]
     _featureids_default_settings = {
         "features": [],  # Feature list forwarded to the IDS after preprocessing
@@ -75,7 +74,6 @@ class FeatureIDS(MetaIDS):
 
     # the IDS is given the path to file(s) containing its requested training data
     def train(self, state=None):
-
         # Build preprocessors from settings
         for pre in self.settings["preprocessors"]:
             apply = [f in pre["features"] for f in self.settings["features"]]
@@ -161,7 +159,6 @@ class FeatureIDS(MetaIDS):
         return events[:N], annotations[:N], timestamps[:N]
 
     def new_state_msg(self, msg):
-
         state = self._extract_features(msg)
         if None in state and not self.settings["allow-none"]:
             settings.logger.info("None in state. Skipping message")

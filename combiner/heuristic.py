@@ -6,7 +6,6 @@ from .combiner import Combiner
 
 
 class HeuristicCombiner(Combiner):
-
     _name = "Heuristic"
     _description = "This combiner implements a heuristic that minimizes the number of misclassifications, which maximizes accuracy."
     _requires_training = True
@@ -25,7 +24,6 @@ class HeuristicCombiner(Combiner):
         return list(itertools.product([0, 1], repeat=len(self.keys)))
 
     def _get_activations(self, alerts):
-
         if not set(alerts.keys()) == set(self.keys):
             settings.logger.error("Keys of combiner do not match alerts")
             settings.logger.error("- data keys: {}".format(",".join(alerts.keys())))
@@ -62,7 +60,6 @@ class HeuristicCombiner(Combiner):
             return malicious > benign, malicious / (benign + malicious)
 
     def save_trained_model(self):
-
         if self.settings["model-file"] is None:
             return False
 

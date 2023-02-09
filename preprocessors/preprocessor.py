@@ -2,7 +2,6 @@ from typing import List
 
 
 class Preprocessor:
-
     _name = None
     _description = ""
     _default_settings = {}

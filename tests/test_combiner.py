@@ -20,7 +20,6 @@ def test_default_combiner_config(combinername):
 
 @pytest.mark.parametrize("combinername", COMBINERNAMES)
 def test_default_config_combiner(combinername):
-
     args = [
         "--retrain",
         "--train.ipal",

@@ -10,6 +10,7 @@ from .interarrivaltime.Mean import InterArrivalTimeMean
 from .interarrivaltime.Range import InterArrivalTimeRange
 from .oracles.DummyIDS import DummyIDS
 from .oracles.OptimalIDS import OptimalIDS
+from .simple.decimal import DecimalPlaces
 from .simple.histogram import Histogram
 from .simple.minmax import MinMax
 from .simple.steadytime import SteadyTime
@@ -17,6 +18,7 @@ from .simple.steadytime import SteadyTime
 idss = [
     Autoregression,
     BLSTM,
+    DecimalPlaces,
     DecisionTree,
     DummyIDS,
     ExtraTrees,

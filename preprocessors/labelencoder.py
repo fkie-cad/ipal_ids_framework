@@ -7,7 +7,6 @@ from .preprocessor import Preprocessor
 
 
 class LabelEncoderPreprocessor(Preprocessor):
-
     _name = "label"
     _description = "Encode as labels"
     encoder: List[Optional[LabelEncoder]]

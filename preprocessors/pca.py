@@ -10,7 +10,6 @@ from .preprocessor import Preprocessor
 
 
 class PCAPreprocessor(Preprocessor):
-
     _name = "pca"
     _description = "Performs a principal component analysis"
 

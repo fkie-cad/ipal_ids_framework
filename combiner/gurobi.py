@@ -7,7 +7,6 @@ from .combiner import Combiner
 
 
 class GurobiCombiner(Combiner):
-
     _name = "Gurobi"
     _description = (
         "Solves an optimization problem with Gurobi to find optimal weights for IDSs."
@@ -95,7 +94,6 @@ class GurobiCombiner(Combiner):
 
         def callback(model, where):
             if where == gurobipy.GRB.Callback.MIPSOL:
-
                 # Save and log intermediate model
                 self.weights = {
                     k: v for k, v in zip(self.keys, model.cbGetSolution([*weight_vars]))
@@ -152,7 +150,6 @@ class GurobiCombiner(Combiner):
         return sums > self.threshold, sums / self.threshold
 
     def save_trained_model(self):
-
         if self.settings["model-file"] is None:
             return False
 

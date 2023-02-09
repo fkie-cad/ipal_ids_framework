@@ -19,7 +19,6 @@ def open_file(filename, mode):
 
 # Initialize logger
 def initialize_logger(args):
-
     if args.log:
         settings.log = getattr(logging, args.log.upper(), None)
 
@@ -41,7 +40,6 @@ def initialize_logger(args):
 
 
 def prepare_arg_parser(parser):
-
     parser.add_argument(
         "config",
         metavar="FILE",
@@ -72,7 +70,6 @@ def prepare_arg_parser(parser):
 
 
 def load_settings(args):
-
     settings.config = args.config
 
     with open_file(settings.config, "r") as f:

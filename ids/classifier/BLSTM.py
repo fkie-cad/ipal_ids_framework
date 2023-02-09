@@ -23,7 +23,6 @@ from ids.featureids import FeatureIDS  # noqa: E402
 
 
 class BLSTM(FeatureIDS):
-
     _name = "BLSTM"
     _description = "Bidirectional LSTM."
     _blstm_default_settings = {

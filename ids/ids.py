@@ -9,7 +9,6 @@ import ipal_iids.settings as settings
 
 
 class MetaIDS:
-
     _name = None
     _description = ""
     _requires = []
