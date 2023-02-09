@@ -40,6 +40,11 @@ class NaiveBayes(FeatureIDS):
         events, annotation, _ = super().train(state=state)
         annotation = [a is not False for a in annotation]
 
+        if len(set(annotation)) <= 1:
+            settings.logger.warning(
+                "Training with a single class ({}) only!".format(set(annotation))
+            )
+
         # Learning Naive Bayes
         settings.logger.info("Learning Naive Bayes")
 

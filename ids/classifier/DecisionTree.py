@@ -52,6 +52,11 @@ class DecisionTree(FeatureIDS):
         events, annotation, _ = super().train(state=state)
         annotation = [a is not False for a in annotation]
 
+        if len(set(annotation)) <= 1:
+            settings.logger.warning(
+                "Training with a single class ({}) only!".format(set(annotation))
+            )
+
         # Learn DecisionTree
         settings.logger.info("Learning DecisionTree")
         tuned_parameters = {

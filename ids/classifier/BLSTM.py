@@ -37,7 +37,7 @@ class BLSTM(FeatureIDS):
         "sequence_length": 4,
         "step": 4,
         "verbose": 1,
-        # "adjust": true, # to use the extend-alarms.py script afterward
+        "adjust": True,  # to use the extend-alarms.py script afterward
     }
 
     def __init__(self, name=None):
@@ -94,6 +94,11 @@ class BLSTM(FeatureIDS):
 
         events = np.array(events)
         annotation = np.array([a is not False for a in annotation])
+
+        if len(set(annotation)) <= 1:
+            settings.logger.warning(
+                "Training with a single class ({}) only!".format(set(annotation))
+            )
 
         label_dim = 1  # True and False
         input_dim = len(events[0])
@@ -188,8 +193,11 @@ class BLSTM(FeatureIDS):
         alerts = [bool(x > 0.5) for x in predict]
 
         if "adjust" in self.settings:  # Annotate offset for adjust script
+            if "adjust" not in msg:
+                msg["adjust"] = {}
+
             offsets = list(range(-self.parameters["sequence_length"] + 1, 1))
-            msg["adjust"] = list(zip(offsets, alerts, predict))
+            msg["adjust"][self._name] = list(zip(offsets, alerts, predict))
 
         return any(alerts), max(predict)
 

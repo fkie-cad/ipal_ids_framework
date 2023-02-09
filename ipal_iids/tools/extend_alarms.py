@@ -82,19 +82,22 @@ def extend_alarms(file):
         if "adjust" not in ipal[i]:
             continue
 
-        # Adjust alert
-        for offset, alert, metric in ipal[i]["adjust"]:
-            assert offset <= 0
+        # For each IDS that wants to adjust something
+        for ids in ipal[i]["adjust"]:
+            # Adjust alert
+            for offset, alert, metric in ipal[i]["adjust"][ids]:
+                assert offset <= 0
 
-            if i + offset < 0:  # Log warning!
-                settings.logger.error(
-                    f"Offset is {offset + i}! Defaulting to dataset start."
-                )
-                offset = -i
+                if i + offset < 0:  # Log warning!
+                    settings.logger.error(
+                        f"Offset is {offset + i}! Defaulting to dataset start."
+                    )
+                    offset = -i
 
-            ipal[i + offset]["ids"] = alert
-            ipal[i + offset]["alerts"] = {k: metric for k in ipal[i + offset]["alerts"]}
-            ipal[i + offset]["scores"] = {k: metric for k in ipal[i + offset]["scores"]}
+                # TODO does not involve the decision of a combiner and uses simply OR!
+                ipal[i + offset]["ids"] = ipal[i + offset]["ids"] or alert
+                ipal[i + offset]["alerts"][ids] = alert
+                ipal[i + offset]["scores"][ids] = metric
 
         del ipal[i]["adjust"]
 

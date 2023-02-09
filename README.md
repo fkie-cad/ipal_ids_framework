@@ -231,7 +231,9 @@ optional arguments:
 
 #### Usage `ipal-extend-alarms`
 
-The `ipal-extend-alarms` works as an online tool - meaning IIDSs have to decide whether they emit an alert live. Therefore, alerts can not be emitted retroactively, wich is sometimes needed for evaluation. As few IIDSs possibly need to retroactively emit alerts, this script post-processes the IIDS output afterward. IIDSs with the support for `ipal-extend-alarms` need the parameter `adjust: true` to be set in their configuration files.
+The `ipal-iids` tool works as an online tool - meaning IIDSs have to decide whether they emit an alert live. Therefore, alerts can not be emitted retroactively, wich is sometimes needed for evaluation. As few IIDSs possibly need to retroactively emit alerts, the `ipal-extend-alarms` script post-processes the IIDS output afterward. IIDSs with the support for `ipal-extend-alarms` need the parameter `adjust: true` to be set in their configuration files.
+
+Note that the `ipal-extend-alarms` tool does not implement combiners and simply combines the results with OR.
 
 ## Development
 

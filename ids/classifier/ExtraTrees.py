@@ -56,6 +56,11 @@ class ExtraTrees(FeatureIDS):
         events, annotation, _ = super().train(state=state)
         annotation = [a is not False for a in annotation]
 
+        if len(set(annotation)) <= 1:
+            settings.logger.warning(
+                "Training with a single class ({}) only!".format(set(annotation))
+            )
+
         # Learn ExtraTrees
         settings.logger.info("Learning ExtraTrees")
         tuned_parameters = {

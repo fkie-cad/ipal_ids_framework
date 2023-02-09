@@ -12,7 +12,7 @@ class SteadyTime(FeatureIDS):
     _steadytime_default_settings = {
         "threshold": 1.0,
         "discrete_threshold": 10,
-        "adjust": True,
+        "adjust": True,  # to use the extend-alarms.py script afterward
     }
 
     def __init__(self, name=None):
@@ -157,14 +157,16 @@ class SteadyTime(FeatureIDS):
 
                 # Add alarm adjustment information if required
                 if self.settings["adjust"]:
+                    if "adjust" not in msg:
+                        msg["adjust"] = {}
 
                     if time > self.time[i][val][1]:  # only alert excess
                         time -= self.time[i][val][1]
 
-                    msg["adjust"] = [
+                    msg["adjust"][self._name] = [
                         [t, True, likelihood] for t in range(-int(time), 0)
                     ]
-                    msg["adjust"] += [[0, False, 0]]  # Reset current alarm
+                    msg["adjust"][self._name] += [[0, False, 0]]  # Reset current alarm
 
         return alert, likelihood
 

@@ -10,6 +10,7 @@
         "idss": {
             "BLSTM": {
                 "_type": "BLSTM",
+                "adjust": true,
                 "allow-none": false,
                 "batch_size": [
                     128
@@ -127,6 +128,30 @@
 }
 {
     "activity": "interrogate",
+    "adjust": {
+        "BLSTM": [
+            [
+                -3,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                -2,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                -1,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                0,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ]
+        ]
+    },
     "alerts": {
 ###IGNORE-LINE###
     },
@@ -231,6 +256,30 @@
 }
 {
     "activity": "interrogate",
+    "adjust": {
+        "BLSTM": [
+            [
+                -3,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                -2,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                -1,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                0,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ]
+        ]
+    },
     "alerts": {
 ###IGNORE-LINE###
     },
@@ -335,6 +384,30 @@
 }
 {
     "activity": "interrogate",
+    "adjust": {
+        "BLSTM": [
+            [
+                -3,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                -2,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                -1,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                0,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ]
+        ]
+    },
     "alerts": {
 ###IGNORE-LINE###
     },
@@ -439,6 +512,30 @@
 }
 {
     "activity": "interrogate",
+    "adjust": {
+        "BLSTM": [
+            [
+                -3,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                -2,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                -1,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                0,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ]
+        ]
+    },
     "alerts": {
 ###IGNORE-LINE###
     },
@@ -543,6 +640,30 @@
 }
 {
     "activity": "interrogate",
+    "adjust": {
+        "BLSTM": [
+            [
+                -3,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                -2,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                -1,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                0,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ]
+        ]
+    },
     "alerts": {
 ###IGNORE-LINE###
     },
@@ -647,6 +768,30 @@
 }
 {
     "activity": "interrogate",
+    "adjust": {
+        "BLSTM": [
+            [
+                -3,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                -2,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                -1,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                0,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ]
+        ]
+    },
     "alerts": {
 ###IGNORE-LINE###
     },
@@ -751,6 +896,30 @@
 }
 {
     "activity": "interrogate",
+    "adjust": {
+        "BLSTM": [
+            [
+                -3,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                -2,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                -1,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ],
+            [
+                0,
+###IGNORE-LINE###
+###IGNORE-LINE###
+            ]
+        ]
+    },
     "alerts": {
 ###IGNORE-LINE###
     },
