@@ -1,7 +1,6 @@
 import joblib
-
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import GridSearchCV
+from sklearn.tree import DecisionTreeClassifier
 
 import ipal_iids.settings as settings
 from ids.featureids import FeatureIDS

@@ -1,7 +1,9 @@
 import json
 from pathlib import Path
+from subprocess import PIPE, Popen
 
-from subprocess import Popen, PIPE
+# Exclude output paths
+collect_ignore = ["snapshots"]
 
 METAIDS = "./ipal-iids"
 IDSNAMES = [
@@ -30,6 +32,7 @@ COMBINERNAMES = [
     "Gurobi",
     "Heuristic",
     "LogisticRegression",
+    "LSTM",
     "Majority",
     "SVM",
     "Weights",

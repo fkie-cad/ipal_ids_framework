@@ -1,21 +1,22 @@
-import json
 import itertools
-import numpy as np
+import json
+import logging
 
 # Silence tensorflow
 import os
-import logging
+
+import numpy as np
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 logging.getLogger("tensorflow").setLevel(logging.FATAL)
 
 import tensorflow.keras.callbacks  # noqa: E402
-from tensorflow.keras.models import Sequential  # noqa: E402
-from tensorflow.keras.layers import TimeDistributed  # noqa: E402
+from tensorflow.keras.layers import LSTM  # noqa: E402
+from tensorflow.keras.layers import Bidirectional  # noqa: E402
 from tensorflow.keras.layers import Dense  # noqa: E402
 from tensorflow.keras.layers import Dropout  # noqa: E402
-from tensorflow.keras.layers import Bidirectional  # noqa: E402
-from tensorflow.keras.layers import LSTM  # noqa: E402
+from tensorflow.keras.layers import TimeDistributed  # noqa: E402
+from tensorflow.keras.models import Sequential  # noqa: E402
 from tensorflow.keras.optimizers import Adam  # noqa: E402
 
 import ipal_iids.settings as settings  # noqa: E402

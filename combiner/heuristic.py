@@ -1,7 +1,8 @@
-import json
 import itertools
+import json
 
 import ipal_iids.settings as settings
+
 from .combiner import Combiner
 
 
@@ -54,7 +55,9 @@ class HeuristicCombiner(Combiner):
         benign = self.model[vector][0]
         malicious = self.model[vector][1]
 
-        if benign == malicious:
+        if benign == 0 and malicious == 0:
+            return self.settings["tie-breaker"], 1
+        elif benign == malicious:
             return self.settings["tie-breaker"], malicious / (benign + malicious)
         else:
             return malicious > benign, malicious / (benign + malicious)

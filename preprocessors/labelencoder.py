@@ -1,4 +1,5 @@
 from typing import List, Optional
+
 from sklearn.preprocessing import LabelEncoder
 
 import ipal_iids.settings as settings

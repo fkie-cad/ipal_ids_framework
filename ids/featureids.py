@@ -1,12 +1,11 @@
 import json
 import math
 import time
-
 from collections.abc import Iterable
 
 import ipal_iids.settings as settings
-
 from preprocessors.utils import get_all_preprocessors
+
 from .ids import MetaIDS
 
 
@@ -187,8 +186,11 @@ class FeatureIDS(MetaIDS):
     def load_trained_model(self, model):
         self.settings = model["settings"]
         self.features = model["features"]
+        self.preprocessors = []
 
         for name, pre_model in model["preprocessors"]:
             self.preprocessors.append(
                 get_all_preprocessors()[name].from_fitted_model(pre_model)
             )
+
+        assert len(self.preprocessors) == len(self.settings["preprocessors"])

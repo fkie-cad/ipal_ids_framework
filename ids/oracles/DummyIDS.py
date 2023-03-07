@@ -1,4 +1,5 @@
 import json
+import random
 
 import ipal_iids.settings as settings
 from ids.ids import MetaIDS
@@ -6,9 +7,11 @@ from ids.ids import MetaIDS
 
 class DummyIDS(MetaIDS):
     _name = "Dummy"
-    _description = "Dummy IDS returns either True or False."
+    _description = "Dummy IDS returns either True, False, or random."
     _requires = ["train.ipal", "live.ipal", "train.state", "live.state"]
-    _optimalids_default_settings = {"ids-value": False}
+    _optimalids_default_settings = {
+        "ids-value": False
+    }  # True, False, 'probability of alert'
     _supports_preprocessor = False
 
     def __init__(self, name=None):
@@ -19,12 +22,20 @@ class DummyIDS(MetaIDS):
         pass
 
     def new_ipal_msg(self, msg):
-        score = 1 if self.settings["ids-value"] else 0
-        return self.settings["ids-value"], score
+        if isinstance(self.settings["ids-value"], bool):
+            alert = self.settings["ids-value"]
+
+        else:
+            alert = random.choices(
+                [True, False],
+                weights=(self.settings["ids-value"], 1 - self.settings["ids-value"]),
+                k=1,
+            )[0]
+
+        return alert, 1 if alert else 0
 
     def new_state_msg(self, msg):
-        score = 1 if self.settings["ids-value"] else 0
-        return self.settings["ids-value"], score
+        return self.new_ipal_msg(msg)
 
     def save_trained_model(self):
         if self.settings["model-file"] is None:

@@ -93,35 +93,34 @@ The `ipal-iids` consists of two phases. During training, the parameters `--train
 Each IIDS has its own options which can be retrieved by ```ipal-iids --default.config [ids-name]```.
 
 ```bash
-ipal-iids -h
-usage: ipal-iids [-h] [--train.ipal FILE] [--train.state FILE] [--live.ipal FILE]
-                  [--live.state FILE] [--output FILE] [--config FILE] [--default.config IDS]
-                  [--retrain] [--log STR] [--logfile FILE] [--compresslevel INT]
+usage: ipal-iids [-h] [--train.ipal FILE] [--train.state FILE] [--train.combiner FILE] [--live.ipal FILE] [--live.state FILE] [--output FILE] [--config FILE] [--combiner.config FILE]
+                 [--default.config IDS] [--combiner.default.config Combiner] [--retrain] [--log STR] [--logfile FILE] [--compresslevel INT] [--version]
 
-optional arguments:
+This program contains the ipal-iids framework together with implementations of several IIDSs based on the IPAL message and state format.
+
+options:
   -h, --help            show this help message and exit
-  --train.ipal FILE     input file of IPAL messages to train the IDS on ('-' stdin, '*.gz'
-                        compressed).
-  --train.state FILE    input file of IPAL state messages to train the IDS on ('-' stdin,
-                        '*.gz' compressed).
-  --live.ipal FILE      input file of IPAL messages to perform the live detection on ('-'
-                        stdin, '*.gz' compressed).
-  --live.state FILE     input file of IPAL state messages to perform the live detection on 
-                        ('-' stdin, '*.gz' compressed).
-  --output FILE         output file to write the anotated IDS output to (Default:none, '-'
-                        stdout, '*,gz' compress).
-  --config FILE         load IDS configuration and parameters from the specified file
-                        ('*.gz' compressed).
-  --default.config IDS  dump the default configuration for the specified IDS to stdout and
-                        exit, can be used as a basis for writing IDS config files. Available
-                        IIDSs are: BLSTM,inter-arrival-mean,inter-arrival-
-                        range,RandomForest,SVM
+  --train.ipal FILE     input file of IPAL messages to train the IDS on ('-' stdin, '*.gz' compressed).
+  --train.state FILE    input file of IPAL state messages to train the IDS on ('-' stdin, '*.gz' compressed).
+  --train.combiner FILE
+                        input file of IPAL or state messages to train the combiner on ('-' stdin, '*.gz' compressed).
+  --live.ipal FILE      input file of IPAL messages to perform the live detection on ('-' stdin, '*.gz' compressed).
+  --live.state FILE     input file of IPAL state messages to perform the live detection on ('-' stdin, '*.gz' compressed).
+  --output FILE         output file to write the anotated IDS output to (Default:none, '-' stdout, '*,gz' compress).
+  --config FILE         load IDS configuration and parameters from the specified file ('*.gz' compressed).
+  --combiner.config FILE
+                        load Combiner configuration and parameters from the specified file ('*.gz' compressed).
+  --default.config IDS  dump the default configuration for the specified IDS to stdout and exit, can be used as a basis for writing IDS config files. Available IIDSs are:
+                        Autoregression,BLSTM,DecimalPlaces,DecisionTree,DTMC,Dummy,Exists,ExtraTrees,Histogram,inter-arrival-mean,inter-arrival-
+                        range,InvariantRules,IsolationForest,MinMax,NaiveBayes,Optimal,PASAD,RandomForest,SVM,Seq2SeqNN,Steadytime,TABOR
+  --combiner.default.config Combiner
+                        dump the default configuration for the specified Combiner to stdout and exit, can be used as a basis for writing Combiner config files. Available Combiners are:
+                        All,Any,Gurobi,Heuristic,LSTM,LogisticRegression,Majority,SVM,Weights
   --retrain             retrain regardless of a trained model file being present.
-  --log STR             define logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
-                        (Default: WARNING).
+  --log STR             define logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL) (Default: WARNING).
   --logfile FILE        file to log to (Default: stderr).
-  --compresslevel INT   set the gzip compress level. 0 no compress, 1 fast/large, ..., 9
-                        slow/tiny. (Default: 9)
+  --compresslevel INT   set the gzip compress level. 0 no compress, 1 fast/large, ..., 9 slow/tiny. (Default: 9)
+  --version             show program's version number and exit
 ```
 
 #### Usage configuration files
@@ -146,16 +145,17 @@ The IIDS framework allows for using multiple IIDSs in parallel. Each entry in th
 
 If multiple IIDSs are used in parallel, it is possible to specifcy a combiner that fuses the results of the individual approaches into a unified alert. Therefore different strategies can be used as listed in the following table:
 
-| Combiner  | Description                                                  |
-| ------------- | ------------------------------------------------------------ |
-| All     | Alerts if all IDSs emit an alert.   |
-| Any     | Alerts if any IDS emits an alert.   |
-| Gurobi     | Solves an optimization problem with Gurobi to find optimal weights for IDSs. This combiner may require a Gurobi license.  |
-| Heuristic     | This combiner implements a heuristic that minimizes the number of misclassifications, which maximizes accuracy.   |
-| LogisticRegression     | Learns a logistic regression combiner.   |
-| Majority     | Alerts if the majority of IDSs emit an alert.   |
-| SVM     | Learns a SVM combiner.   |
-| Weights     | Each IDS gets assigned a dedicated weight. The combiner alerts if a weighted sum of alerts/scores is greater than a threshold.   |
+| Combiner  | Time-Aware | Description                                                  |
+| ------------- | --- | ------------------------------------------------------------ |
+| All     | x | Alerts if all IDSs emit an alert.   |
+| Any     | x | Alerts if any IDS emits an alert.   |
+| Gurobi     | Running Avg. | Solves an optimization problem with Gurobi to find optimal weights for IDSs. This combiner may require a Gurobi license.  |
+| Heuristic     | x | This combiner implements a heuristic that minimizes the number of misclassifications, which maximizes accuracy.   |
+| LSTM     | yes | Time-aware LSTM over the a window of recent IIDS alerts.   |
+| LogisticRegression     | Running Avg. | Learns a logistic regression combiner.   |
+| Majority     | Running Avg. | Alerts if the majority of IDSs emit an alert.   |
+| SVM     | Running Avg. | Learns a SVM combiner.   |
+| Weights     | Running Avg. | Each IDS gets assigned a dedicated weight. The combiner alerts if a weighted sum of alerts/scores is greater than a threshold.   |
 
 To utilize a combiner, the IIDS framework requires a dedicated configuration file. A default configuration for each combiner can be obtained with `ipal-iids --combiner.default.config [Combiner name]`:
 
@@ -164,9 +164,11 @@ ipal-iids --combiner.default.config Weights
 {
     "_type": "Weights",
     "model-file": null,
-    "weights": {},
-    "threshold": 1,
-    "use_scores": false
+    "new_weight": 1.0,
+    "use_scores": false,
+    "keys": null,
+    "weights": [],
+    "threshold": 1
 }
 ```
 
@@ -219,21 +221,36 @@ This tool allows for visualizing the trained models for an IIDS configuration. T
 
 ```bash
 ipal-visualize-model  -h
-usage: ipal-visualize-model [-h] [--log STR] [--logfile FILE] FILE
+usage: ipal-visualize-model [-h] [--log STR] [--logfile FILE] [--version] FILE
 
 positional arguments:
   FILE            load the IDS configuration of the trained model ('*.gz' compressed).
 
-optional arguments:
+options:
   -h, --help      show this help message and exit
-  --log STR       define logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL).
-                  Default is WARNING.
+  --log STR       define logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL). Default is WARNING.
   --logfile FILE  File to log to. Default is stderr.
+  --version       show program's version number and exit
 ```
 
 #### Usage `ipal-extend-alarms`
 
 The `ipal-iids` tool works as an online tool - meaning IIDSs have to decide whether they emit an alert live. Therefore, alerts can not be emitted retroactively, wich is sometimes needed for evaluation. As few IIDSs possibly need to retroactively emit alerts, the `ipal-extend-alarms` script post-processes the IIDS output afterward. IIDSs with the support for `ipal-extend-alarms` need the parameter `adjust: true` to be set in their configuration files.
+
+```bash
+./ipal-extend-alarms -h
+usage: ipal-extend-alarms [-h] [--log STR] [--logfile FILE] [--version] FILE [FILE ...]
+
+positional arguments:
+  FILE            files to extend alarms ('*.gz' compressed).
+
+options:
+  -h, --help      show this help message and exit
+  --log STR       define logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL). Default is WARNING.
+  --logfile FILE  File to log to. Default is stderr.
+  --version       show program's version number and exit
+```
+
 
 Note that the `ipal-extend-alarms` tool does not implement combiners and simply combines the results with OR.
 

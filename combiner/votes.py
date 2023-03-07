@@ -1,5 +1,6 @@
 import ipal_iids.settings as settings
-from .combiner import Combiner
+
+from .combiner import Combiner, RunningAverageCombiner
 
 
 class AnyCombiner(Combiner):
@@ -54,7 +55,7 @@ class AllCombiner(Combiner):
         return False
 
 
-class MajorityCombiner(Combiner):
+class MajorityCombiner(RunningAverageCombiner):
     _name = "Majority"
     _description = "Alerts if the majority of IDSs emit an alert."
     _requires_training = False
@@ -68,11 +69,9 @@ class MajorityCombiner(Combiner):
         pass
 
     def combine(self, alerts, scores):
-        alerts = list(alerts.values())
-        return (
-            alerts.count(True) >= len(alerts) / 2,
-            alerts.count(True) / len(alerts) * 2,
-        )
+        votes = self._get_activations(alerts, scores)
+        threshold = 0.5 * len(votes)
+        return sum(votes) >= threshold, sum(votes) / threshold
 
     def save_trained_model(self):
         settings.logger.info("Model of combiner does not need to be saved.")
@@ -83,14 +82,13 @@ class MajorityCombiner(Combiner):
         return False
 
 
-class WeightsCombiner(Combiner):
+class WeightsCombiner(RunningAverageCombiner):
     _name = "Weights"
     _description = "Each IDS gets assigned a dedicated weight. The combiner alerts if a weighted sum of alerts/scores is greater than a threshold."
     _requires_training = False
     _weights_default_settings = {
-        "weights": {},  # dict of IDS name and weight
+        "weights": [],  # list of weights for IDSs (order of keys)
         "threshold": 1,  # threshold upon which to emit an alert
-        "use_scores": False,
     }
 
     def __init__(self):
@@ -101,18 +99,8 @@ class WeightsCombiner(Combiner):
         pass
 
     def combine(self, alerts, scores):
-        data = scores if self.settings["use_scores"] else alerts
-
-        if not set(data.keys()) == set(self.settings["weights"].keys()):
-            settings.logger.error("Keys of weights combiner do not match data")
-            settings.logger.error("- data keys: {}".format(",".join(data.keys())))
-            settings.logger.error(
-                "- weights keys: {}".format(",".join(self.settings["weights"].keys()))
-            )
-            exit(1)
-
-        # sum of weights for alarms (True * num = num, False * num = 0)
-        sums = sum([data[name] * self.settings["weights"][name] for name in data])
+        votes = self._get_activations(alerts, scores)
+        sums = sum([v * w for v, w in zip(votes, self.settings["weights"])])
         return sums >= self.settings["threshold"], sums / self.settings["threshold"]
 
     def save_trained_model(self):

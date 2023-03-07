@@ -1,19 +1,20 @@
 import json
-import gurobipy
 from math import inf
 
+import gurobipy
+
 import ipal_iids.settings as settings
-from .combiner import Combiner
+
+from .combiner import RunningAverageCombiner
 
 
-class GurobiCombiner(Combiner):
+class GurobiCombiner(RunningAverageCombiner):
     _name = "Gurobi"
     _description = (
         "Solves an optimization problem with Gurobi to find optimal weights for IDSs."
     )
     _requires_training = True
     _gurobi_default_settings = {
-        "use_scores": False,
         "time-limit": None,
         "threads-limit": None,
     }
@@ -24,22 +25,10 @@ class GurobiCombiner(Combiner):
 
         self.weights = None
         self.bias = None
-        self.keys = None
         self.threshold = 1.5
         self.objective = None
 
-    def _get_activations(self, alerts, scores):
-        data = scores if self.settings["use_scores"] else alerts
-
-        if not set(data.keys()) == set(self.keys):
-            settings.logger.error("Keys of combiner do not match data")
-            settings.logger.error("- data keys: {}".format(",".join(data.keys())))
-            settings.logger.error("- combiner keys: {}".format(",".join(self.keys)))
-            exit(1)
-
-        return {ids: float(data[ids]) for ids in self.keys}
-
-    def _gurobi(self, data, annotations):
+    def _gurobi(self, events, annotations):
         # supress stdout logging
         env = gurobipy.Env(empty=True)
         env.setParam("OutputFlag", 0)
@@ -54,7 +43,7 @@ class GurobiCombiner(Combiner):
             m.setParam("Threads", self.settings["threads-limit"])
 
         # Add a weight variable for each ids
-        weight_vars = [m.addVar(name=f"w_{ids_name}") for ids_name in self.keys]
+        weight_vars = [m.addVar(name=f"w_{k}") for k in self.settings["keys"]]
 
         # Add a general bias var
         bias_var = m.addVar(name="bias", lb=-inf)
@@ -62,7 +51,7 @@ class GurobiCombiner(Combiner):
         # Add a slack variable for each message
         slack_vars = [
             m.addVar(name=f"slack_{i}", vtype=gurobipy.GRB.BINARY)
-            for i in range(len(data))
+            for i in range(len(events))
         ]
 
         # The objective is to minimize the slack
@@ -73,13 +62,12 @@ class GurobiCombiner(Combiner):
 
         # Add soft constraints for each message
         idx = -1
-        for activation, malicious in zip(data, annotations):
+        for event, malicious in zip(events, annotations):
             idx += 1
 
             s = (
                 gurobipy.quicksum(
-                    weight * act
-                    for weight, act in zip(activation.values(), weight_vars)
+                    weight * act for weight, act in zip(event, weight_vars)
                 )
                 + bias_var
             )
@@ -95,9 +83,12 @@ class GurobiCombiner(Combiner):
         def callback(model, where):
             if where == gurobipy.GRB.Callback.MIPSOL:
                 # Save and log intermediate model
-                self.weights = {
-                    k: v for k, v in zip(self.keys, model.cbGetSolution([*weight_vars]))
-                }
+                self.weights = [
+                    w
+                    for _, w in zip(
+                        self.settings["keys"], model.cbGetSolution([*weight_vars])
+                    )
+                ]
                 self.bias = model.cbGetSolution([bias_var])
                 self.objective = model.cbGet(gurobipy.GRB.Callback.MIPSOL_OBJ)
 
@@ -113,10 +104,7 @@ class GurobiCombiner(Combiner):
         m.optimize(callback)
         settings.logger.info(f"Optimization done, objective value: {m.objVal}")
 
-        self.weights = {
-            ids_name: weight_var.x
-            for ids_name, weight_var in zip(self.keys, weight_vars)
-        }
+        self.weights = [w.x for _, w in zip(self.settings["keys"], weight_vars)]
         self.bias = bias_var.x
         self.objective = m.objVal
 
@@ -126,27 +114,14 @@ class GurobiCombiner(Combiner):
         settings.logger.info(f"- Objective: {m.objVal}")
 
     def train(self, file):
-        data = []
-        annotations = []
-
-        settings.logger.info("Loading combiner training file")
-        with self._open_file(file, "r") as f:
-            for line in f.readlines():
-                js = json.loads(line)
-
-                if self.keys is None:
-                    self.keys = sorted(js["scores"].keys())
-
-                data.append(self._get_activations(js["alerts"], js["scores"]))
-                annotations.append(js["malicious"] is not False)
+        events, annotations = super().train(file)
 
         settings.logger.info("Fitting Gurobi Combiner")
-        self._gurobi(data, annotations)
+        self._gurobi(events, annotations)
 
     def combine(self, alerts, scores):
-        data = self._get_activations(alerts, scores)
-        sums = sum([data[name] * self.weights[name] for name in self.weights])
-
+        votes = self._get_activations(alerts, scores)
+        sums = sum([v * w for v, w in zip(votes, self.weights)])
         return sums > self.threshold, sums / self.threshold
 
     def save_trained_model(self):
@@ -156,7 +131,6 @@ class GurobiCombiner(Combiner):
         model = {
             "_name": self._name,
             "settings": self.settings,
-            "keys": self.keys,
             "weights": self.weights,
             "bias": self.bias,
             "threshold": self.threshold,
@@ -184,7 +158,6 @@ class GurobiCombiner(Combiner):
         # Load model
         assert self._name == model["_name"]
         self.settings = model["settings"]
-        self.keys = model["keys"]
         self.weights = model["weights"]
         self.bias = model["bias"]
         self.threshold = model["threshold"]

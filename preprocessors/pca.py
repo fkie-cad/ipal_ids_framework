@@ -1,7 +1,7 @@
-import joblib
 import os
 import random
 
+import joblib
 from sklearn.decomposition import PCA
 
 import ipal_iids.settings as settings

@@ -2,7 +2,17 @@
     "_iids-config": {
         "combiner": {
             "_type": "Gurobi",
+            "keys": [
+                "Gradient",
+                "Histogram",
+                "MinMax"
+            ],
             "model-file": null,
+            "new_weight": [
+                1.0,
+                1.0,
+                1.0
+            ],
             "threads-limit": null,
             "time-limit": null,
             "use_scores": false

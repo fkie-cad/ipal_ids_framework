@@ -1,21 +1,15 @@
 {
     "_iids-config": {
         "combiner": {
-            "_type": "SVM",
-            "keys": [
-                "Gradient",
-                "Histogram",
-                "MinMax"
-            ],
+            "_type": "LSTM",
+            "epochs": 10,
+            "lookback": 2,
             "model-file": null,
-            "new_weight": [
-                1.0,
-                1.0,
-                1.0
-            ],
-            "use_scores": false
+            "stride": 2,
+            "use_scores": false,
+            "verbose": 0
         },
-        "combiner_config": "misc/configs/combiner-SVM.config",
+        "combiner_config": "misc/configs/combiner-LSTM.config",
         "compresslevel": 9,
         "config": "misc/configs/combiner-ids.config",
         "idss": {

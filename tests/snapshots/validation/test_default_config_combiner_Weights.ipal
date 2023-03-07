@@ -2,14 +2,24 @@
     "_iids-config": {
         "combiner": {
             "_type": "Weights",
+            "keys": [
+                "MinMax",
+                "Gradient",
+                "Histogram"
+            ],
             "model-file": null,
+            "new_weight": [
+                1.0,
+                1.0,
+                1.0
+            ],
             "threshold": 1,
             "use_scores": false,
-            "weights": {
-                "Gradient": 2.0,
-                "Histogram": 0.5,
-                "MinMax": 1.0
-            }
+            "weights": [
+                1.0,
+                2.0,
+                0.5
+            ]
         },
         "combiner_config": "misc/configs/combiner-Weights.config",
         "compresslevel": 9,

@@ -2,7 +2,18 @@
     "_iids-config": {
         "combiner": {
             "_type": "Majority",
-            "model-file": null
+            "keys": [
+                "Gradient",
+                "Histogram",
+                "MinMax"
+            ],
+            "model-file": null,
+            "new_weight": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "use_scores": false
         },
         "combiner_config": "misc/configs/combiner-Majority.config",
         "compresslevel": 9,

@@ -1,8 +1,8 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 setup(
     name="ipal-iids",
-    version="1.4.5",
+    version="1.4.7",
     packages=find_packages(exclude="tests"),
     scripts=["ipal-iids", "ipal-extend-alarms", "ipal-visualize-model"],
     install_requires=[
@@ -19,7 +19,7 @@ setup(
         "pandas",
         "gurobipy",
     ],
-    tests_require=["pytest"],
+    tests_require=["pre-commit", "black", "flake8", "pytest", "pytest-cov", "isort"],
     url="https://github.com/fkie-cad/ipal_ids_framework",
     author="Konrad Wolsing",
     author_email="wolsing@comsys.rwth-aachen.de",

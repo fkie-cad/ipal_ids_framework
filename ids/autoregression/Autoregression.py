@@ -3,7 +3,6 @@ import json
 from ar import arsel
 
 import ipal_iids.settings as settings
-
 from ids.ids import MetaIDS
 
 

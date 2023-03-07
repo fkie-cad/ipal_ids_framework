@@ -7,13 +7,11 @@ import os
 import random
 import sys
 import time
-
 from pathlib import Path
 
 import ipal_iids.settings as settings
-
-from ids.utils import get_all_iidss
 from combiner.utils import get_all_combiner
+from ids.utils import get_all_iidss
 
 
 # Wrapper for hiding .gz files
@@ -485,7 +483,7 @@ def train_combiner(combiner):
         )
 
 
-def live_idss(idss, combiner):
+def live_idss(idss, combiner):  # noqa: C901
     # Keep track of the last state and message information. Then we are capable of delivering them in the right order.
     ipal_msg = None
     state_msg = None
@@ -517,8 +515,10 @@ def live_idss(idss, combiner):
 
         # Process next message
         if is_ipal_smaller:
-            ipal_msg["scores"] = {}
-            ipal_msg["alerts"] = {}
+            if "scores" not in ipal_msg:
+                ipal_msg["scores"] = {}
+            if "alerts" not in ipal_msg:
+                ipal_msg["alerts"] = {}
 
             for ids in idss:
                 if ids.requires("live.ipal"):
@@ -540,8 +540,10 @@ def live_idss(idss, combiner):
             ipal_msg = None
 
         else:
-            state_msg["scores"] = {}
-            state_msg["alerts"] = {}
+            if "scores" not in state_msg:
+                state_msg["scores"] = {}
+            if "alerts" not in state_msg:
+                state_msg["alerts"] = {}
 
             for ids in idss:
                 if ids.requires("live.state"):

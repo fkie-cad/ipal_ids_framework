@@ -1,8 +1,6 @@
 import pytest
 
-from .conftest import metaids
-from .conftest import IDSNAMES
-from .conftest import check_with_validation_file
+from .conftest import IDSNAMES, check_with_validation_file, metaids
 
 
 @pytest.mark.parametrize("idsname", IDSNAMES)

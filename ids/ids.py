@@ -2,7 +2,6 @@ import gzip
 import hashlib
 import json
 import sys
-
 from pathlib import Path
 
 import ipal_iids.settings as settings

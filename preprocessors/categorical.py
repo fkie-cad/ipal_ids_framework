@@ -1,6 +1,6 @@
-import numpy as np
+from typing import Any, Dict, List, Union
 
-from typing import Any, Dict, Union, List
+import numpy as np
 
 import ipal_iids.settings as settings
 

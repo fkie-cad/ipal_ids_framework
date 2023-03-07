@@ -1,11 +1,10 @@
 import joblib
-
 from sklearn.naive_bayes import (
-    GaussianNB,
-    MultinomialNB,
-    ComplementNB,
     BernoulliNB,
     CategoricalNB,
+    ComplementNB,
+    GaussianNB,
+    MultinomialNB,
 )
 
 import ipal_iids.settings as settings

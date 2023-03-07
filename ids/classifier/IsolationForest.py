@@ -1,5 +1,4 @@
 import joblib
-
 from sklearn.ensemble import IsolationForest as IsolationForestClassifier
 
 import ipal_iids.settings as settings
