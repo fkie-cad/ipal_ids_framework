@@ -1,20 +1,23 @@
+from .default import AnyCombiner
 from .gurobi import GurobiCombiner
 from .heuristic import HeuristicCombiner
 from .logisticregression import LogisticRegressionCombiner
 from .lstm import LSTMCombiner
+from .matrix import MatrixCombiner
 from .svm import SVMCombiner
-from .votes import AllCombiner, AnyCombiner, MajorityCombiner, WeightsCombiner
 
 combiners = [
-    AllCombiner,
-    AnyCombiner,
-    GurobiCombiner,  # RunningAverage
+    # Default
+    AnyCombiner,  # Remains for simplicity as default combiner
+    # Unsupervised & Timeaware
+    MatrixCombiner,  # AllCombiner TemporalCombiner MajorityCombiner WeightsCombiner
+    # Supervised & Point-based
+    GurobiCombiner,
     HeuristicCombiner,
-    LSTMCombiner,  # Time-aware
-    LogisticRegressionCombiner,  # RunningAverage
-    MajorityCombiner,  # RunningAverage
-    SVMCombiner,  # RunningAverage
-    WeightsCombiner,  # RunningAverage
+    LogisticRegressionCombiner,
+    SVMCombiner,
+    # Supervised & Timeaware
+    LSTMCombiner,
 ]
 
 

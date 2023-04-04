@@ -526,8 +526,17 @@ def live_idss(idss, combiner):  # noqa: C901
                     ipal_msg["alerts"][ids._name] = alert
                     ipal_msg["scores"][ids._name] = score
 
-            alert, score = combiner.combine(ipal_msg["alerts"], ipal_msg["scores"])
-            ipal_msg["ids"] = alert
+            alert, score, offset = combiner.combine(
+                ipal_msg["alerts"], ipal_msg["scores"]
+            )
+            if offset == 0:
+                ipal_msg["ids"] = alert
+                ipal_msg["scores"][combiner._name] = score
+            else:
+                ipal_msg["ids"] = False
+                if "adjust" not in ipal_msg:
+                    ipal_msg["adjust"] = {}
+                ipal_msg["adjust"][combiner._name] = [[offset, alert, score]]
 
             if settings.output:
                 if _first_ipal_msg:
@@ -551,8 +560,17 @@ def live_idss(idss, combiner):  # noqa: C901
                     state_msg["alerts"][ids._name] = alert
                     state_msg["scores"][ids._name] = score
 
-            alert, score = combiner.combine(state_msg["alerts"], state_msg["scores"])
-            state_msg["ids"] = alert
+            alert, score, offset = combiner.combine(
+                state_msg["alerts"], state_msg["scores"]
+            )
+            if offset == 0:
+                state_msg["ids"] = alert
+                state_msg["scores"][combiner._name] = score
+            else:
+                state_msg["ids"] = False
+                if "adjust" not in state_msg:
+                    state_msg["adjust"] = {}
+                state_msg["adjust"][combiner._name] = [[offset, alert, score]]
 
             if settings.output:
                 if _first_state_msg:

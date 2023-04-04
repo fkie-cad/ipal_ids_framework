@@ -1,94 +1,58 @@
 {
     "_iids-config": {
         "combiner": {
-            "_type": "Weights",
-            "keys": [
-                "MinMax",
-                "Gradient",
-                "Histogram"
-            ],
-            "model-file": null,
-            "new_weight": [
-                1.0,
-                1.0,
-                1.0
-            ],
-            "threshold": 1,
-            "use_scores": false,
-            "weights": [
-                1.0,
-                2.0,
-                0.5
-            ]
+            "_type": "Any",
+            "model-file": null
         },
-        "combiner_config": "misc/configs/combiner-Weights.config",
+        "combiner_config": null,
         "compresslevel": 9,
-        "config": "misc/configs/combiner-ids.config",
+        "config": "misc/configs/Seq2SeqNN.config",
         "idss": {
-            "Gradient": {
-                "_type": "MinMax",
+            "Seq2SeqNN": {
+                "_type": "Seq2SeqNN",
+                "aggregate": 3,
+                "alertratio": 20.0,
                 "allow-none": false,
-                "discrete_threshold": 10,
+                "batch_size": 4096,
+                "cutoff": 1,
+                "epochs": 15,
+                "evaluation_norm_p": 4,
                 "features": [
                     "state;switch"
                 ],
+                "gpu": "cpu",
+                "hidden_cells": 64,
+                "highpercentile": 90,
+                "lowpercentile": 20,
                 "model-file": "./model",
-                "preprocessors": [
-                    {
-                        "features": [
-                            "state;switch"
-                        ],
-                        "method": "gradient"
-                    }
-                ],
-                "save-training": null,
-                "threshold": 0,
-                "trainon": 1.0
-            },
-            "Histogram": {
-                "_type": "Histogram",
-                "allow-none": false,
-                "bins": 10,
-                "discrete_threshold": 10,
-                "features": [],
-                "model-file": "./model",
+                "n_hidden_cells": 64,
+                "nn-model": null,
                 "preprocessors": [],
+                "save-intermediate-models": false,
                 "save-training": null,
-                "threshold": 0,
+                "threads": 4,
                 "trainon": 1.0,
+                "treshold": 0.3,
+                "window_given": 3,
+                "window_predict": 1,
                 "window_size": 5
-            },
-            "MinMax": {
-                "_type": "MinMax",
-                "allow-none": false,
-                "discrete_threshold": 10,
-                "features": [
-                    "state;switch"
-                ],
-                "model-file": "./model",
-                "preprocessors": [],
-                "save-training": null,
-                "threshold": 0,
-                "trainon": 1.0
             }
         },
-        "live_ipal": "misc/ipal/test.ipal",
-        "live_state": null,
+        "live_ipal": null,
+        "live_state": "misc/ipal/test.ipal",
         "log": 30,
         "logfile": null,
         "logformat": "%(levelname)s:%(name)s:%(message)s",
         "output": "-",
         "retrain": true,
-        "train_combiner": "misc/ipal/train-combiner.ipal",
-        "train_ipal": "misc/ipal/train.ipal",
-        "train_state": null,
+        "train_combiner": null,
+        "train_ipal": null,
+        "train_state": "misc/ipal/train.ipal",
 ###IGNORE-LINE###
     },
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -96,15 +60,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 0,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -116,9 +79,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -126,15 +87,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 1,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -146,9 +106,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -156,15 +114,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 2,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -176,9 +133,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -186,15 +141,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 3,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -206,9 +160,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -216,15 +168,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 4,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -236,9 +187,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -246,15 +195,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 5,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -266,9 +214,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -276,15 +222,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 6,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -296,9 +241,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -306,15 +249,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 7,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -326,9 +268,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -336,15 +276,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 8,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -356,9 +295,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -366,15 +303,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 9,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -386,9 +322,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -396,15 +330,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 10,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -416,9 +349,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -426,15 +357,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 11,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -446,9 +376,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -456,15 +384,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 12,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -476,9 +403,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -486,15 +411,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 13,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -506,9 +430,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -516,15 +438,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 14,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -536,9 +457,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -546,15 +465,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 15,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -566,9 +484,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -576,15 +492,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 16,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -596,9 +511,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -606,15 +519,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 17,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -626,9 +538,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -636,15 +546,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 18,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -656,9 +565,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -666,15 +573,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 19,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -686,9 +592,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -696,15 +600,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 20,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -716,9 +619,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -726,15 +627,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 21,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -746,9 +646,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -756,15 +654,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 22,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -776,9 +673,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -786,15 +681,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 23,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -806,9 +700,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -816,15 +708,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 24,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -836,9 +727,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -846,15 +735,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 25,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -866,9 +754,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -876,15 +762,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 26,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -896,9 +781,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -906,15 +789,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 27,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -926,9 +808,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+###IGNORE-LINE###
     },
     "crc": true,
     "data": {
@@ -936,15 +816,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 28,
-    "ids": false,
+###IGNORE-LINE###
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {

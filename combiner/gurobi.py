@@ -5,10 +5,10 @@ import gurobipy
 
 import ipal_iids.settings as settings
 
-from .combiner import RunningAverageCombiner
+from .combiner import Combiner
 
 
-class GurobiCombiner(RunningAverageCombiner):
+class GurobiCombiner(Combiner):
     _name = "Gurobi"
     _description = (
         "Solves an optimization problem with Gurobi to find optimal weights for IDSs."
@@ -17,6 +17,8 @@ class GurobiCombiner(RunningAverageCombiner):
     _gurobi_default_settings = {
         "time-limit": None,
         "threads-limit": None,
+        "keys": None,
+        "use_scores": False,
     }
 
     def __init__(self):
@@ -114,7 +116,7 @@ class GurobiCombiner(RunningAverageCombiner):
         settings.logger.info(f"- Objective: {m.objVal}")
 
     def train(self, file):
-        events, annotations = super().train(file)
+        events, annotations = self._load_training(file)
 
         settings.logger.info("Fitting Gurobi Combiner")
         self._gurobi(events, annotations)
@@ -122,7 +124,7 @@ class GurobiCombiner(RunningAverageCombiner):
     def combine(self, alerts, scores):
         votes = self._get_activations(alerts, scores)
         sums = sum([v * w for v, w in zip(votes, self.weights)])
-        return sums > self.threshold, sums / self.threshold
+        return sums > self.threshold, sums / self.threshold, 0
 
     def save_trained_model(self):
         if self.settings["model-file"] is None:

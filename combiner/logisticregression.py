@@ -5,14 +5,17 @@ from sklearn.linear_model import LogisticRegression as LogisticRegressionModel
 
 import ipal_iids.settings as settings
 
-from .combiner import RunningAverageCombiner
+from .combiner import Combiner
 
 
-class LogisticRegressionCombiner(RunningAverageCombiner):
+class LogisticRegressionCombiner(Combiner):
     _name = "LogisticRegression"
     _description = "Learns a logistic regression combiner."
     _requires_training = True
-    _logistic_default_settings = {}
+    _logistic_default_settings = {
+        "keys": None,
+        "use_scores": False,
+    }
 
     def __init__(self):
         super().__init__()
@@ -21,7 +24,7 @@ class LogisticRegressionCombiner(RunningAverageCombiner):
         self.model = None
 
     def train(self, file):
-        events, annotations = super().train(file)
+        events, annotations = self._load_training(file)
 
         self.model = LogisticRegressionModel()
         self.model.fit(events, annotations)
@@ -29,7 +32,7 @@ class LogisticRegressionCombiner(RunningAverageCombiner):
     def combine(self, alerts, scores):
         activations = self._get_activations(alerts, scores)
         alert = bool(self.model.predict([activations])[0])
-        return alert, 1 if alert else 0
+        return alert, 1 if alert else 0, 0
 
     def save_trained_model(self):
         if self.settings["model-file"] is None:

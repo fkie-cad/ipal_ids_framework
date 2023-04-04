@@ -1,10 +1,29 @@
 {
     "_iids-config": {
         "combiner": {
-            "_type": "All",
-            "model-file": null
+            "_type": "Matrix",
+            "keys": [
+                "MinMax",
+                "Gradient",
+                "Histogram"
+            ],
+            "lookahead": 0,
+            "matrix": [
+                [
+                    1.0
+                ],
+                [
+                    2.0
+                ],
+                [
+                    0.5
+                ]
+            ],
+            "model-file": null,
+            "threshold": 1,
+            "use_scores": false
         },
-        "combiner_config": "misc/configs/combiner-All.config",
+        "combiner_config": "misc/configs/combiner-Matrix.config",
         "compresslevel": 9,
         "config": "misc/configs/combiner-ids.config",
         "idss": {
@@ -65,7 +84,7 @@
         "train_combiner": "misc/ipal/train-combiner.ipal",
         "train_ipal": "misc/ipal/train.ipal",
         "train_state": null,
-###IGNORE-LINE###
+        "version": "v1.4.7"
     },
     "activity": "interrogate",
     "alerts": {
@@ -87,6 +106,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -117,6 +137,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -147,6 +168,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -177,6 +199,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -207,6 +230,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -237,6 +261,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -267,6 +292,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -297,6 +323,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -327,6 +354,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -357,6 +385,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -387,6 +416,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -417,6 +447,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -447,6 +478,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -477,6 +509,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -507,6 +540,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -537,6 +571,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -567,6 +602,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -597,6 +633,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -627,6 +664,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -657,6 +695,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -687,6 +726,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -717,6 +757,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -747,6 +788,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -777,6 +819,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -807,6 +850,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -837,6 +881,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -867,6 +912,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -897,6 +943,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",
@@ -927,6 +974,7 @@
     "scores": {
         "Gradient": 0,
         "Histogram": 0,
+        "Matrix": 0.0,
         "MinMax": 0
     },
     "src": "1.1.1.1:1",

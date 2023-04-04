@@ -41,6 +41,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -67,6 +68,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -93,6 +95,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -119,6 +122,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -145,6 +149,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -171,6 +176,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -197,6 +203,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -223,6 +230,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -249,6 +257,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -275,6 +284,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -301,6 +311,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -327,6 +338,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -353,6 +365,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -379,6 +392,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -405,6 +419,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -431,6 +446,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -457,6 +473,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -483,6 +500,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -509,6 +527,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -535,6 +554,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -561,6 +581,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -587,6 +608,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -613,6 +635,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -639,6 +662,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -665,6 +689,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -691,6 +716,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -717,6 +743,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -743,6 +770,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",
@@ -769,6 +797,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "DecimalPlaces": 0
     },
     "src": "1.1.1.1:1",

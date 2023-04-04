@@ -1,88 +1,52 @@
 {
     "_iids-config": {
         "combiner": {
-            "_type": "Majority",
-            "keys": [
-                "Gradient",
-                "Histogram",
-                "MinMax"
-            ],
-            "model-file": null,
-            "new_weight": [
-                1.0,
-                1.0,
-                1.0
-            ],
-            "use_scores": false
+            "_type": "Any",
+            "model-file": null
         },
-        "combiner_config": "misc/configs/combiner-Majority.config",
+        "combiner_config": null,
         "compresslevel": 9,
-        "config": "misc/configs/combiner-ids.config",
+        "config": "misc/configs/InvariantRules.config",
         "idss": {
-            "Gradient": {
-                "_type": "MinMax",
-                "allow-none": false,
-                "discrete_threshold": 10,
-                "features": [
-                    "state;switch"
+            "InvariantRules": {
+                "_type": "InvariantRules",
+                "actuators": [
+                    "switch"
                 ],
-                "model-file": "./model",
-                "preprocessors": [
-                    {
-                        "features": [
-                            "state;switch"
-                        ],
-                        "method": "gradient"
-                    }
-                ],
-                "save-training": null,
-                "threshold": 0,
-                "trainon": 1.0
-            },
-            "Histogram": {
-                "_type": "Histogram",
-                "allow-none": false,
-                "bins": 10,
                 "discrete_threshold": 10,
-                "features": [],
-                "model-file": "./model",
-                "preprocessors": [],
-                "save-training": null,
-                "threshold": 0,
-                "trainon": 1.0,
-                "window_size": 5
-            },
-            "MinMax": {
-                "_type": "MinMax",
-                "allow-none": false,
-                "discrete_threshold": 10,
-                "features": [
-                    "state;switch"
+                "eps": 0.01,
+                "gamma_value": 0.9,
+                "keyArray": [
+                    [
+                        "switch"
+                    ]
                 ],
+                "max_comp": 4,
+                "max_k": 4,
+                "merge_rules": 1,
+                "mode": 2,
                 "model-file": "./model",
-                "preprocessors": [],
-                "save-training": null,
-                "threshold": 0,
-                "trainon": 1.0
+                "negated_states": 0,
+                "parallel_filter": 0,
+                "sigma": 1.1,
+                "theta_value": 0.08
             }
         },
-        "live_ipal": "misc/ipal/test.ipal",
-        "live_state": null,
+        "live_ipal": null,
+        "live_state": "misc/ipal/test.ipal",
         "log": 30,
         "logfile": null,
         "logformat": "%(levelname)s:%(name)s:%(message)s",
         "output": "-",
         "retrain": true,
-        "train_combiner": "misc/ipal/train-combiner.ipal",
-        "train_ipal": "misc/ipal/train.ipal",
-        "train_state": null,
+        "train_combiner": null,
+        "train_ipal": null,
+        "train_state": "misc/ipal/train.ipal",
 ###IGNORE-LINE###
     },
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -96,9 +60,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -110,9 +73,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -126,9 +87,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -140,9 +100,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -156,9 +114,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -170,9 +127,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -186,9 +141,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -200,9 +154,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -216,9 +168,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -230,9 +181,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -246,9 +195,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -260,9 +208,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -276,9 +222,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -290,9 +235,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -306,9 +249,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -320,9 +262,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -336,9 +276,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -350,9 +289,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -366,9 +303,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -380,9 +316,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -396,9 +330,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -410,9 +343,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -426,9 +357,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -440,9 +370,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -456,9 +384,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -470,9 +397,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -486,9 +411,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -500,9 +424,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -516,9 +438,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -530,9 +451,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -546,9 +465,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -560,9 +478,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -576,9 +492,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -590,9 +505,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -606,9 +519,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -620,9 +532,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -636,9 +546,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -650,9 +559,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -666,9 +573,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -680,9 +586,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -696,9 +600,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -710,9 +613,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": true
     },
     "crc": true,
     "data": {
@@ -720,15 +621,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 21,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 1,
+        "InvariantRules": 1
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -740,9 +640,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": true
     },
     "crc": true,
     "data": {
@@ -750,15 +648,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 22,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 1,
+        "InvariantRules": 1
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -770,9 +667,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": true
     },
     "crc": true,
     "data": {
@@ -780,15 +675,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 23,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 1,
+        "InvariantRules": 1
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -800,9 +694,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": true
     },
     "crc": true,
     "data": {
@@ -810,15 +702,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 24,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 1,
+        "InvariantRules": 1
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -830,9 +721,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -846,9 +735,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -860,9 +748,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -876,9 +762,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -890,9 +775,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": true
     },
     "crc": true,
     "data": {
@@ -900,15 +783,14 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 27,
-    "ids": false,
+    "ids": true,
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 1,
+        "InvariantRules": 1
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -920,9 +802,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "Gradient": false,
-        "Histogram": false,
-        "MinMax": false
+        "InvariantRules": false
     },
     "crc": true,
     "data": {
@@ -936,9 +816,8 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Gradient": 0,
-        "Histogram": 0,
-        "MinMax": 0
+        "Any": 0,
+        "InvariantRules": 0
     },
     "src": "1.1.1.1:1",
     "state": {

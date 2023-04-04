@@ -27,15 +27,13 @@ IDSNAMES = [
 ]
 
 COMBINERNAMES = [
-    "All",
     "Any",
     "Gurobi",
     "Heuristic",
-    "LogisticRegression",
     "LSTM",
-    "Majority",
+    "LogisticRegression",
+    "Matrix",
     "SVM",
-    "Weights",
 ]
 
 

@@ -5,14 +5,14 @@ from sklearn import svm
 
 import ipal_iids.settings as settings
 
-from .combiner import RunningAverageCombiner
+from .combiner import Combiner
 
 
-class SVMCombiner(RunningAverageCombiner):
+class SVMCombiner(Combiner):
     _name = "SVM"
     _description = "Learns a SVM combiner."
     _requires_training = True
-    _svm_default_settings = {}
+    _svm_default_settings = {"keys": None, "use_scores": False}
 
     def __init__(self):
         super().__init__()
@@ -21,7 +21,7 @@ class SVMCombiner(RunningAverageCombiner):
         self.model = None
 
     def train(self, file):
-        events, annotations = super().train(file)
+        events, annotations = self._load_training(file)
 
         settings.logger.info("Fitting SVM Combiner")
         self.model = svm.SVC()
@@ -30,7 +30,7 @@ class SVMCombiner(RunningAverageCombiner):
     def combine(self, alerts, scores):
         activations = self._get_activations(alerts, scores)
         alert = bool(self.model.predict([activations])[0])
-        return alert, 1 if alert else 0
+        return alert, 1 if alert else 0, 0
 
     def save_trained_model(self):
         if self.settings["model-file"] is None:

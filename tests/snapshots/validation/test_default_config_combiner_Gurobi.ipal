@@ -2,17 +2,8 @@
     "_iids-config": {
         "combiner": {
             "_type": "Gurobi",
-            "keys": [
-                "Gradient",
-                "Histogram",
-                "MinMax"
-            ],
+            "keys": [],
             "model-file": null,
-            "new_weight": [
-                1.0,
-                1.0,
-                1.0
-            ],
             "threads-limit": null,
             "time-limit": null,
             "use_scores": false
@@ -99,6 +90,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -129,6 +121,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -159,6 +152,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -189,6 +183,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -219,6 +214,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -249,6 +245,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -279,6 +276,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -309,6 +307,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -339,6 +338,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -369,6 +369,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -399,6 +400,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -429,6 +431,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -459,6 +462,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -489,6 +493,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -519,6 +524,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -549,6 +555,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -579,6 +586,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -609,6 +617,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -639,6 +648,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -669,6 +679,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -699,6 +710,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -729,6 +741,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -759,6 +772,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -789,6 +803,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -819,6 +834,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -849,6 +865,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -879,6 +896,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -909,6 +927,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },
@@ -939,6 +958,7 @@
     "responds to": [],
     "scores": {
         "Gradient": 0,
+        "Gurobi": 0.0,
         "Histogram": 0,
         "MinMax": 0
     },

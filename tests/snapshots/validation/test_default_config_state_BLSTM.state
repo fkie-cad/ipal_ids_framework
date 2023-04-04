@@ -66,6 +66,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -92,6 +93,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -117,6 +119,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+###IGNORE-LINE###
 ###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
@@ -168,6 +171,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -193,6 +197,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+###IGNORE-LINE###
 ###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
@@ -220,6 +225,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -245,6 +251,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+###IGNORE-LINE###
 ###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
@@ -296,6 +303,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -321,6 +329,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+###IGNORE-LINE###
 ###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
@@ -348,6 +357,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -373,6 +383,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+###IGNORE-LINE###
 ###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
@@ -424,6 +435,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -449,6 +461,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+###IGNORE-LINE###
 ###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
@@ -476,6 +489,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -501,6 +515,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+###IGNORE-LINE###
 ###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
@@ -552,6 +567,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -577,6 +593,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+###IGNORE-LINE###
 ###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
@@ -604,6 +621,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -629,6 +647,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+###IGNORE-LINE###
 ###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
@@ -680,6 +699,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -705,6 +725,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+###IGNORE-LINE###
 ###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
@@ -732,6 +753,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -757,6 +779,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+###IGNORE-LINE###
 ###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
@@ -808,6 +831,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -833,6 +857,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+###IGNORE-LINE###
 ###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
@@ -860,6 +885,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -885,6 +911,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+###IGNORE-LINE###
 ###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
@@ -936,6 +963,7 @@
     "responds to": [],
     "scores": {
 ###IGNORE-LINE###
+###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -961,6 +989,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+###IGNORE-LINE###
 ###IGNORE-LINE###
     },
     "src": "1.1.1.1:1",

@@ -56,11 +56,11 @@ class HeuristicCombiner(Combiner):
         malicious = self.model[vector][1]
 
         if benign == 0 and malicious == 0:
-            return self.settings["tie-breaker"], 1
+            return self.settings["tie-breaker"], 1, 0
         elif benign == malicious:
-            return self.settings["tie-breaker"], malicious / (benign + malicious)
+            return self.settings["tie-breaker"], malicious / (benign + malicious), 0
         else:
-            return malicious > benign, malicious / (benign + malicious)
+            return malicious > benign, malicious / (benign + malicious), 0
 
     def save_trained_model(self):
         if self.settings["model-file"] is None:

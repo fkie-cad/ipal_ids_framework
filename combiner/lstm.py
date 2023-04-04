@@ -98,13 +98,13 @@ class LSTMCombiner(Combiner):
         # Manage buffer
         self.buffer.append(self._get_activations(alerts, scores))
         if len(self.buffer) < self.window_size:
-            return False, 0
+            return False, 0, 0
         elif len(self.buffer) > self.window_size:
             self.buffer.pop(0)
 
         sequence = self.buffer[:: -self.settings["stride"]]
         prediction = float(self.model.predict([sequence], verbose=False)[0][0])
-        return prediction > 0.5, prediction
+        return prediction > 0.5, prediction, 0
 
     def save_trained_model(self):
         if self.settings["model-file"] is None:

@@ -93,8 +93,8 @@ The `ipal-iids` consists of two phases. During training, the parameters `--train
 Each IIDS has its own options which can be retrieved by ```ipal-iids --default.config [ids-name]```.
 
 ```bash
-usage: ipal-iids [-h] [--train.ipal FILE] [--train.state FILE] [--train.combiner FILE] [--live.ipal FILE] [--live.state FILE] [--output FILE] [--config FILE] [--combiner.config FILE]
-                 [--default.config IDS] [--combiner.default.config Combiner] [--retrain] [--log STR] [--logfile FILE] [--compresslevel INT] [--version]
+usage: ipal-iids [-h] [--train.ipal FILE] [--train.state FILE] [--train.combiner FILE] [--live.ipal FILE] [--live.state FILE] [--output FILE] [--config FILE] [--combiner.config FILE] [--default.config IDS]
+                 [--combiner.default.config Combiner] [--retrain] [--log STR] [--logfile FILE] [--compresslevel INT] [--version]
 
 This program contains the ipal-iids framework together with implementations of several IIDSs based on the IPAL message and state format.
 
@@ -115,7 +115,7 @@ options:
                         range,InvariantRules,IsolationForest,MinMax,NaiveBayes,Optimal,PASAD,RandomForest,SVM,Seq2SeqNN,Steadytime,TABOR
   --combiner.default.config Combiner
                         dump the default configuration for the specified Combiner to stdout and exit, can be used as a basis for writing Combiner config files. Available Combiners are:
-                        All,Any,Gurobi,Heuristic,LSTM,LogisticRegression,Majority,SVM,Weights
+                        Any,Matrix,Gurobi,Heuristic,LogisticRegression,SVM,LSTM
   --retrain             retrain regardless of a trained model file being present.
   --log STR             define logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL) (Default: WARNING).
   --logfile FILE        file to log to (Default: stderr).
@@ -145,30 +145,28 @@ The IIDS framework allows for using multiple IIDSs in parallel. Each entry in th
 
 If multiple IIDSs are used in parallel, it is possible to specifcy a combiner that fuses the results of the individual approaches into a unified alert. Therefore different strategies can be used as listed in the following table:
 
-| Combiner  | Time-Aware | Description                                                  |
-| ------------- | --- | ------------------------------------------------------------ |
-| All     | x | Alerts if all IDSs emit an alert.   |
-| Any     | x | Alerts if any IDS emits an alert.   |
-| Gurobi     | Running Avg. | Solves an optimization problem with Gurobi to find optimal weights for IDSs. This combiner may require a Gurobi license.  |
-| Heuristic     | x | This combiner implements a heuristic that minimizes the number of misclassifications, which maximizes accuracy.   |
-| LSTM     | yes | Time-aware LSTM over the a window of recent IIDS alerts.   |
-| LogisticRegression     | Running Avg. | Learns a logistic regression combiner.   |
-| Majority     | Running Avg. | Alerts if the majority of IDSs emit an alert.   |
-| SVM     | Running Avg. | Learns a SVM combiner.   |
-| Weights     | Running Avg. | Each IDS gets assigned a dedicated weight. The combiner alerts if a weighted sum of alerts/scores is greater than a threshold.   |
+| Combiner  | (Un-)Supervised | Time-Aware | Description                                                  |
+| ------------- | --- | --- | ------------------------------------------------------------ |
+| Any     | unsup. | no | Alerts if any IDS emits an alert.   |
+| Gurobi     | sup. | no | Solves an optimization problem with Gurobi to find optimal weights for IDSs. This combiner may require a Gurobi license.  |
+| Heuristic     | sup. |no | This combiner implements a heuristic that minimizes the number of misclassifications, which maximizes accuracy.   |
+| LSTM     | sup. | yes | Time-aware LSTM over the a window of recent IIDS alerts.   |
+| LogisticRegression     | sup. | no | Learns a logistic regression combiner.   |
+| SVM     | sup. | no | Learns a SVM combiner.   |
+| Matrix     | unsup. | yes | Each IDS gets assigned a dedicated weight, or multiple for each timestep. The combiner alerts if a weighted sum of alerts/scores is greater than a threshold. |
 
 To utilize a combiner, the IIDS framework requires a dedicated configuration file. A default configuration for each combiner can be obtained with `ipal-iids --combiner.default.config [Combiner name]`:
 
 ```bash
-ipal-iids --combiner.default.config Weights
+ipal-iids --combiner.default.config Matrix
 {
-    "_type": "Weights",
+    "_type": "Matrix",
     "model-file": null,
-    "new_weight": 1.0,
+    "matrix": [],
+    "threshold": 0,
     "use_scores": false,
-    "keys": null,
-    "weights": [],
-    "threshold": 1
+    "keys": [],
+    "lookahead": 0
 }
 ```
 
@@ -285,7 +283,7 @@ More information on the black and flake8 setup can be found at https://ljvmirand
 The process for adding support for a new IIDS is the following:
 
 1. Add a new folder and IIDS module in `ids/[ids name]/[ids name].py `
-2. Create a new IIDS class inheriting the MetaIDS class (see ```ids/ids.py```) or inheriting the FeatureIDS class (see `ipial_iids/ids/featureids.py`) for preprocessor support. The IIDS class may implement:
+2. Create a new IIDS class inheriting the MetaIDS class (see ```ids/ids.py```) or inheriting the FeatureIDS class (see `ipal_iids/ids/featureids.py`) for preprocessor support. The IIDS class may implement:
    - `train`: given some training data, the IIDS should learn its internal model
    - `new_ipal_msg`: given a new IPAL message, return whether the IIDS detected an anomaly
    - `new_state_msg`: given a new IPAL state message, return whether the IIDS detected an anomaly

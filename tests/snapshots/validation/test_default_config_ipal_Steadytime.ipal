@@ -52,6 +52,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -78,6 +79,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -104,6 +106,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -130,6 +133,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -156,6 +160,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -182,6 +187,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -208,6 +214,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -234,6 +241,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -260,6 +268,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -286,6 +295,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -312,6 +322,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -338,6 +349,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -364,6 +376,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -390,6 +403,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -416,6 +430,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -442,6 +457,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -468,6 +484,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -494,6 +511,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -520,6 +538,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -546,6 +565,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -572,6 +592,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -598,6 +619,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 1,
         "Steadytime": 1
     },
     "src": "1.1.1.1:1",
@@ -624,6 +646,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 1,
         "Steadytime": 1
     },
     "src": "1.1.1.1:1",
@@ -650,6 +673,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 1,
         "Steadytime": 1
     },
     "src": "1.1.1.1:1",
@@ -676,6 +700,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 1,
         "Steadytime": 1
     },
     "src": "1.1.1.1:1",
@@ -702,6 +727,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -728,6 +754,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
@@ -754,6 +781,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 1,
         "Steadytime": 1
     },
     "src": "1.1.1.1:1",
@@ -780,6 +808,7 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
+        "Any": 0,
         "Steadytime": 0
     },
     "src": "1.1.1.1:1",
