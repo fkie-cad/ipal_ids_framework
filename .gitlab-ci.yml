@@ -30,6 +30,11 @@ isort:
   script:
   - isort --profile black --filter-files -c .
 
+cffconvert:
+  stage: Static Analysis
+  script:
+  - cffconvert --validate -i CITATION.cff
+
 pytest:
   stage: Test
   script:
