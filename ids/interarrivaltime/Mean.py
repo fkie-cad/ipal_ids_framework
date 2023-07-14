@@ -125,8 +125,8 @@ class InterArrivalTimeMean(MetaIDS):
             # Check mean model
             iet_mean = np.mean(self.sliding_windows[identifier]["interevents"])
             alert = not (
-                self.mean_model[identifier]["ll"] < iet_mean
-                and iet_mean < self.mean_model[identifier]["ul"]
+                self.mean_model[identifier]["ll"] <= iet_mean
+                and iet_mean <= self.mean_model[identifier]["ul"]
             )
 
             return alert, iet_mean - self.mean_model[identifier]["mu"]

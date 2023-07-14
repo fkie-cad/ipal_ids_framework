@@ -32,6 +32,7 @@ COMBINERNAMES = [
     "Heuristic",
     "LSTM",
     "LogisticRegression",
+    "MLP",
     "Matrix",
     "SVM",
 ]

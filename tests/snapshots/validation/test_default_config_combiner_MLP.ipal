@@ -1,19 +1,64 @@
 {
     "_iids-config": {
         "combiner": {
-            "_type": "Any",
-            "model-file": null
+            "_type": "MLP",
+            "keys": [
+                "MinMax",
+                "Gradient",
+                "Histogram"
+            ],
+            "model-file": null,
+            "use_scores": false
         },
-        "combiner_config": null,
+        "combiner_config": "misc/configs/combiner-MLP.config",
         "compresslevel": 9,
-        "config": "misc/configs/inter-arrival-range.config",
+        "config": "misc/configs/combiner-ids.config",
         "idss": {
-            "inter-arrival-range": {
-                "N": 4,
-                "W": 5,
-                "_type": "inter-arrival-range",
-                "alert_unknown": true,
-                "model-file": "./model"
+            "Gradient": {
+                "_type": "MinMax",
+                "allow-none": false,
+                "discrete_threshold": 10,
+                "features": [
+                    "state;switch"
+                ],
+                "model-file": "./model",
+                "preprocessors": [
+                    {
+                        "features": [
+                            "state;switch"
+                        ],
+                        "method": "gradient"
+                    }
+                ],
+                "save-training": null,
+                "threshold": 0,
+                "trainon": 1.0
+            },
+            "Histogram": {
+                "_type": "Histogram",
+                "allow-none": false,
+                "bins": 10,
+                "discrete_threshold": 10,
+                "features": [],
+                "model-file": "./model",
+                "preprocessors": [],
+                "save-training": null,
+                "threshold": 0,
+                "trainon": 1.0,
+                "window_size": 5
+            },
+            "MinMax": {
+                "_type": "MinMax",
+                "allow-none": false,
+                "discrete_threshold": 10,
+                "features": [
+                    "state;switch"
+                ],
+                "model-file": "./model",
+                "preprocessors": [],
+                "save-training": null,
+                "threshold": 0,
+                "trainon": 1.0
             }
         },
         "live_ipal": "misc/ipal/test.ipal",
@@ -23,14 +68,16 @@
         "logformat": "%(levelname)s:%(name)s:%(message)s",
         "output": "-",
         "retrain": true,
-        "train_combiner": null,
+        "train_combiner": "misc/ipal/train-combiner.ipal",
         "train_ipal": "misc/ipal/train.ipal",
         "train_state": null,
 ###IGNORE-LINE###
     },
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -44,8 +91,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -57,7 +106,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -71,8 +122,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -84,7 +137,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -98,8 +153,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -111,7 +168,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -125,8 +184,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -138,7 +199,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -152,8 +215,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -165,7 +230,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -179,8 +246,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -192,7 +261,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -206,8 +277,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -219,7 +292,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -233,8 +308,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -246,7 +323,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -260,8 +339,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -273,7 +354,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -287,8 +370,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -300,7 +385,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -314,8 +401,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -327,7 +416,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -341,8 +432,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -354,7 +447,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -368,8 +463,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -381,7 +478,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -395,8 +494,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -408,7 +509,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -422,8 +525,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -435,7 +540,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -449,8 +556,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -462,7 +571,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -476,8 +587,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -489,7 +602,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -503,8 +618,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -516,7 +633,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -530,8 +649,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -543,7 +664,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -557,8 +680,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -570,7 +695,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -584,8 +711,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -597,7 +726,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -611,8 +742,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -624,7 +757,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -638,8 +773,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -651,7 +788,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -665,8 +804,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -678,7 +819,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -692,8 +835,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -705,7 +850,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -719,8 +866,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -732,7 +881,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -746,8 +897,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -759,7 +912,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -773,8 +928,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {
@@ -786,7 +943,9 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-range": false
+        "Gradient": false,
+        "Histogram": false,
+        "MinMax": false
     },
     "crc": true,
     "data": {
@@ -800,8 +959,10 @@
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 0,
-        "inter-arrival-range": 0.0
+        "Gradient": 0,
+        "Histogram": 0,
+        "MLP": 0,
+        "MinMax": 0
     },
     "src": "1.1.1.1:1",
     "state": {

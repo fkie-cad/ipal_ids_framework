@@ -135,8 +135,8 @@ class InterArrivalTimeRange(MetaIDS):
                 self.sliding_windows[identifier]["interevents"]
             ) - np.min(self.sliding_windows[identifier]["interevents"])
             alert = not (
-                self.range_model[identifier]["ll"] < iet_range
-                and iet_range < self.range_model[identifier]["ul"]
+                self.range_model[identifier]["ll"] <= iet_range
+                and iet_range <= self.range_model[identifier]["ul"]
             )
 
             return alert, iet_range - self.range_model[identifier]["mu"]

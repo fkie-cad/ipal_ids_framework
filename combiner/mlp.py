@@ -1,33 +1,30 @@
 import json
 
 import joblib
-from sklearn.linear_model import LogisticRegression
+from sklearn.neural_network import MLPClassifier
 
 import ipal_iids.settings as settings
 
 from .combiner import Combiner
 
 
-class LogisticRegressionCombiner(Combiner):
-    _name = "LogisticRegression"
-    _description = "Learns a logistic regression combiner."
+class MLPCombiner(Combiner):
+    _name = "MLP"
+    _description = "Learns a MLP combiner."
     _requires_training = True
-    _logistic_default_settings = {
-        "keys": None,
-        "use_scores": False,
-    }
+    _mlp_default_settings = {"keys": None, "use_scores": False}
 
     def __init__(self):
         super().__init__()
-        self._add_default_settings(self._logistic_default_settings)
+        self._add_default_settings(self._mlp_default_settings)
 
         self.model = None
 
     def train(self, file):
         events, annotations = self._load_training(file)
 
-        settings.logger.info("Fitting Logistic Regression Combiner")
-        self.model = LogisticRegression()
+        settings.logger.info("Fitting MLP Combiner")
+        self.model = MLPClassifier()
         self.model.fit(events, annotations)
 
     def combine(self, alerts, scores):

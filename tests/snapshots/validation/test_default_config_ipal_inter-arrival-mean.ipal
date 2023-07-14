@@ -138,7 +138,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -146,13 +146,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 4,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -165,7 +165,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -173,13 +173,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 5,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -192,7 +192,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -200,13 +200,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 6,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -219,7 +219,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -227,13 +227,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 7,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -246,7 +246,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -254,13 +254,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 8,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -273,7 +273,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -281,13 +281,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 9,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -300,7 +300,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -308,13 +308,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 10,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -327,7 +327,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -335,13 +335,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 11,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -354,7 +354,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -362,13 +362,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 12,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -381,7 +381,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -389,13 +389,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 13,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -408,7 +408,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -416,13 +416,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 14,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -435,7 +435,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -443,13 +443,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 15,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -462,7 +462,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -470,13 +470,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 16,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -489,7 +489,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -497,13 +497,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 17,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -516,7 +516,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -524,13 +524,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 18,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -543,7 +543,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -551,13 +551,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 19,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -570,7 +570,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -578,13 +578,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 20,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -597,7 +597,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -605,13 +605,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 21,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -624,7 +624,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -632,13 +632,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 22,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -651,7 +651,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -659,13 +659,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 23,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -678,7 +678,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -686,13 +686,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 24,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -705,7 +705,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -713,13 +713,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 25,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -732,7 +732,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -740,13 +740,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 26,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -759,7 +759,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -767,13 +767,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 27,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": true,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",
@@ -786,7 +786,7 @@
 {
     "activity": "interrogate",
     "alerts": {
-        "inter-arrival-mean": true
+        "inter-arrival-mean": false
     },
     "crc": true,
     "data": {
@@ -794,13 +794,13 @@
     },
     "dest": "2.2.2.2:502:1",
     "id": 28,
-    "ids": true,
+    "ids": false,
     "length": 12,
     "malicious": false,
     "protocol": "modbus",
     "responds to": [],
     "scores": {
-        "Any": 1,
+        "Any": 0,
         "inter-arrival-mean": 0.0
     },
     "src": "1.1.1.1:1",

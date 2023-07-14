@@ -59,7 +59,9 @@ class MatrixCombiner(Combiner):
 
         return (
             score >= self.settings["threshold"],
-            score / self.settings["threshold"],
+            score / self.settings["threshold"]
+            if self.settings["threshold"] != 0
+            else 0,
             -self.settings["lookahead"],
         )
 

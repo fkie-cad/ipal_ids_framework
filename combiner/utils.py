@@ -4,6 +4,7 @@ from .heuristic import HeuristicCombiner
 from .logisticregression import LogisticRegressionCombiner
 from .lstm import LSTMCombiner
 from .matrix import MatrixCombiner
+from .mlp import MLPCombiner
 from .svm import SVMCombiner
 
 combiners = [
@@ -15,6 +16,7 @@ combiners = [
     GurobiCombiner,
     HeuristicCombiner,
     LogisticRegressionCombiner,
+    MLPCombiner,
     SVMCombiner,
     # Supervised & Timeaware
     LSTMCombiner,

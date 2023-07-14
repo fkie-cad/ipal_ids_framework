@@ -84,7 +84,7 @@
         "train_combiner": "misc/ipal/train-combiner.ipal",
         "train_ipal": "misc/ipal/train.ipal",
         "train_state": null,
-        "version": "v1.4.7"
+###IGNORE-LINE###
     },
     "activity": "interrogate",
     "alerts": {
