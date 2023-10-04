@@ -7,6 +7,7 @@
         "combiner_config": null,
         "compresslevel": 9,
         "config": "misc/configs/inter-arrival-mean.config",
+        "hostname": false,
         "idss": {
             "inter-arrival-mean": {
                 "N": 4,

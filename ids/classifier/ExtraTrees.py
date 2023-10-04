@@ -79,28 +79,39 @@ class ExtraTrees(FeatureIDS):
             "ccp_alpha": self.settings["ccp_alpha"],
             "max_samples": self.settings["max_samples"],
         }
-
         settings.logger.info(tuned_parameters)
-        etc = GridSearchCV(
-            ExtraTreesClassifier(),
-            [tuned_parameters],
-            scoring=self.settings["scoring"],
-            n_jobs=self.settings["jobs"],
-            verbose=self.settings["verbose"],
-        )
 
-        etc.fit(events, annotation)
+        # Test if gridsearch is neccesary
+        if max([len(v) for v in tuned_parameters.values()]) > 1:
+            settings.logger.info("Finding best parameteres with GirdSearchCV")
+            etc = GridSearchCV(
+                ExtraTreesClassifier(),
+                [tuned_parameters],
+                scoring=self.settings["scoring"],
+                n_jobs=self.settings["jobs"],
+                verbose=self.settings["verbose"],
+            )
 
-        settings.logger.info("Best parameters set found on development set:")
-        settings.logger.info(etc.best_params_)
-        settings.logger.info("Grid scores on development set:")
-        means = etc.cv_results_["mean_test_score"]
-        stds = etc.cv_results_["std_test_score"]
-        for mean, std, params in zip(means, stds, etc.cv_results_["params"]):
-            settings.logger.info("%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params))
+            etc.fit(events, annotation)
 
-        # Save best estimator
-        self.etc = etc.best_estimator_
+            settings.logger.info("Best parameters set found on development set:")
+            settings.logger.info(etc.best_params_)
+            settings.logger.info("Grid scores on development set:")
+            means = etc.cv_results_["mean_test_score"]
+            stds = etc.cv_results_["std_test_score"]
+            for mean, std, params in zip(means, stds, etc.cv_results_["params"]):
+                settings.logger.info(
+                    "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params)
+                )
+
+            # Save best estimator
+            self.etc = etc.best_estimator_
+
+        else:
+            tuned_parameters = {k: v[0] for k, v in tuned_parameters.items()}
+            self.etc = ExtraTreesClassifier(**tuned_parameters)
+            self.etc.fit(events, annotation)
+
         self.classes = list(self.etc.classes_)
 
     def new_state_msg(self, msg):

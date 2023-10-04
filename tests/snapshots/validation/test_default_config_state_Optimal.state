@@ -7,6 +7,7 @@
         "combiner_config": null,
         "compresslevel": 9,
         "config": "misc/configs/Optimal.config",
+        "hostname": false,
         "idss": {
             "Optimal": {
                 "_type": "Optimal",

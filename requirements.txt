@@ -6,7 +6,7 @@ keras
 torch
 git+https://github.com/RhysU/ar.git
 matplotlib
-pomegranate==0.14.8
+git+https://github.com/jmschrei/pomegranate.git@v0.14.9
 tr
 pandas
 gurobipy

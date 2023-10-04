@@ -16,6 +16,7 @@ IDSNAMES = [
     "ExtraTrees",
     "Histogram",
     "IsolationForest",
+    "Kitsune",
     "MinMax",
     "NaiveBayes",
     "Optimal",

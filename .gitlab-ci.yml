@@ -8,8 +8,14 @@ before_script:
   - apt-get -y install libgsl-dev git
   - python3 --version
   - pip3 install numpy
-  - pip3 install -r requirements.txt
   - pip3 install -r requirements-dev.txt
+
+.install_ipal:
+  script:
+    - pip3 install -r requirements.txt
+    - cd ids/tabor/rti_plus
+    - make
+    - cd -
 
 stages:
   - Static Analysis
@@ -39,9 +45,18 @@ cffconvert:
   - cffconvert --validate -i CITATION.cff
   allow_failure: true
 
+execute:
+  stage: Test
+  script:
+    - !reference [.install_ipal, script]
+    - ./ipal-iids --version
+    - ./ipal-visualize-model --version
+    - ./ipal-extend-alarms --version
+
 pytest:
   stage: Test
   script:
+    - !reference [.install_ipal, script]
     - python3 -m pytest -vv --cov=ipal_iids --cov=ids --cov=preprocessors --cov-report term --cov-report xml:coverage.xml --cov-branch
   coverage: '/(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/'
   artifacts:

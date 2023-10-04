@@ -7,6 +7,7 @@
         "combiner_config": null,
         "compresslevel": 9,
         "config": "misc/configs/DecisionTree.config",
+        "hostname": false,
         "idss": {
             "DecisionTree": {
                 "_type": "DecisionTree",

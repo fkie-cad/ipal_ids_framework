@@ -8,6 +8,7 @@
         "combiner_config": "misc/configs/combiner-Heuristic.config",
         "compresslevel": 9,
         "config": "misc/configs/combiner-ids.config",
+        "hostname": false,
         "idss": {
             "Gradient": {
                 "_type": "MinMax",

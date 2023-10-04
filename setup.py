@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="ipal-iids",
-    version="1.4.9",
+    version="1.4.10",
     packages=find_packages(exclude="tests"),
     scripts=["ipal-iids", "ipal-extend-alarms", "ipal-visualize-model"],
     install_requires=[
@@ -14,7 +14,7 @@ setup(
         "torch",
         "ar @ git+https://github.com/RhysU/ar.git",
         "matplotlib",
-        "pomegranate",
+        "pomegranate @ git+https://github.com/jmschrei/pomegranate.git@v0.14.9",
         "tr",
         "pandas",
         "gurobipy",

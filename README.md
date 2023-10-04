@@ -25,6 +25,7 @@ The IIDS framework contains implementations of the following IIDSs. Note that we
 | Inter-arrival time     | Message       | [Paper](https://doi.org/10.1007/978-3-319-99843-5_5)         | Packet Inter-arrival time |
 | Invariant Rules*       | State         | [Paper](http://dx.doi.org/10.14722/ndss.2019.23265), [Code](https://github.com/cfeng783/NDSS19_InvariantRuleAD) | Compares states against invariant rules generated from training dataset                  |
 | Isolation Forest |Message/State | [Paper](https://dl.acm.org/doi/10.1145/3387940.3391486) [Code](https://zenodo.org/record/3699088) | (not reproduced) |
+| Kitsune |Message | [Paper](https://www.ndss-symposium.org/wp-content/uploads/2018/02/ndss2018_03A-3_Mirsky_paper.pdf) [Code](https://zenodo.org/record/3699088) | |
 | Naive Bayes    | Message/State | [Paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7573322) | (not reproduced)
 | Optimal                | Message/State | --                                                           | Implements a "Oracle" that always classifies correctly (or always incorrect if desired). |
 | PASAD*                  | State         | [Paper](https://doi.org/10.1145/3243734.3243781), [Code](https://github.com/mikeliturbe/pasad), [Code](https://github.com/rahulrajpl/PyPASAD) | Process prediction - Process-Aware Stealthy Attack Detector |

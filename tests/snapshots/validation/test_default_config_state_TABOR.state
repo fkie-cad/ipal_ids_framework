@@ -7,6 +7,7 @@
         "combiner_config": null,
         "compresslevel": 9,
         "config": "misc/configs/TABOR.config",
+        "hostname": false,
         "idss": {
             "TABOR": {
                 "RTI_MIN_DATA": 3,

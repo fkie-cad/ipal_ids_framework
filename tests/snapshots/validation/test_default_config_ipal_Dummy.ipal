@@ -7,6 +7,7 @@
         "combiner_config": null,
         "compresslevel": 9,
         "config": "misc/configs/Dummy.config",
+        "hostname": false,
         "idss": {
             "Dummy": {
                 "_type": "Dummy",

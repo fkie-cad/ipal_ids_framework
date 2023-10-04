@@ -12,6 +12,7 @@
         "combiner_config": "misc/configs/combiner-LSTM.config",
         "compresslevel": 9,
         "config": "misc/configs/combiner-ids.config",
+        "hostname": false,
         "idss": {
             "Gradient": {
                 "_type": "MinMax",

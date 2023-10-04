@@ -5,6 +5,7 @@ import json
 import logging
 import os
 import random
+import socket
 import sys
 import time
 from pathlib import Path
@@ -42,6 +43,11 @@ def copy_file_to_tmp_file(filein):
 
 # Initialize logger
 def initialize_logger(args):
+    # Decide if hostname is added
+    if args.hostname:
+        settings.hostname = True
+        settings.logformat = f"%(asctime)s:{socket.gethostname()}:" + settings.logformat
+
     if args.log:
         settings.log = getattr(logging, args.log.upper(), None)
 
@@ -182,6 +188,14 @@ def prepare_arg_parser(parser):
         help="retrain regardless of a trained model file being present.",
         action="store_true",
         required=False,
+    )
+
+    parser.add_argument(
+        "--hostname",
+        dest="hostname",
+        help="Add the hostname to the output.",
+        required=False,
+        action="store_true",
     )
 
     # Logging

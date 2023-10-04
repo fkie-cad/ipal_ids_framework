@@ -75,6 +75,14 @@ def load_settings(args):
     with open_file(settings.config, "r") as f:
         try:
             settings.idss = json.load(f)
+
+        except UnicodeDecodeError as e:
+            settings.logger.error("Error parsing config file")
+            settings.logger.error(
+                "Make sure you provide a config file, not a model file!"
+            )
+            settings.logger.error(e)
+            exit(1)
         except json.decoder.JSONDecodeError as e:
             settings.logger.error("Error parsing config file")
             settings.logger.error(e)

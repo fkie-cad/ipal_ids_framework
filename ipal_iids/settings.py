@@ -3,7 +3,7 @@ from io import TextIOWrapper
 
 from ids.utils import get_all_iidss
 
-version = "v1.4.9"
+version = "v1.4.10"
 
 # Gzip options
 compresslevel = 9  # 0 no compress, 1 large/fast, 9 small/slow
@@ -22,6 +22,7 @@ output = None
 outputfd: TextIOWrapper
 
 # Logging settings
+hostname = False
 logger = logging.getLogger("ipal-iids")
 log = logging.WARNING
 logformat = "%(levelname)s:%(name)s:%(message)s"
@@ -49,6 +50,7 @@ def iids_settings_to_dict():
         "live_state": live_state,
         "retrain": retrain,
         "output": output,
+        "hostname": hostname,
         "log": log,
         "logformat": logformat,
         "logfile": logfile,

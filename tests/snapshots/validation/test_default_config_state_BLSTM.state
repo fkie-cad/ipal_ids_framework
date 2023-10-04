@@ -7,6 +7,7 @@
         "combiner_config": null,
         "compresslevel": 9,
         "config": "misc/configs/BLSTM.config",
+        "hostname": false,
         "idss": {
             "BLSTM": {
                 "_type": "BLSTM",

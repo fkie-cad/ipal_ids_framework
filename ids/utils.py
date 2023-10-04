@@ -8,6 +8,7 @@ from .classifier.RandomForest import RandomForest
 from .classifier.SVM import SVM
 from .interarrivaltime.Mean import InterArrivalTimeMean
 from .interarrivaltime.Range import InterArrivalTimeRange
+from .kitsune.kitsune import Kitsune
 from .oracles.DummyIDS import DummyIDS
 from .oracles.OptimalIDS import OptimalIDS
 from .simple.decimal import DecimalPlaces
@@ -28,6 +29,7 @@ idss = [
     InterArrivalTimeMean,
     InterArrivalTimeRange,
     IsolationForest,
+    Kitsune,
     MinMax,
     NaiveBayes,
     OptimalIDS,

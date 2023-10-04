@@ -74,28 +74,39 @@ class SVM(FeatureIDS):
             "break_ties": self.settings["break_ties"],
             "random_state": self.settings["random_state"],
         }
-
         settings.logger.info(tuned_parameters)
-        svc = GridSearchCV(
-            svm.SVC(),
-            [tuned_parameters],
-            scoring=self.settings["scoring"],
-            n_jobs=self.settings["jobs"],
-            verbose=self.settings["verbose"],
-        )
 
-        svc.fit(events, annotation)
+        # Test if gridsearch is neccesary
+        if max([len(v) for v in tuned_parameters.values()]) > 1:
+            settings.logger.info("Finding best parameteres with GirdSearchCV")
+            svc = GridSearchCV(
+                svm.SVC(),
+                [tuned_parameters],
+                scoring=self.settings["scoring"],
+                n_jobs=self.settings["jobs"],
+                verbose=self.settings["verbose"],
+            )
 
-        settings.logger.info("Best parameters set found on development set:")
-        settings.logger.info(svc.best_params_)
-        settings.logger.info("Grid scores on development set:")
-        means = svc.cv_results_["mean_test_score"]
-        stds = svc.cv_results_["std_test_score"]
-        for mean, std, params in zip(means, stds, svc.cv_results_["params"]):
-            settings.logger.info("%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params))
+            svc.fit(events, annotation)
 
-        # Save best estimator
-        self.svm = svc.best_estimator_
+            settings.logger.info("Best parameters set found on development set:")
+            settings.logger.info(svc.best_params_)
+            settings.logger.info("Grid scores on development set:")
+            means = svc.cv_results_["mean_test_score"]
+            stds = svc.cv_results_["std_test_score"]
+            for mean, std, params in zip(means, stds, svc.cv_results_["params"]):
+                settings.logger.info(
+                    "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params)
+                )
+
+            # Save best estimator
+            self.svm = svc.best_estimator_
+
+        else:
+            tuned_parameters = {k: v[0] for k, v in tuned_parameters.items()}
+            self.svm = svm.SVC(**tuned_parameters)
+            self.svm.fit(events, annotation)
+
         self.classes = list(self.svm.classes_)
 
     def new_state_msg(self, msg):

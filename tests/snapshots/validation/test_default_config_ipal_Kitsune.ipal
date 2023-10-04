@@ -1,0 +1,923 @@
+{
+    "_iids-config": {
+        "combiner": {
+            "_type": "Any",
+            "model-file": null
+        },
+        "combiner_config": null,
+        "compresslevel": 9,
+        "config": "misc/configs/Kitsune.config",
+        "hostname": false,
+        "idss": {
+            "Kitsune": {
+                "_type": "Kitsune",
+                "features_regexp": {
+                    "datagramSize": [
+                        "length",
+                        "(.*)"
+                    ],
+                    "dstIP": [
+                        "dest",
+                        "(\\d+\\.\\d+\\.\\d+\\.\\d+)"
+                    ],
+                    "dstMAC": [
+                        "dest",
+                        "([abcdef\\d][abcdef\\d]\\.[abcdef\\d][abcdef\\d]\\.[abcdef\\d][abcdef\\d]\\.[abcdef\\d][abcdef\\d]\\.[abcdef\\d][abcdef\\d]\\.[abcdef\\d][abcdef\\d])"
+                    ],
+                    "dstPort": [
+                        "src",
+                        "\\d+\\.\\d+\\.\\d+\\.\\d+:(\\d+)"
+                    ],
+                    "srcIP": [
+                        "src",
+                        "(\\d+\\.\\d+\\.\\d+\\.\\d+)"
+                    ],
+                    "srcMAC": [
+                        "src",
+                        "([abcdef\\d][abcdef\\d]\\.[abcdef\\d][abcdef\\d]\\.[abcdef\\d][abcdef\\d]\\.[abcdef\\d][abcdef\\d]\\.[abcdef\\d][abcdef\\d]\\.[abcdef\\d][abcdef\\d])"
+                    ],
+                    "srcPort": [
+                        "src",
+                        "\\d+\\.\\d+\\.\\d+\\.\\d+:(\\d+)"
+                    ],
+                    "timestamp": [
+                        "timestamp",
+                        "(.*)"
+                    ]
+                },
+                "fm_grace_period": 11,
+                "hidden_ratio": 0.75,
+                "lambdas": [
+                    5,
+                    3,
+                    1,
+                    0.1,
+                    0.01
+                ],
+                "learning_rate": 0.1,
+                "max_autoencoder_size": 10,
+                "max_host": 10000000000,
+                "max_sess": 10000000000,
+                "model-file": "./model",
+                "offset_live_timestamps": true,
+                "stats": [
+                    {
+                        "features": {
+                            "ID1": [
+                                "srcMAC",
+                                "srcIP"
+                            ],
+                            "t1": "timestamp",
+                            "v1": "datagramSize"
+                        },
+                        "limit": "mac_hostlimit",
+                        "name": "MIstat",
+                        "type": "1D",
+                        "typediff": false
+                    },
+                    {
+                        "features": {
+                            "ID1": [
+                                "srcIP"
+                            ],
+                            "ID2": [
+                                "dstIP"
+                            ],
+                            "t1": "timestamp",
+                            "v1": "datagramSize"
+                        },
+                        "limit": "hostlimit",
+                        "name": "HHstat",
+                        "type": "1D2D",
+                        "typediff": false
+                    },
+                    {
+                        "features": {
+                            "ID1": [
+                                "srcIP",
+                                "dstIP"
+                            ],
+                            "t1": "timestamp",
+                            "v1": "_zero"
+                        },
+                        "limit": "hostlimit",
+                        "name": "HHstat_ji",
+                        "type": "1D",
+                        "typediff": true
+                    },
+                    {
+                        "features": {
+                            "ID1": [
+                                "srcIP",
+                                "srcPort"
+                            ],
+                            "ID2": [
+                                "dstIP",
+                                "dstPort"
+                            ],
+                            "t1": "timestamp",
+                            "v1": "datagramSize"
+                        },
+                        "limit": "sessionlimit",
+                        "name": "HpHpstat",
+                        "type": "1D2D",
+                        "typediff": false
+                    }
+                ],
+                "threshold": 10
+            }
+        },
+        "live_ipal": "misc/ipal/test.ipal",
+        "live_state": null,
+        "log": 30,
+        "logfile": null,
+        "logformat": "%(levelname)s:%(name)s:%(message)s",
+        "output": "-",
+        "retrain": true,
+        "train_combiner": null,
+        "train_ipal": "misc/ipal/train.ipal",
+        "train_state": null,
+###IGNORE-LINE###
+    },
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 0,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 100,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 1,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 101,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 2,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 102,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 3,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 103,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 4,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 104,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 5,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 105,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 6,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 106,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 7,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 107,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 8,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 108,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 9,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 109,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 10,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 110,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 11,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 111,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 12,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 112,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 13,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 113,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 14,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 114,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 15,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 115,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 16,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 116,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 17,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 117,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 18,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 118,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 19,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 119,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 20,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 120,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 21,
+    "ids": false,
+    "length": 12,
+    "malicious": true,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 121,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 22,
+    "ids": false,
+    "length": 12,
+    "malicious": true,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 122,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 23,
+    "ids": false,
+    "length": 12,
+    "malicious": true,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 123,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 24,
+    "ids": false,
+    "length": 12,
+    "malicious": true,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 124,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 25,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 125,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 26,
+    "ids": false,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 126,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": false
+    },
+    "crc": true,
+    "data": {
+        "switch": 1
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 27,
+    "ids": false,
+    "length": 12,
+    "malicious": true,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 0,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 1
+    },
+    "timestamp": 127,
+    "type": 1
+}
+{
+    "activity": "interrogate",
+    "alerts": {
+        "Kitsune": true
+    },
+    "crc": true,
+    "data": {
+        "switch": 0
+    },
+    "dest": "2.2.2.2:502:1",
+    "id": 28,
+    "ids": true,
+    "length": 12,
+    "malicious": false,
+    "protocol": "modbus",
+    "responds to": [],
+    "scores": {
+        "Any": 1,
+###IGNORE-LINE###
+    },
+    "src": "1.1.1.1:1",
+    "state": {
+        "switch": 0
+    },
+    "timestamp": 128,
+    "type": 1
+}

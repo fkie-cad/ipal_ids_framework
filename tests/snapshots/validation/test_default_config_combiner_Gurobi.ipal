@@ -11,6 +11,7 @@
         "combiner_config": "misc/configs/combiner-Gurobi.config",
         "compresslevel": 9,
         "config": "misc/configs/combiner-ids.config",
+        "hostname": false,
         "idss": {
             "Gradient": {
                 "_type": "MinMax",

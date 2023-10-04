@@ -7,6 +7,7 @@
         "combiner_config": null,
         "compresslevel": 9,
         "config": "misc/configs/InvariantRules.config",
+        "hostname": false,
         "idss": {
             "InvariantRules": {
                 "_type": "InvariantRules",
