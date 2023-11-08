@@ -1,6 +1,6 @@
 # IPAL - Industrial Intrusion Detection Framework
 
-This repository is part of IPAL - an Industrial Protocol Abstraction Layer. IPAL aims to establish an abstract representation of industrial network traffic for subsequent unified and protocol-independent industrial intrusion detection. IPAL consists of a [transcriber](https://github.com/fkie-cad/ipal_transcriber) to automatically translate industrial traffic into the IPAL representation, an [IDS Framework](https://github.com/fkie-cad/ipal_ids_framework) implementing various industrial intrusion detection systems (IIDSs), and a collection of evaluation [datasets](https://github.com/fkie-cad/ipal_datasets). For details about IPAL, please refer to our publications listed down below.
+This repository is part of [IPAL](https://github.com/fkie-cad/ipal) - an Industrial Protocol Abstraction Layer. IPAL aims to establish an abstract representation of industrial network traffic for subsequent unified and protocol-independent industrial intrusion detection. IPAL consists of a [transcriber](https://github.com/fkie-cad/ipal_transcriber) to automatically translate industrial traffic into the IPAL representation, an [IDS Framework](https://github.com/fkie-cad/ipal_ids_framework) implementing various industrial intrusion detection systems (IIDSs), and a collection of evaluation [datasets](https://github.com/fkie-cad/ipal_datasets). For details about IPAL, please refer to our publications listed down below.
 
 The ever-increasing digitization in industries enables the automatization of complex physical processes and, with progressive integration into the Internet, also large-scale distributed systems. Due to both trends, well-known cyber-security problems are inherited, which, in the past, already led to severe attacks, e.g., the striking of the Ukrainian power grid in 2015. Supplementing proactive measures, Industrial Intrusion Detection Systems (IIDSs) promise to detect such attacks timely by monitoring the communication between automatization devices or accessing the processes’ physical state. Researchers proposed many IIDS solutions until today. However, due to a lack of standard interfaces and diverse communication protocols across industrial domains, great efforts are required to adapt existing IIDSs to new domains and communication protocols. To overcome this issue, we propose IPAL - a common message format that decouples IIDSs from domain-specific communication protocols. This representation applies to most IIDSs, as all their input data requirements are covered. Moreover, the required data is extractable across multiple industrial protocols due to inherent similarities in their communication patterns.
 
@@ -46,6 +46,8 @@ Note: IDSs marked with * are not available publically, but can be obtained on re
 - Wolsing, Konrad, Eric Wagner, and Martin Henze. "Poster: Facilitating Protocol-independent Industrial Intrusion Detection Systems." *Proceedings of the 2020 ACM SIGSAC Conference on Computer and Communications Security*. 2020 [https://doi.org/10.1145/3372297.3420019](https://doi.org/10.1145/3372297.3420019)
 
 ## Getting started
+
+If you are new to IPAL and want to learn about the general idea or try out our tutorials, please refer to IPAL's main repository: [https://github.com/fkie-cad/ipal](https://github.com/fkie-cad/ipal).
 
 ###### Prerequisites
 
