@@ -46,6 +46,13 @@ def prepare_arg_parser(parser):
         help="load the IDS configuration of the trained model ('*.gz' compressed).",
     )
 
+    parser.add_argument(
+        "--output",
+        metavar="output",
+        help="file to save the plot to (Default: '': show in matplotlib window)",
+        required=False,
+    )
+
     # Logging
     parser.add_argument(
         "--log",
@@ -102,7 +109,7 @@ def load_settings(args):
     return idss
 
 
-def plot_models(idss):
+def plot_models(idss, args):
     for ids in idss:
         try:  # Try to load the trained models
             if not ids.load_trained_model():
@@ -127,7 +134,11 @@ def plot_models(idss):
             settings.logger.warning("Nothing to render")
         else:
             fig.suptitle(ids._name)
-            plt.show()
+
+            if args.output is not None:
+                plt.savefig(args.output)
+            else:
+                plt.show()
             plt.close()
 
 
@@ -140,7 +151,7 @@ def main():
     initialize_logger(args)
 
     idss = load_settings(args)
-    plot_models(idss)
+    plot_models(idss, args)
 
 
 if __name__ == "__main__":
