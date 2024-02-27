@@ -3,7 +3,7 @@ from io import TextIOWrapper
 
 from ids.utils import get_all_iidss
 
-version = "v1.4.10"
+version = "v1.4.11"
 
 # Gzip options
 compresslevel = 9  # 0 no compress, 1 large/fast, 9 small/slow
