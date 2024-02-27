@@ -615,6 +615,9 @@ def main():
         # Train IDSs
         settings.logger.info("Start IDS training...")
         train_idss(idss)
+
+        # Train combiner
+        settings.logger.info("Start Combiner training...")
         train_combiner(combiner)
 
         # Live IDS

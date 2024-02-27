@@ -29,13 +29,13 @@ class corClust:
     def corrDist(self):
         c_rs_sqrt = np.sqrt(self.c_rs)
         C_rs_sqrt = np.outer(c_rs_sqrt, c_rs_sqrt)
-        C_rs_sqrt[
-            C_rs_sqrt == 0
-        ] = 1e-100  # this protects against dive by zero erros (occurs when a feature is a constant)
+        C_rs_sqrt[C_rs_sqrt == 0] = (
+            1e-100  # this protects against dive by zero erros (occurs when a feature is a constant)
+        )
         D = 1 - self.C / C_rs_sqrt  # the correlation distance matrix
-        D[
-            D < 0
-        ] = 0  # small negatives may appear due to the incremental fashion in which we update the mean. Therefore, we 'fix' them
+        D[D < 0] = (
+            0  # small negatives may appear due to the incremental fashion in which we update the mean. Therefore, we 'fix' them
+        )
         return D
 
     # clusters the features together, having no more than maxClust features per cluster
