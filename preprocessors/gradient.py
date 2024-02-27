@@ -22,16 +22,20 @@ class GradientPreprocessor(Preprocessor):
 
             out = None  # None if buffer not full yet
 
-            if self.last_value[i] is not None:  # Skip if first value
+            # Skip if first value and none values
+            if self.last_value[i] is not None and value[i] is not None:
                 # calculate new gradient
                 self.sliding_window[i].append(value[i] - self.last_value[i])
 
+                # Handle sliding window
                 if len(self.sliding_window[i]) > self.window_size:
                     self.sliding_window[i].pop(0)
                 if len(self.sliding_window[i]) == self.window_size:
                     out = sum(self.sliding_window[i]) / self.window_size
 
-            self.last_value[i] = value[i]  # Save last value
+            if value[i] is not None:  # Save last non-none value
+                self.last_value[i] = value[i]
+
             value[i] = out  # set output
 
         return value

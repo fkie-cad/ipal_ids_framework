@@ -10,3 +10,4 @@ git+https://github.com/jmschrei/pomegranate.git@v0.14.9
 tr
 pandas
 gurobipy
+cython

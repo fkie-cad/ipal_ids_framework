@@ -34,9 +34,17 @@ class MinMax(FeatureIDS):
         # Train on input
         for i in range(len(events[0])):
             data = [e[i] for e in events if e[i] is not None]
-            self.mins[i] = min(data)
-            self.maxs[i] = max(data)
-            self.deltas[i] = (self.maxs[i] - self.mins[i]) / 2
+
+            if len(data) == 0:
+                settings.logger.warning(f"No training data for sensor {i}")
+                self.mins[i] = None
+                self.maxs[i] = None
+                self.deltas[i] = None
+
+            else:
+                self.mins[i] = min(data)
+                self.maxs[i] = max(data)
+                self.deltas[i] = (self.maxs[i] - self.mins[i]) / 2
 
             if len(set(data)) <= self.settings["discrete_threshold"]:
                 self.deltas[i] = 0  # No threshold for discrete process values
@@ -63,6 +71,9 @@ class MinMax(FeatureIDS):
             if value is None:  # None is not malicious
                 likelihood = max(likelihood, 0)
 
+            elif minimum is None or maximum is None:  # we had no training data
+                likelihood = max(likelihood, 0)
+
             elif minimum <= value and value <= maximum:  # 0: if within min/max region
                 likelihood = max(likelihood, 0)
 
@@ -73,8 +84,11 @@ class MinMax(FeatureIDS):
                 likelihood = max(likelihood, overshoot / (1 if err == 0 else err))
 
             # Trigger alert
-            if value is not None and (value < minimum - err or maximum + err < value):
-                alert |= True
+            if minimum is not None and maximum is not None:
+                if value is not None and (
+                    value < minimum - err or maximum + err < value
+                ):
+                    alert |= True
 
         return alert, likelihood
 
@@ -132,8 +146,12 @@ class MinMax(FeatureIDS):
 
         xs = np.arange(len(self.mins))
         labels = self.mins.keys()
-        mins = np.array([self.mins[i] for i in labels])
-        maxs = np.array([self.maxs[i] for i in labels])
+        mins = np.array(
+            [self.mins[i] if self.mins[i] is not None else 0 for i in labels]
+        )
+        maxs = np.array(
+            [self.maxs[i] if self.maxs[i] is not None else 0 for i in labels]
+        )
         deltas = np.array([self.deltas[i] * self.settings["threshold"] for i in labels])
         means = np.array([(min + max) / 2 for min, max in zip(mins, maxs)])
 
