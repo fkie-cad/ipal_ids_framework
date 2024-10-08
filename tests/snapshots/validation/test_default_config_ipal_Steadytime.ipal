@@ -5,12 +5,12 @@
             "model-file": null
         },
         "combiner_config": null,
-        "compresslevel": 9,
-        "config": "misc/configs/Steadytime.config",
+###IGNORE-LINE###
+        "config": "misc/configs/SteadyTime.config",
         "hostname": false,
         "idss": {
             "Steadytime": {
-                "_type": "Steadytime",
+                "_type": "SteadyTime",
                 "adjust": true,
                 "allow-none": false,
                 "bins": 10,

@@ -1,12 +1,12 @@
 import logging
-from io import TextIOWrapper
+from io import BytesIO, TextIOWrapper
 
-from ids.utils import get_all_iidss
+import ids.utils
 
-version = "v1.4.11"
+version = "v1.5.1"
 
 # Gzip options
-compresslevel = 9  # 0 no compress, 1 large/fast, 9 small/slow
+compresslevel = 6  # 0 no compress, 1 large/fast, 9 small/slow
 
 # In and output
 config = None
@@ -19,7 +19,7 @@ live_state = None
 live_statefd: TextIOWrapper
 retrain = False
 output = None
-outputfd: TextIOWrapper
+outputfd: TextIOWrapper | BytesIO
 
 # Logging settings
 hostname = False
@@ -29,7 +29,7 @@ logformat = "%(levelname)s:%(name)s:%(message)s"
 logfile = None
 
 # IDS parameters
-idss = {ids._name: {"_type": ids._name} for ids in get_all_iidss().values()}
+idss = {ids_name: {"_type": ids_name} for ids_name in list(ids.utils.paths.keys())}
 
 combinerconfig = None
 combiner = None

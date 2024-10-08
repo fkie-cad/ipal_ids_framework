@@ -1,1 +1,3 @@
 WARNING:ipal-iids:No combiner defined. Using default Any combiner!
+###IGNORE-LINE###
+  super().__init__(**kwargs)

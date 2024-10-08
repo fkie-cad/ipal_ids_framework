@@ -1,6 +1,5 @@
-import json
-
 import numpy as np
+import orjson
 
 import ipal_iids.settings as settings
 from ids.ids import MetaIDS
@@ -15,7 +14,7 @@ from ids.ids import MetaIDS
 
 
 class InterArrivalTimeMean(MetaIDS):
-    _name = "inter-arrival-mean"
+    _name = "InterArrivalTimeMean"
     _description = "Mean inter-arrival time"
     _requires = ["train.ipal", "live.ipal"]
     _interarrivaltimemean_default_settings = {"N": 4, "W": 5, "alert_unknown": True}
@@ -44,8 +43,8 @@ class InterArrivalTimeMean(MetaIDS):
 
         # Load timestamps for each identifier
         with self._open_file(ipal) as f:
-            for line in f.readlines():
-                ipal_msg = json.loads(line)
+            for line in f:
+                ipal_msg = orjson.loads(line)
 
                 timestamp = ipal_msg["timestamp"]
                 identifier = self._get_identifier(ipal_msg)
@@ -64,7 +63,7 @@ class InterArrivalTimeMean(MetaIDS):
                 interevent_times.append(events[k][i + 1] - events[k][i])
 
             if len(interevent_times) <= self.settings["W"]:
-                settings.logger.warning("Only single window of type {}".format(k))
+                settings.logger.warning(f"Only single window of type {k}")
                 continue
 
             mu = np.mean(interevent_times)
@@ -86,9 +85,7 @@ class InterArrivalTimeMean(MetaIDS):
                 "interevents": [],
             }
 
-            settings.logger.info(
-                "- {} [{}, {}] mean: {} sigma: {}".format(k, ll, ul, mu, sigma)
-            )
+            settings.logger.info(f"- {k} [{ll}, {ul}] mean: {mu} sigma: {sigma}")
 
     def new_ipal_msg(self, msg):
         identifier = self._get_identifier(msg)
@@ -125,8 +122,9 @@ class InterArrivalTimeMean(MetaIDS):
             # Check mean model
             iet_mean = np.mean(self.sliding_windows[identifier]["interevents"])
             alert = not (
-                self.mean_model[identifier]["ll"] <= iet_mean
-                and iet_mean <= self.mean_model[identifier]["ul"]
+                self.mean_model[identifier]["ll"]
+                <= iet_mean
+                <= self.mean_model[identifier]["ul"]
             )
 
             return alert, iet_mean - self.mean_model[identifier]["mu"]
@@ -141,8 +139,8 @@ class InterArrivalTimeMean(MetaIDS):
             "mean_model": self.mean_model,
         }
 
-        with self._open_file(self._resolve_model_file_path(), mode="wt") as f:
-            f.write(json.dumps(model, indent=4) + "\n")
+        with self._open_file(self._resolve_model_file_path(), mode="wb") as f:
+            f.write(orjson.dumps(model) + b"\n")
 
         return True
 
@@ -151,11 +149,11 @@ class InterArrivalTimeMean(MetaIDS):
             return False
 
         try:  # Open model file
-            with self._open_file(self._resolve_model_file_path(), mode="rt") as f:
-                model = json.load(f)
+            with self._open_file(self._resolve_model_file_path(), mode="rb") as f:
+                model = orjson.loads(f.read())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(str(self._resolve_model_file_path()))
+                f"Model file {str(self._resolve_model_file_path())} not found."
             )
             return False
 
@@ -201,6 +199,6 @@ class InterArrivalTimeMean(MetaIDS):
         ax.set_xticklabels(labels, rotation=90, ha="center")
 
         ax.set_ylabel("Inter arrival time [in s]")
-        ax.set_title("N: {} W: {}".format(self.settings["N"], self.settings["W"]))
+        ax.set_title(f"N: {self.settings['N']} W: {self.settings['W']}")
 
         return plt, fig

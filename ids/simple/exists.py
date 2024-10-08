@@ -1,11 +1,11 @@
-import json
+import orjson
 
 import ipal_iids.settings as settings
 from ids.ids import MetaIDS
 
 
 class ExistsIDS(MetaIDS):
-    _name = "Exists"
+    _name = "ExistsIDS"
     _description = "Tests if a value has been seen before or not."
     _requires = ["train.state", "live.state", "train.ipal", "live.ipal"]
     _exists_default_settings = {"exclude": [], "threshold": 10}
@@ -29,10 +29,10 @@ class ExistsIDS(MetaIDS):
             self.key = "state"
             fd = state
 
-        # Load trainig file and parse data
+        # Load training file and parse data
         with self._open_file(fd) as f:
-            for line in f.readlines():
-                for k, v in json.loads(line)[self.key].items():
+            for line in f:
+                for k, v in orjson.loads(line)[self.key].items():
                     if k in self.settings["exclude"]:
                         continue
 
@@ -75,8 +75,8 @@ class ExistsIDS(MetaIDS):
             "exists": {k: list(v) for k, v in self.exists.items()},
         }
 
-        with self._open_file(self._resolve_model_file_path(), "wt") as f:
-            f.write(json.dumps(model, indent=4))
+        with self._open_file(self._resolve_model_file_path(), "wb") as f:
+            f.write(orjson.dumps(model, option=orjson.OPT_INDENT_2))
 
         return True
 
@@ -86,10 +86,10 @@ class ExistsIDS(MetaIDS):
 
         try:  # Open model file
             with self._open_file(self._resolve_model_file_path(), "rt") as f:
-                model = json.loads(f.read())
+                model = orjson.loads(f.read())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(str(self._resolve_model_file_path()))
+                f"Model file {str(self._resolve_model_file_path())} not found."
             )
             return False
 

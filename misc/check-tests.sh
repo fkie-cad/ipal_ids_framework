@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-cd tests/snapshots/output
+cd tests/snapshots/output || exit
 
-for f in *;
+for f in *$1*;
 do
-    echo $f
-    diff $f ../validation/$f || (vimdiff $f ../validation/$f && sleep 1)
+    echo "$f"
+    diff "$f" ../validation/"$f" || (vimdiff "$f" ../validation/"$f" && sleep 1)
 done

@@ -16,30 +16,31 @@ This repository contains the ``ipal-iids`` framework together with implementatio
 
 The IIDS framework contains implementations of the following IIDSs. Note that we distinguish between IIDSs operating on the IPAL [message format](https://github.com/fkie-cad/ipal_transcriber#message-format) (on a per-network packet basis) or on the IPAL [state format](https://github.com/fkie-cad/ipal_transcriber#state-format) (a summary of all industrial process values for a given point in time).
 
-| IDSs                   | Type          | Publication/Source Code                                      | Description                                                  |
-| ---------------------- | ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Autoregression         | State         | [Paper](https://doi.org/10.1145/3243734.3243781), [Paper](https://doi.org/10.1145/2664243.2664277), [Code](https://github.com/RhysU/ar) | Process prediction (not reproduced)                                     |
-| BLSTM                  | Message/State | [Paper](https://doi.org/10.1109/TrustCom%2FBigDataSE.2018.00094), [Code](https://github.com/Rocionightwater/ML-NIDS-for-SCADA) | Machine Learning - Bidirectional Long Short Term Memory      |
-| Decision Trees |Message/State | [Paper](https://dl.acm.org/doi/10.1145/3387940.3391486) [Code](https://zenodo.org/record/3699088) | (not reproduced) |
-| Dummy                | Message/State | --                                                           | Implements a Dummy IDS that always or never alerts. |
-| DTMC*                   | Message       | [Paper](https://doi.org/10.1007/978-3-319-74947-1_4), [Code](https://github.com/jjchromik/intravis) | Packet Sequences - Discrete-time Markov Chains               |
-| Extra Trees |Message/State | [Paper](https://dl.acm.org/doi/10.1145/3387940.3391486) [Code](https://zenodo.org/record/3699088) | (not reproduced) |
-| Inter-arrival time     | Message       | [Paper](https://doi.org/10.1007/978-3-319-99843-5_5)         | Packet Inter-arrival time |
-| Invariant Rules*       | State         | [Paper](http://dx.doi.org/10.14722/ndss.2019.23265), [Code](https://github.com/cfeng783/NDSS19_InvariantRuleAD) | Compares states against invariant rules generated from training dataset                  |
-| Isolation Forest |Message/State | [Paper](https://dl.acm.org/doi/10.1145/3387940.3391486) [Code](https://zenodo.org/record/3699088) | (not reproduced) |
-| Kitsune |Message | [Paper](https://www.ndss-symposium.org/wp-content/uploads/2018/02/ndss2018_03A-3_Mirsky_paper.pdf) [Code](https://zenodo.org/record/3699088) | |
-| Naive Bayes    | Message/State | [Paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7573322) | (not reproduced)
-| Optimal                | Message/State | --                                                           | Implements a "Oracle" that always classifies correctly (or always incorrect if desired). |
-| PASAD*                  | State         | [Paper](https://doi.org/10.1145/3243734.3243781), [Code](https://github.com/mikeliturbe/pasad), [Code](https://github.com/rahulrajpl/PyPASAD) | Process prediction - Process-Aware Stealthy Attack Detector |
-| Random Forest          | Message/State | [Paper](https://doi.org/10.1109/TrustCom%2FBigDataSE.2018.00094), [Code](https://github.com/Rocionightwater/ML-NIDS-for-SCADA) | Machine Learning - Random Forest |
-| Seq2SeqNN*              | State         | [Paper](https://doi.org/10.1007/978-3-030-42048-2_1), [Code](https://github.com/jukworks/swat-seq2seq) | Process Prediction - Sequence-to-Sequence Neural Networks    |
-| SIMPLE-DecimalPlaces              | Message/State | --                                                           | Alerts if process values with fewer/more decimal places occur than during training.                            |
-| SIMPLE-Exists              | Message/State | --                                                           | Alerts if too many process value, that have never been seen before, occur over a longer period of time.                            |
-| SIMPLE-Histogram              | Message/State | [Paper](https://doi.org/10.1007/978-3-031-17143-7_28)                                                           | Histogramm of a sensor over time.                            |
-| SIMPLE-MinMax                 | Message/State | [Paper](https://doi.org/10.1007/978-3-031-17143-7_28)                                                           | Minimum and Maximum of a value plus threshold                |
-| SIMPLE-Steadytime              | Message/State | [Paper](https://doi.org/10.1007/978-3-031-17143-7_28)                                                           | Compares longest or shortest time in a single state of a sensor.  |
-| Support Vector Machine | Message/State | [Paper](https://doi.org/10.1109/TrustCom%2FBigDataSE.2018.00094), [Code](https://github.com/Rocionightwater/ML-NIDS-for-SCADA) | Machine Learning - Support Vector Machine                    |
-| TABOR*                  | State         | [Paper](https://doi.org/10.1145/3196494.3196546)             | Process Sequences - Time Automata and Bayesian netwORk |
+| IDSs                        | Type          | Publication/Source Code                                                                                                                       | Description                                                                                             |
+|-----------------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| Autoregression (Deprecated) | State         | [Paper](https://doi.org/10.1145/3243734.3243781), [Paper](https://doi.org/10.1145/2664243.2664277), [Code](https://github.com/RhysU/ar)       | Process prediction (not reproduced)                                                                     |
+| BLSTM                       | Message/State | [Paper](https://doi.org/10.1109/TrustCom%2FBigDataSE.2018.00094), [Code](https://github.com/Rocionightwater/ML-NIDS-for-SCADA)                | Machine Learning - Bidirectional Long Short Term Memory                                                 |
+| Decision Trees              | Message/State | [Paper](https://dl.acm.org/doi/10.1145/3387940.3391486) [Code](https://zenodo.org/record/3699088)                                             | (not reproduced)                                                                                        |
+| Dummy                       | Message/State | --                                                                                                                                            | Implements a Dummy IDS that alerts always, never, or randomly.                                          |
+| DTMC*                       | Message       | [Paper](https://doi.org/10.1007/978-3-319-74947-1_4), [Code](https://github.com/jjchromik/intravis)                                           | Packet Sequences - Discrete-time Markov Chains                                                          |
+| Extra Trees                 | Message/State | [Paper](https://dl.acm.org/doi/10.1145/3387940.3391486) [Code](https://zenodo.org/record/3699088)                                             | (not reproduced)                                                                                        |
+| Inter-arrival time          | Message       | [Paper](https://doi.org/10.1007/978-3-319-99843-5_5)                                                                                          | Packet Inter-arrival time                                                                               |
+| Invariant Rules*            | State         | [Paper](http://dx.doi.org/10.14722/ndss.2019.23265), [Code](https://github.com/cfeng783/NDSS19_InvariantRuleAD)                               | Compares states against invariant rules generated from training dataset                                 |
+| Isolation Forest            | Message/State | [Paper](https://dl.acm.org/doi/10.1145/3387940.3391486) [Code](https://zenodo.org/record/3699088)                                             | (not reproduced)                                                                                        |
+| Kitsune                     | Message       | [Paper](https://www.ndss-symposium.org/wp-content/uploads/2018/02/ndss2018_03A-3_Mirsky_paper.pdf) [Code](https://zenodo.org/record/3699088)  |                                                                                                         |
+| Naive Bayes                 | Message/State | [Paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7573322)                                                                     | (not reproduced)                                                                                        |
+| Optimal                     | Message/State | --                                                                                                                                            | Implements a "Oracle" that always classifies correctly (or always incorrect if desired).                |
+| PASAD*                      | State         | [Paper](https://doi.org/10.1145/3243734.3243781), [Code](https://github.com/mikeliturbe/pasad), [Code](https://github.com/rahulrajpl/PyPASAD) | Process prediction - Process-Aware Stealthy Attack Detector                                             |
+| Random Forest               | Message/State | [Paper](https://doi.org/10.1109/TrustCom%2FBigDataSE.2018.00094), [Code](https://github.com/Rocionightwater/ML-NIDS-for-SCADA)                | Machine Learning - Random Forest                                                                        |
+| Seq2SeqNN*                  | State         | [Paper](https://doi.org/10.1007/978-3-030-42048-2_1), [Code](https://github.com/jukworks/swat-seq2seq)                                        | Process Prediction - Sequence-to-Sequence Neural Networks                                               |
+| SIMPLE-DecimalPlaces        | Message/State | --                                                                                                                                            | Alerts if process values with fewer/more decimal places occur than during training.                     |
+| SIMPLE-Exists               | Message/State | --                                                                                                                                            | Alerts if too many process value, that have never been seen before, occur over a longer period of time. |
+| SIMPLE-Histogram            | Message/State | [Paper](https://doi.org/10.1007/978-3-031-17143-7_28)                                                                                         | Histogramm of a sensor over time.                                                                       |
+| SIMPLE-MinMax               | Message/State | [Paper](https://doi.org/10.1007/978-3-031-17143-7_28)                                                                                         | Minimum and Maximum of a value plus threshold                                                           |
+| SIMPLE-Steadytime           | Message/State | [Paper](https://doi.org/10.1007/978-3-031-17143-7_28)                                                                                         | Compares longest or shortest time in a single state of a sensor.                                        |
+| Support Vector Machine      | Message/State | [Paper](https://doi.org/10.1109/TrustCom%2FBigDataSE.2018.00094), [Code](https://github.com/Rocionightwater/ML-NIDS-for-SCADA)                | Machine Learning - Support Vector Machine                                                               |
+| TABOR*                      | State         | [Paper](https://doi.org/10.1145/3196494.3196546)                                                                                              | Process Sequences - Time Automata and Bayesian netwORk                                                  |
+
 Note: IDSs marked with * are not available publically, but can be obtained on request.
 
 ###### Publications
@@ -148,17 +149,18 @@ The IIDS framework allows for using multiple IIDSs in parallel. Each entry in th
 
 #### Usage Combiner
 
-If multiple IIDSs are used in parallel, it is possible to specifcy a combiner that fuses the results of the individual approaches into a unified alert. Therefore different strategies can be used as listed in the following table:
+If multiple IIDSs are used in parallel, it is possible to specify a combiner that fuses the results of the individual
+approaches into a unified alert. Therefore, different strategies can be used as listed in the following table:
 
-| Combiner  | (Un-)Supervised | Time-Aware | Description                                                  |
-| ------------- | --- | --- | ------------------------------------------------------------ |
-| Any     | unsup. | no | Alerts if any IDS emits an alert.   |
-| Gurobi     | sup. | no | Solves an optimization problem with Gurobi to find optimal weights for IDSs. This combiner may require a Gurobi license.  |
-| Heuristic     | sup. |no | This combiner implements a heuristic that minimizes the number of misclassifications, which maximizes accuracy.   |
-| LSTM     | sup. | yes | Time-aware LSTM over the a window of recent IIDS alerts.   |
-| LogisticRegression     | sup. | no | Learns a logistic regression combiner.   |
-| SVM     | sup. | no | Learns a SVM combiner.   |
-| Matrix     | unsup. | yes | Each IDS gets assigned a dedicated weight, or multiple for each timestep. The combiner alerts if a weighted sum of alerts/scores is greater than a threshold. |
+| Combiner           | (Un-)Supervised | Time-Aware | Description                                                                                                                                                   |
+|--------------------|-----------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Any                | unsup.          | no         | Alerts if any IDS emits an alert.                                                                                                                             |
+| Gurobi             | sup.            | no         | Solves an optimization problem with Gurobi to find optimal weights for IDSs. This combiner may require a Gurobi license.                                      |
+| Heuristic          | sup.            | no         | This combiner implements a heuristic that minimizes the number of misclassifications, which maximizes accuracy.                                               |
+| LSTM               | sup.            | yes        | Time-aware LSTM over the a window of recent IIDS alerts.                                                                                                      |
+| LogisticRegression | sup.            | no         | Learns a logistic regression combiner.                                                                                                                        |
+| SVM                | sup.            | no         | Learns a SVM combiner.                                                                                                                                        |
+| Matrix             | unsup.          | yes        | Each IDS gets assigned a dedicated weight, or multiple for each timestep. The combiner alerts if a weighted sum of alerts/scores is greater than a threshold. |
 
 To utilize a combiner, the IIDS framework requires a dedicated configuration file. A default configuration for each combiner can be obtained with `ipal-iids --combiner.default.config [Combiner name]`:
 
@@ -190,16 +192,16 @@ Note that some combiners require dedicated training files. It is recommended to 
 
 The preprocessors are useful for IIDSs, that require a certain input format. E.g., some machine-learning IIDSs work best if their data is scaled between 0 and 1. Only IIDSs inheriting from the `FeatureIDS` can use the preprocessors. Initially, the preprocessors are fitted to the training data. Currently, the following preprocessors are implemented:
 
-| Preprocessor  | Description                                                  |
-| ------------- | ------------------------------------------------------------ |
-| aggregate     | Aggregates multiple feature vectors into a single vector     |
-| categorical   | Encode, usually strings, as an array of binary indicators    |
-| gradient      | Calculates the derivative of a process value                 |
+| Preprocessor  | Description                                                                           |
+|---------------|---------------------------------------------------------------------------------------|
+| aggregate     | Aggregates multiple feature vectors into a single vector                              |
+| categorical   | Encode, usually strings, as an array of binary indicators                             |
+| gradient      | Calculates the derivative of a process value                                          |
 | indicate-none | Extend each feature with a binary value indicating whether the feature is none or not |
-| label         | Encode, usually strings, as numeric labels                   |
-| mean          | Subtract mean and scale by the standard deviation            |
-| minmax        | Scale by minimum and maximum from 0 to 1                     |
-| pca           | Performs a principal component analysis on the input vector |
+| label         | Encode, usually strings, as numeric labels                                            |
+| mean          | Subtract mean and scale by the standard deviation                                     |
+| minmax        | Scale by minimum and maximum from 0 to 1                                              |
+| pca           | Performs a principal component analysis on the input vector                           |
 
 Multiple preprocessors can be used in series. The following example shows how preprocessors are defined in the configuration file:
 
@@ -210,8 +212,8 @@ Multiple preprocessors can be used in series. The following example shows how pr
         ...
         "features" : ["src", "type", "state;4:PID Setpoint", "length"],
         "preprocessors": [
-            {"method" : "mean", "features" : ["state;4:PID Setpoint", "length"]},
-            {"method" : "categorical", "features" : ["type"]}
+            {"method" : "Mean", "features" : ["state;4:PID Setpoint", "length"]},
+            {"method" : "Categorical", "features" : ["type"]}
         ],
         ...
     }
@@ -238,7 +240,10 @@ options:
 
 #### Usage `ipal-extend-alarms`
 
-The `ipal-iids` tool works as an online tool - meaning IIDSs have to decide whether they emit an alert live. Therefore, alerts can not be emitted retroactively, wich is sometimes needed for evaluation. As few IIDSs possibly need to retroactively emit alerts, the `ipal-extend-alarms` script post-processes the IIDS output afterward. IIDSs with the support for `ipal-extend-alarms` need the parameter `adjust: true` to be set in their configuration files.
+The `ipal-iids` tool works as an online tool - meaning IIDSs have to decide whether they emit an alert live. Therefore,
+alerts can not be emitted retroactively, which is sometimes needed for evaluation. As few IIDSs possibly need to
+retroactively emit alerts, the `ipal-extend-alarms` script post-processes the IIDS output afterward. IIDSs with the
+support for `ipal-extend-alarms` need the parameter `adjust: true` to be set in their configuration files.
 
 ```bash
 ./ipal-extend-alarms -h
@@ -285,7 +290,9 @@ More information on the black and flake8 setup can be found at https://ljvmirand
 
 ##### Add an IIDS
 
-The process for adding support for a new IIDS is the following:
+Currently there are two ways how support for a new IIDS can be added.
+
+*At first you can create a new IIDS and make it part of the IPAL code:*
 
 1. Add a new folder and IIDS module in `ids/[ids name]/[ids name].py `
 2. Create a new IIDS class inheriting the MetaIDS class (see ```ids/ids.py```) or inheriting the FeatureIDS class (see `ipal_iids/ids/featureids.py`) for preprocessor support. The IIDS class may implement:
@@ -300,6 +307,36 @@ The process for adding support for a new IIDS is the following:
 5. Add the new IIDS to the [implemented IIDSs](#implemented-iidss) table above
 
 Note: The name of an IIDS may not begin with "_"!
+
+*Secondly you can create a config file specifying from which file the IIDS should be loaded:*
+
+1. Create a so called "extra" config file specifying the names and locations of the new IIDSs (or combiners and preprocessors). Paths are either absolute or relativ to the position of the config file. The config file is passed to IPAL via the `--extra.config` argument. An example config file could look like this:
+```
+{
+    "IDS": [
+        {
+            "name": "TestIDS",
+            "path": "./testids.py"
+        }
+    ],
+
+    "Combiner": [
+        {
+            "name": "Test",
+            "path": "./testcombiner.py"
+        }
+    ],
+
+    "Preprocessor": [
+        {
+            "name": "Test",
+            "path": "./testpreprocessor.py"
+        }
+    ]
+}
+```
+
+Note: The names of the IIDSs should be equal to the names of the corresponding Python classes. The names of the combiners should be equal to the class names without the suffix "Combiner", e.g. your combiner class is called "AwesomeCombiner" then you should write "Awesome" as the name for your combiner into your "extra" config file.
 
 ##### Add a preprocessor
 
@@ -323,12 +360,14 @@ Adding a combiner is analog to adding a new preprocessor.
 ## Contributors
 
 - Antoine Saillard (RWTH Aachen University & Fraunhofer FKIE)
+- David Valero Ribes (RWTH Aachen University)
+- Dominik Kus (RWTH Aachen University)
 - Eric Wagner (Fraunhofer FKIE & RWTH Aachen University)
+- Frederik Basels (RWTH Aachen University)
+- Jonas Lohmann (RWTH Aachen University)
 - Konrad Wolsing (Fraunhofer FKIE & RWTH Aachen University)
 - Lea Thiemt (RWTH Aachen University)
 - Sven Zemanek (Fraunhofer FKIE)
-- Dominik Kus (RWTH Aachen University)
-- Frederik Basels (RWTH Aachen University)
 
 ## License
 

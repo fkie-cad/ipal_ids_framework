@@ -16,7 +16,7 @@ class NaiveBayes(FeatureIDS):
     _description = "Naive bayes classifier."
     _naivebayes_default_settings = {
         # Naive Bayes type
-        "nb-classifier": "Gaussian",  # Gaussian, Multinomal, Complement, Bernoulli, Categorical
+        "nb-classifier": "Gaussian",  # Gaussian, Multinomial, Complement, Bernoulli, Categorical
         "no-probability": False,
     }
 
@@ -40,7 +40,7 @@ class NaiveBayes(FeatureIDS):
 
         if len(set(annotation)) <= 1:
             settings.logger.warning(
-                "Training with a single class ({}) only!".format(set(annotation))
+                f"Training with a single class ({set(annotation)}) only!"
             )
 
         # Learning Naive Bayes
@@ -58,9 +58,7 @@ class NaiveBayes(FeatureIDS):
             self.nbc = CategoricalNB()
         else:
             settings.logger.error(
-                "Unknown Naive Bayes classifier {}. Falling back to Gaussian".format(
-                    self.settings["nb-classifier"]
-                )
+                f"Unknown Naive Bayes classifier {self.settings['nb-classifier']}. Falling back to Gaussian"
             )
             self.nbc = GaussianNB()
 
@@ -109,7 +107,7 @@ class NaiveBayes(FeatureIDS):
             model = joblib.load(self._resolve_model_file_path())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(str(self._resolve_model_file_path()))
+                f"Model file {str(self._resolve_model_file_path())} not found."
             )
             return False
 

@@ -50,7 +50,7 @@ class Histogram(FeatureIDS):
         events, annotations, _ = super().train(state=state)
 
         # Check input
-        if len(set(annotations) - set([False])) > 0:
+        if len(set(annotations) - {False}) > 0:
             settings.logger.warning("IDS expects benign data only!")
 
         # Prepare data structures and find non-discrete values
@@ -81,7 +81,7 @@ class Histogram(FeatureIDS):
         # Calculate deltas and real values
         for i in range(len(events[0])):
             if self.hist[i] is None:  # Skip non-discrete sensors
-                settings.logger.info("Sensor {} ignored".format(i))
+                settings.logger.info(f"Sensor {i} ignored")
                 continue
 
             for val in self.hist[i]:
@@ -89,13 +89,7 @@ class Histogram(FeatureIDS):
                 self.deltas[i][val] = (self.hist[i][val][1] - self.hist[i][val][0]) / 2
 
                 settings.logger.info(
-                    "Sensor {} Val {}: [{}, {}] +-{}".format(
-                        i,
-                        val,
-                        self.hist[i][val][0],
-                        self.hist[i][val][1],
-                        self.deltas[i][val],
-                    )
+                    f"Sensor {i} Val {val}: [{self.hist[i][val][0]}, {self.hist[i][val][1]}] +-{self.deltas[i][val]}"
                 )
 
         # Reset values
@@ -109,7 +103,7 @@ class Histogram(FeatureIDS):
             err = self.deltas[sensor][val] * self.settings["threshold"]
             cur = self._cur[sensor][val]
 
-            if cur < tmin or tmax < cur:  # outside normal bounary
+            if cur < tmin or tmax < cur:  # outside normal boundary
                 overshoot = abs(((tmax + tmin) * 0.5 - cur)) - (tmax - tmin) * 0.5
                 likelihood = max(likelihood, overshoot / (1 if err == 0 else err))
 
@@ -161,8 +155,8 @@ class Histogram(FeatureIDS):
             "deltas": self.deltas,
         }
 
-        with self._open_file(self._resolve_model_file_path(), "wt") as f:
-            f.write(json.dumps(model, indent=4))
+        with self._open_file(self._resolve_model_file_path(), "w") as f:
+            f.write(json.dumps(model))
 
         return True
 
@@ -175,7 +169,7 @@ class Histogram(FeatureIDS):
                 model = json.loads(f.read())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(str(self._resolve_model_file_path()))
+                f"Model file {str(self._resolve_model_file_path())} not found."
             )
             return False
 

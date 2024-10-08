@@ -5,7 +5,7 @@
             "model-file": null
         },
         "combiner_config": null,
-        "compresslevel": 9,
+###IGNORE-LINE###
         "config": "misc/configs/Histogram.config",
         "hostname": false,
         "idss": {

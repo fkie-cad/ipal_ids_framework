@@ -1,11 +1,10 @@
-import json
 from math import inf
 
 import gurobipy
+import orjson
 
 import ipal_iids.settings as settings
-
-from .combiner import Combiner
+from combiner.combiner import Combiner
 
 
 class GurobiCombiner(Combiner):
@@ -74,7 +73,7 @@ class GurobiCombiner(Combiner):
                 + bias_var
             )
 
-            if malicious:  # 1.5 (settings["threshold"] is in bettween of 1 and 2)
+            if malicious:  # 1.5 (settings["threshold"] is in between of 1 and 2)
                 m.addConstr(s + 10 * slack_vars[idx] >= 2)
             else:
                 # We cannot use strict inequality as gurobi does not support it
@@ -139,8 +138,8 @@ class GurobiCombiner(Combiner):
             "objective": self.objective,
         }
 
-        with self._open_file(self._resolve_model_file_path(), mode="wt") as f:
-            f.write(json.dumps(model, indent=4) + "\n")
+        with self._open_file(self._resolve_model_file_path(), mode="wb") as f:
+            f.write(orjson.dumps(model, option=orjson.OPT_INDENT_2))
 
         return True
 
@@ -149,11 +148,11 @@ class GurobiCombiner(Combiner):
             return False
 
         try:  # Open model file
-            with self._open_file(self._resolve_model_file_path(), mode="rt") as f:
-                model = json.load(f)
+            with self._open_file(self._resolve_model_file_path(), mode="rb") as f:
+                model = orjson.loads(f.read())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(str(self._resolve_model_file_path()))
+                f"Model file {str(self._resolve_model_file_path())} not found."
             )
             return False
 

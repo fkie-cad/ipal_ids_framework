@@ -1,20 +1,13 @@
 #!/usr/bin/env python3
 import argparse
-import gzip
-import json
 import logging
 import sys
 
+import orjson
+
+import ipal_iids.iids as iids
 import ipal_iids.settings as settings
-from ids.utils import get_all_iidss
-
-
-# Wrapper for hiding .gz files
-def open_file(filename, mode):
-    if filename.endswith(".gz"):
-        return gzip.open(filename, mode=mode, compresslevel=settings.compresslevel)
-    else:
-        return open(filename, mode=mode, buffering=1)
+from ids.utils import get_all_iidss, set_idss_to_load
 
 
 # Initialize logger
@@ -79,9 +72,11 @@ def prepare_arg_parser(parser):
 def load_settings(args):
     settings.config = args.config
 
-    with open_file(settings.config, "r") as f:
+    with iids.open_file(settings.config, "rb") as f:
         try:
-            settings.idss = json.load(f)
+            settings.idss = orjson.loads(f.read())
+            # IDSs to be dynamically loaded
+            set_idss_to_load([settings.idss[k]["_type"] for k in settings.idss.keys()])
 
         except UnicodeDecodeError as e:
             settings.logger.error("Error parsing config file")
@@ -90,7 +85,7 @@ def load_settings(args):
             )
             settings.logger.error(e)
             exit(1)
-        except json.decoder.JSONDecodeError as e:
+        except orjson.JSONDecodeError as e:
             settings.logger.error("Error parsing config file")
             settings.logger.error(e)
             exit(1)
@@ -114,20 +109,18 @@ def plot_models(idss, args):
         try:  # Try to load the trained models
             if not ids.load_trained_model():
                 settings.logger.error(
-                    "IDS {} did not load model successfully.".format(ids._name)
+                    f"IDS {ids._name} did not load model successfully."
                 )
                 continue
         except NotImplementedError:
             settings.logger.error(
-                "Loading model from file not implemented for {}.".format(ids._name)
+                f"Loading model from file not implemented for {ids._name}."
             )
 
         try:  # Try to plot the trained models
             plt, fig = ids.visualize_model()
         except NotImplementedError:
-            settings.logger.error(
-                "Plotting model not implemented for {}.".format(ids._name)
-            )
+            settings.logger.error(f"Plotting model not implemented for {ids._name}.")
             continue
 
         if plt is None or fig is None:

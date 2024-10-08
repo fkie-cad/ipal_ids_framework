@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-import json
 from typing import Any, Dict
 
-from ids.ids import MetaIDS
+import orjson
 
-from .feature_extractor import FeatureExtractor
-from .KitNET.KitNET import KitNET
+from ids.ids import MetaIDS
+from ids.kitsune.feature_extractor import FeatureExtractor
+from ids.kitsune.KitNET.KitNET import KitNET
 
 
 class Kitsune(MetaIDS):
@@ -120,8 +120,8 @@ class Kitsune(MetaIDS):
         )
 
         with self._open_file(ipal) as f:
-            for line in f.readlines():
-                ipal_msg = json.loads(line)
+            for line in f:
+                ipal_msg = orjson.loads(line)
 
                 ts = ipal_msg["timestamp"]
                 self._last_training_ts_delta = ts - self._last_training_ts
@@ -139,4 +139,4 @@ class Kitsune(MetaIDS):
         features = self._fe.extract_features(msg, timestamp_offset=self._ts_offset)
         score = self._detector.execute(features)
 
-        return (bool(score > self.settings["threshold"]), float(score))
+        return bool(score > self.settings["threshold"]), float(score)

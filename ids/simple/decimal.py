@@ -1,6 +1,7 @@
 import decimal
-import json
 import sys
+
+import orjson
 
 import ipal_iids.settings as settings
 from ids.ids import MetaIDS
@@ -41,10 +42,10 @@ class DecimalPlaces(MetaIDS):
             self.key = "state"
             fd = state
 
-        # Load trainig file and parse data
+        # Load training file and parse data
         with self._open_file(fd) as f:
-            for line in f.readlines():
-                for k, v in json.loads(line)[self.key].items():
+            for line in f:
+                for k, v in orjson.loads(line)[self.key].items():
                     decimal = self._get_decimal_places(v)
                     if decimal is None:
                         continue
@@ -89,8 +90,8 @@ class DecimalPlaces(MetaIDS):
             "maxs": self.maxs,
         }
 
-        with self._open_file(self._resolve_model_file_path(), "wt") as f:
-            f.write(json.dumps(model, indent=4))
+        with self._open_file(self._resolve_model_file_path(), "wb") as f:
+            f.write(orjson.dumps(model, option=orjson.OPT_INDENT_2))
 
         return True
 
@@ -100,10 +101,10 @@ class DecimalPlaces(MetaIDS):
 
         try:  # Open model file
             with self._open_file(self._resolve_model_file_path(), "rt") as f:
-                model = json.loads(f.read())
+                model = orjson.loads(f.read())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(str(self._resolve_model_file_path()))
+                f"Model file {str(self._resolve_model_file_path())} not found."
             )
             return False
 

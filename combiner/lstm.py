@@ -1,10 +1,11 @@
-import json
 import logging
 
 # Silence tensorflow
 import os
 
 import joblib
+import numpy as np
+import orjson
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 logging.getLogger("tensorflow").setLevel(logging.FATAL)
@@ -15,8 +16,7 @@ from tensorflow.keras.models import Sequential  # noqa: E402
 from tensorflow.keras.optimizers import Adam  # noqa: E402
 
 import ipal_iids.settings as settings  # noqa: E402
-
-from .combiner import Combiner  # noqa: E402
+from combiner.combiner import Combiner  # noqa: E402
 
 
 class LSTMCombiner(Combiner):
@@ -46,8 +46,8 @@ class LSTMCombiner(Combiner):
 
         if not set(data.keys()) == set(self.keys):
             settings.logger.error("Keys of combiner do not match data")
-            settings.logger.error("- data keys: {}".format(",".join(data.keys())))
-            settings.logger.error("- combiner keys: {}".format(",".join(self.keys)))
+            settings.logger.error(f"- data keys: {','.join(data.keys())}")
+            settings.logger.error(f"- combiner keys: {','.join(self.keys)}")
             exit(1)
 
         return [float(data[ids]) for ids in self.keys]
@@ -68,8 +68,8 @@ class LSTMCombiner(Combiner):
 
         settings.logger.info("Loading combiner training file")
         with self._open_file(file, "r") as f:
-            for line in f.readlines():
-                js = json.loads(line)
+            for line in f:
+                js = orjson.loads(line)
 
                 if self.keys is None:
                     self.keys = sorted(js["scores"].keys())
@@ -82,14 +82,14 @@ class LSTMCombiner(Combiner):
                     buffer.pop(0)
 
                 # Add training sequence
-                seq.append(buffer[:: -self.settings["stride"]])
+                seq.append(np.array(buffer[:: -self.settings["stride"]]))
                 annotations.append(js["malicious"] is not False)
 
         self.model = self._lstm_model(len(self.keys))
         settings.logger.info(f"Training LSTM for {self.settings['epochs']} epochs...")
         self.model.fit(
-            seq,
-            annotations,
+            np.array(seq),
+            np.array(annotations),
             epochs=self.settings["epochs"],
             verbose=self.settings["verbose"],
         )
@@ -103,7 +103,9 @@ class LSTMCombiner(Combiner):
             self.buffer.pop(0)
 
         sequence = self.buffer[:: -self.settings["stride"]]
-        prediction = float(self.model.predict([sequence], verbose=False)[0][0])
+        prediction = float(
+            self.model.predict(np.array([sequence]), verbose=False)[0][0]
+        )
         return prediction > 0.5, prediction, 0
 
     def save_trained_model(self):
@@ -130,7 +132,7 @@ class LSTMCombiner(Combiner):
             model = joblib.load(self._resolve_model_file_path())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(str(self._resolve_model_file_path()))
+                f"Model file {str(self._resolve_model_file_path())} not found."
             )
             return False
 

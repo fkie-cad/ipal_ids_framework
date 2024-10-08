@@ -56,7 +56,7 @@ class RandomForest(FeatureIDS):
 
         if len(set(annotation)) <= 1:
             settings.logger.warning(
-                "Training with a single class ({}) only!".format(set(annotation))
+                f"Training with a single class ({set(annotation)}) only!"
             )
 
         # Learn Random Forest
@@ -81,9 +81,9 @@ class RandomForest(FeatureIDS):
         }
         settings.logger.info(tuned_parameters)
 
-        # Test if gridsearch is neccesary
+        # Test if gridsearch is necessary
         if max([len(v) for v in tuned_parameters.values()]) > 1:
-            settings.logger.info("Finding best parameteres with GirdSearchCV")
+            settings.logger.info("Finding best parameters with GirdSearchCV")
             rfc = GridSearchCV(
                 RandomForestClassifier(),
                 [tuned_parameters],
@@ -100,9 +100,7 @@ class RandomForest(FeatureIDS):
             means = rfc.cv_results_["mean_test_score"]
             stds = rfc.cv_results_["std_test_score"]
             for mean, std, params in zip(means, stds, rfc.cv_results_["params"]):
-                settings.logger.info(
-                    "%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params)
-                )
+                settings.logger.info(f"{mean:0.3f} (+/-{std * 2:0.03f}) for {params!r}")
 
             # Save best estimator
             self.rfc = rfc.best_estimator_
@@ -156,7 +154,7 @@ class RandomForest(FeatureIDS):
             model = joblib.load(self._resolve_model_file_path())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(str(self._resolve_model_file_path()))
+                f"Model file {str(self._resolve_model_file_path())} not found."
             )
             return False
 
@@ -180,9 +178,7 @@ class RandomForest(FeatureIDS):
             ax.axis("off")
 
         for i in range(len(self.rfc.estimators_)):
-            settings.logger.info(
-                "Plotting tree {}/{}".format(i + 1, len(self.rfc.estimators_))
-            )
+            settings.logger.info(f"Plotting tree {i + 1}/{len(self.rfc.estimators_)}")
 
             plot_tree(
                 self.rfc.estimators_[i],

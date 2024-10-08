@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.cluster.hierarchy import fcluster, linkage, to_tree
+from scipy.cluster.hierarchy import linkage, to_tree
 
 
 # A helper class for KitNET which performs a correlation-based incremental clustering of the dimensions in X
@@ -9,10 +9,10 @@ class corClust:
     def __init__(self, n):
         # parameter:
         self.n = n
-        # varaibles
+        # variables
         self.c = np.zeros(n)  # linear num of features
-        self.c_r = np.zeros(n)  # linear sum of feature residules
-        self.c_rs = np.zeros(n)  # linear sum of feature residules
+        self.c_r = np.zeros(n)  # linear sum of feature residues
+        self.c_rs = np.zeros(n)  # linear sum of feature residues
         self.C = np.zeros((n, n))  # partial correlation matrix
         self.N = 0  # number of updates performed
 
@@ -30,7 +30,7 @@ class corClust:
         c_rs_sqrt = np.sqrt(self.c_rs)
         C_rs_sqrt = np.outer(c_rs_sqrt, c_rs_sqrt)
         C_rs_sqrt[C_rs_sqrt == 0] = (
-            1e-100  # this protects against dive by zero erros (occurs when a feature is a constant)
+            1e-100  # this protects against divide by zero errors (occurs when a feature is a constant)
         )
         D = 1 - self.C / C_rs_sqrt  # the correlation distance matrix
         D[D < 0] = (
@@ -58,7 +58,7 @@ class corClust:
         ):  # base case: we found a minimal cluster, so mark it
             return [
                 dendro.pre_order()
-            ]  # return the origional ids of the features in this cluster
+            ]  # return the original ids of the features in this cluster
         return self.__breakClust__(dendro.get_left(), maxClust) + self.__breakClust__(
             dendro.get_right(), maxClust
         )

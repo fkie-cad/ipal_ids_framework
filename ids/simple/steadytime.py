@@ -1,11 +1,11 @@
-import json
+import orjson
 
 import ipal_iids.settings as settings
 from ids.featureids import FeatureIDS
 
 
 class SteadyTime(FeatureIDS):
-    _name = "Steadytime"
+    _name = "SteadyTime"
     _description = "The Steadytime approach detects whether a sensor/actuator remains static, i.e., does not change its value, for a shorter or longer time than seen during training. This approach is motivated by the observation that an attack, e.g., freezing a sensor/actuator such as a pressure relief valve, cannot be detected by checking whether a value or the velocity of a value change remains within certain boundaries. Since a steady state is difficult to define for noisy sensor data, Steadytime takes only process values into account if the number of distinct values during training is sufficiently small."
     _requires = ["train.ipal", "live.ipal", "train.state", "live.state"]
     _steadytime_default_settings = {
@@ -57,7 +57,7 @@ class SteadyTime(FeatureIDS):
         events, annotations, _ = super().train(state=state)
 
         # Check input
-        if len(set(annotations) - set([False])) > 0:
+        if len(set(annotations) - {False}) > 0:
             settings.logger.warning("IDS expects benign data only!")
 
         # Prepare data structures and find non-discrete values
@@ -87,7 +87,7 @@ class SteadyTime(FeatureIDS):
         # Calculate deltas and real values
         for i in range(len(events[0])):
             if self.time[i] is None:  # Skip non-discrete sensors
-                settings.logger.info("Sensor {} ignored".format(i))
+                settings.logger.info(f"Sensor {i} ignored")
                 continue
 
             for val in self.time[i]:
@@ -98,12 +98,7 @@ class SteadyTime(FeatureIDS):
                     ) / 2
 
                 settings.logger.info(
-                    "Sensor {} Val {}: {} +-{}".format(
-                        i,
-                        val,
-                        self.time[i][val],
-                        self.deltas[i][val],
-                    )
+                    f"Sensor {i} Val {val}: {self.time[i][val]} +-{self.deltas[i][val]}"
                 )
 
         # Reset values
@@ -118,11 +113,11 @@ class SteadyTime(FeatureIDS):
         tmin, tmax = self.time[sensor][val]
         err = self.deltas[sensor][val] * self.settings["threshold"]
 
-        if time < tmin or tmax < time:  # outside normal bounary
+        if time < tmin or tmax < time:  # outside normal boundary
             overshoot = abs(((tmax + tmin) * 0.5 - time)) - (tmax - tmin) * 0.5
             likelihood = max(likelihood, overshoot / (1 if err == 0 else err))
 
-        return tmin - err <= time and time <= tmax + err, likelihood
+        return tmin - err <= time <= tmax + err, likelihood
 
     def new_state_msg(self, msg):
         likelihood = 0
@@ -182,8 +177,12 @@ class SteadyTime(FeatureIDS):
             "deltas": self.deltas,
         }
 
-        with self._open_file(self._resolve_model_file_path(), "wt") as f:
-            f.write(json.dumps(model, indent=4))
+        with self._open_file(self._resolve_model_file_path(), "wb") as f:
+            f.write(
+                orjson.dumps(
+                    model, option=orjson.OPT_INDENT_2 | orjson.OPT_NON_STR_KEYS
+                )
+            )
 
         return True
 
@@ -193,10 +192,10 @@ class SteadyTime(FeatureIDS):
 
         try:  # Open model file
             with self._open_file(self._resolve_model_file_path(), "rt") as f:
-                model = json.loads(f.read())
+                model = orjson.loads(f.read())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(str(self._resolve_model_file_path()))
+                f"Model file {str(self._resolve_model_file_path())} not found."
             )
             return False
 

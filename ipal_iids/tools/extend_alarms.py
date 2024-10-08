@@ -1,22 +1,11 @@
 #!/usr/bin/env python3
 import argparse
-import gzip
-import json
 import logging
-import sys
 
+import orjson
+
+import ipal_iids.iids as iids
 import ipal_iids.settings as settings
-
-
-def open_file(filename, mode="r"):
-    if filename is None:
-        return None
-    elif filename.endswith(".gz"):
-        return gzip.open(filename, mode=mode, compresslevel=settings.compresslevel)
-    elif filename == "-":
-        return sys.stdin
-    else:
-        return open(filename, mode=mode, buffering=1)
 
 
 # Initialize logger
@@ -76,9 +65,9 @@ def extend_alarms(file):
     ipal = []
 
     # Load file into memory
-    with open_file(file, mode="r") as f:
-        for line in f.readlines():
-            ipal.append(json.loads(line))
+    with iids.open_file(file, mode="r") as f:
+        for line in f:
+            ipal.append(orjson.loads(line))
 
     # Extend alarms
     for i in range(len(ipal)):
@@ -105,9 +94,9 @@ def extend_alarms(file):
         del ipal[i]["adjust"]
 
     # Write file to disc
-    with open_file(file, "wt") as f:
+    with iids.open_file(file, "wb") as f:
         for out in ipal:
-            f.write(json.dumps(out) + "\n")
+            f.write(orjson.dumps(out, option=orjson.OPT_APPEND_NEWLINE))
 
 
 def main():
@@ -120,9 +109,7 @@ def main():
     N = 0
     for file in args.files:
         N += 1
-        settings.logger.info(
-            "Extending Alarms ({}/{}) {}".format(N, len(args.files), file)
-        )
+        settings.logger.info(f"Extending Alarms ({N}/{len(args.files)}) {file}")
 
         extend_alarms(file)
 

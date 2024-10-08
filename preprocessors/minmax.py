@@ -3,13 +3,12 @@ from typing import List
 import numpy as np
 
 import ipal_iids.settings as settings
-
-from .preprocessor import Preprocessor
+from preprocessors.preprocessor import Preprocessor
 
 
 class MinMaxPreprocessor(Preprocessor):
-    _name = "minmax"
-    _description = "Scale by mininum and maximum"
+    _name = "MinMax"
+    _description = "Scale by minimum and maximum"
     mins: List[float]
     maxs: List[float]
 
@@ -32,9 +31,7 @@ class MinMaxPreprocessor(Preprocessor):
 
             if self.mins[i] == self.maxs[i]:
                 settings.logger.info(
-                    "Min Max is the same. Adjusting values of feature {} to 0.5".format(
-                        i
-                    )
+                    f"Min Max is the same. Adjusting values of feature {i} to 0.5"
                 )
                 self.mins[i] -= 1
                 self.maxs[i] += 1
@@ -51,9 +48,7 @@ class MinMaxPreprocessor(Preprocessor):
 
             if value[i] < self.mins[i] or self.maxs[i] < value[i]:
                 settings.logger.warning(
-                    "Value {} out of trained range ({} - {})".format(
-                        value[i], self.mins[i], self.maxs[i]
-                    )
+                    f"Value {value[i]} out of trained range ({self.mins[i]} - {self.maxs[i]})"
                 )
 
             value[i] = (value[i] - self.mins[i]) / (self.maxs[i] - self.mins[i])

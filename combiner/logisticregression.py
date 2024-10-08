@@ -1,11 +1,8 @@
-import json
-
 import joblib
 from sklearn.linear_model import LogisticRegression
 
 import ipal_iids.settings as settings
-
-from .combiner import Combiner
+from combiner.combiner import Combiner
 
 
 class LogisticRegressionCombiner(Combiner):
@@ -57,7 +54,7 @@ class LogisticRegressionCombiner(Combiner):
             model = joblib.load(self._resolve_model_file_path())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(str(self._resolve_model_file_path()))
+                f"Model file {str(self._resolve_model_file_path())} not found."
             )
             return False
 

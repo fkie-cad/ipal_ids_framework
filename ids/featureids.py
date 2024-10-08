@@ -1,10 +1,10 @@
-import json
+import json  # we cannot support orjson because it has no support for NaN
 import math
 import time
 from collections.abc import Iterable
 
 import ipal_iids.settings as settings
-from preprocessors.utils import get_all_preprocessors
+from preprocessors.utils import load_preprocessor
 
 from .ids import MetaIDS
 
@@ -45,9 +45,7 @@ class FeatureIDS(MetaIDS):
             else:
                 if not self.settings["allow-none"]:
                     settings.logger.warning(
-                        "Index '{}' not found in msg {}. Returning None".format(
-                            index, msg
-                        )
+                        f"Index '{index}' not found in msg {msg}. Returning None"
                     )
                 return None
 
@@ -76,7 +74,7 @@ class FeatureIDS(MetaIDS):
         # Build preprocessors from settings
         for pre in self.settings["preprocessors"]:
             apply = [f in pre["features"] for f in self.settings["features"]]
-            self.preprocessors.append(get_all_preprocessors()[pre["method"]](apply))
+            self.preprocessors.append(load_preprocessor(pre["method"])(apply))
 
         self.features = [f.split(";") for f in self.settings["features"]]
 
@@ -86,10 +84,10 @@ class FeatureIDS(MetaIDS):
 
         # Load features from training file
         start = time.time()
-        settings.logger.info("Loading training file started at {}".format(start))
+        settings.logger.info(f"Loading training file started at {start}")
 
         with self._open_file(state) as state_file:
-            for msg in state_file.readlines():
+            for msg in state_file:
                 msg = json.loads(msg)
                 state = self._extract_features(msg)
 
@@ -101,12 +99,10 @@ class FeatureIDS(MetaIDS):
                     settings.logger.info("None in state. Skipping message!")
 
         end = time.time()
-        settings.logger.info(
-            "Loading training file ended at {} ({}s)".format(end, end - start)
-        )
+        settings.logger.info(f"Loading training file ended at {end} ({end - start}s)")
 
         # Train and apply preprocessors
-        settings.logger.info("Raw features: {}".format(events[0]))
+        settings.logger.info(f"Raw features: {events[0]}")
         for pre in self.preprocessors:
             pre.fit(events)
             events = [pre.transform(e) for e in events]
@@ -120,25 +116,23 @@ class FeatureIDS(MetaIDS):
                 ]
             )
             assert len(events) == len(annotations) == len(timestamps)
-            settings.logger.info("{} features: {}".format(pre._name, events[0]))
+            settings.logger.info(f"{pre._name} features: {events[0]}")
 
         events = [list(self.__flatten(e)) for e in events]
-        settings.logger.info("Final features: {}".format(events[0]))
+        settings.logger.info(f"Final features: {events[0]}")
 
         end2 = time.time()
-        settings.logger.info("Preprocessing ended at {} ({}s)".format(end2, end2 - end))
+        settings.logger.info(f"Preprocessing ended at {end2} ({end2 - end}s)")
 
         # Train IDS only on first x% of the data
         N = int(len(events) * self.settings["trainon"])
         settings.logger.info(
-            "Preprocesser trained on {} IDS is training on first {}".format(
-                len(events), len(events[:N])
-            )
+            f"Preprocesser trained on {len(events)} IDS is training on first {len(events[:N])}"
         )
 
         if "save-training" in self.settings and self.settings["save-training"]:
             with self._open_file(
-                self._relative_to_config(self.settings["save-training"]), mode="wt"
+                self._relative_to_config(self.settings["save-training"]), mode="wb"
             ) as f:
                 for e, a, t in zip(events[:N], annotations[:N], timestamps[:N]):
                     f.write(
@@ -149,7 +143,6 @@ class FeatureIDS(MetaIDS):
                                 "malicious": a,
                             }
                         )
-                        + "\n"
                     )
 
         for pre in self.preprocessors:
@@ -190,7 +183,7 @@ class FeatureIDS(MetaIDS):
 
         for name, pre_model in model["preprocessors"]:
             self.preprocessors.append(
-                get_all_preprocessors()[name].from_fitted_model(pre_model)
+                load_preprocessor(name).from_fitted_model(pre_model)
             )
 
         assert len(self.preprocessors) == len(self.settings["preprocessors"])

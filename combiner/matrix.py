@@ -1,6 +1,5 @@
 import ipal_iids.settings as settings
-
-from .combiner import Combiner
+from combiner.combiner import Combiner
 
 
 class MatrixCombiner(Combiner):
@@ -11,7 +10,7 @@ class MatrixCombiner(Combiner):
         "matrix": [],  # matrix of weights for each IDS
         "threshold": 0,  # Threshold after which to emit an alert
         "use_scores": False,  # Whether to use alerts or confidence scores
-        "keys": [],  # name of the IIDSs determining the order of the weihts
+        "keys": [],  # name of the IIDSs determining the order of the weights
         "lookahead": 0,  # Steps to look into the "future" (requires ipal-extend-alarms)
     }
 

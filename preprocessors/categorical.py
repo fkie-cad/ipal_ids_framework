@@ -3,12 +3,11 @@ from typing import Any, Dict, List, Union
 import numpy as np
 
 import ipal_iids.settings as settings
-
-from .preprocessor import Preprocessor
+from preprocessors.preprocessor import Preprocessor
 
 
 class CategoricalPreprocessor(Preprocessor):
-    _name = "categorical"
+    _name = "Categorical"
     _description = "Encode as categorical"
     encoder: List[Union[Dict[str, Any], None]]
 
@@ -40,9 +39,7 @@ class CategoricalPreprocessor(Preprocessor):
             try:
                 value[i] = self.encoder[i][str(value[i])]
             except ValueError:
-                settings.logger.critical(
-                    "Value {} not in trained categories".format(value[i])
-                )
+                settings.logger.critical(f"Value {value[i]} not in trained categories")
 
         return value
 

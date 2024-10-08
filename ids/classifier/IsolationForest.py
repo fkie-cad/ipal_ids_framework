@@ -86,7 +86,7 @@ class IsolationForest(FeatureIDS):
             model = joblib.load(self._resolve_model_file_path())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(str(self._resolve_model_file_path()))
+                f"Model file {str(self._resolve_model_file_path())} not found."
             )
             return False
 
@@ -109,9 +109,7 @@ class IsolationForest(FeatureIDS):
             ax.axis("off")
 
         for i in range(len(self.ifc.estimators_)):
-            settings.logger.info(
-                "Plotting tree {}/{}".format(i + 1, len(self.ifc.estimators_))
-            )
+            settings.logger.info(f"Plotting tree {i + 1}/{len(self.ifc.estimators_)}")
 
             plot_tree(
                 self.ifc.estimators_[i],

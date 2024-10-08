@@ -5,12 +5,11 @@ import joblib
 from sklearn.decomposition import PCA
 
 import ipal_iids.settings as settings
-
-from .preprocessor import Preprocessor
+from preprocessors.preprocessor import Preprocessor
 
 
 class PCAPreprocessor(Preprocessor):
-    _name = "pca"
+    _name = "PCA"
     _description = "Performs a principal component analysis"
 
     def __init__(self, features):
@@ -34,8 +33,8 @@ class PCAPreprocessor(Preprocessor):
         pass  # Nothing to reset
 
     def get_fitted_model(self):
-        # Save model to temprary file
-        tmp = ".tmp-{}".format(random.randint(1000, 9999))
+        # Save model to temporary file
+        tmp = f".tmp-{random.randint(1000, 9999)}"
         joblib.dump(self.encoder, tmp, compress=3)
 
         # Load file to string
@@ -50,7 +49,7 @@ class PCAPreprocessor(Preprocessor):
     @classmethod
     def from_fitted_model(cls, model):
         # Save model to temporary file
-        tmp = ".tmp-{}".format(random.randint(1000, 9999))
+        tmp = f".tmp-{random.randint(1000, 9999)}"
         with open(tmp, "wb") as f:
             f.write(bytes(model["model"]))
 
@@ -58,7 +57,7 @@ class PCAPreprocessor(Preprocessor):
         pca = PCAPreprocessor(model["features"])
         pca.encoder = joblib.load(tmp)
 
-        # Remove temprary file
+        # Remove temporary file
         os.remove(tmp)
 
         return pca

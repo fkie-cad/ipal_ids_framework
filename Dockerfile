@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:latest
 
 RUN apt-get update \
     && apt-get -y install software-properties-common sudo g++ \
@@ -14,8 +14,8 @@ COPY --chown=ipal . .
 
 # Install IIDS framework
 WORKDIR /home/ipal/ipal_ids_framework/
-RUN sudo pip install numpy # for ar to install correctly
-RUN sudo pip install .
-RUN sudo pip install -r requirements-dev.txt
+RUN sudo pip install --break-system-packages numpy # for ar to install correctly
+RUN sudo pip install --break-system-packages .
+RUN sudo pip install --break-system-packages -r requirements-dev.txt
 
 CMD /bin/bash

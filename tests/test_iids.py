@@ -1,23 +1,65 @@
 import pytest
 
-from .conftest import IDSNAMES, check_with_validation_file, metaids
+from .conftest import (
+    IDSNAMES,
+    check_command_output,
+    check_with_validation_file,
+    metaids,
+)
 
 
 def test_metaids_empty():
-    errno, stdout, stderr = metaids([])
-    assert stdout == b""
-    assert errno == 1
-    assert b"ERROR:ipal-iids:no IDS configuration provided, exiting\n" in stderr
+    args = []
+    errno, stdout, stderr = metaids(args)
+
+    check_command_output(
+        returncode=errno,
+        args=args,
+        stdout=stdout,
+        stderr=stderr,
+        expectedcode=1,
+        expected_stderr=[
+            r"ERROR:ipal-iids:no IDS configuration provided, exiting\n"
+        ],  # only checks if that string shows up
+        expected_stdout=[b""],
+        check_for=["WARNING"],
+    )
+
+
+STATIC_COMMANDS = [["-h"], ["--version"]]
+
+
+@pytest.mark.parametrize("args", STATIC_COMMANDS)
+def test_metaids_static_commands(args):
+    errno, stdout, stderr = metaids(args)
+    check_command_output(
+        returncode=errno,
+        args=args,
+        stdout=stdout,
+        stderr=stderr,
+        expectedcode=0,
+        expected_stderr=[b""],
+        check_for=["WARNING", "ERROR"],
+    )
 
 
 @pytest.mark.parametrize("idsname", IDSNAMES)
 def test_get_default_config(idsname):
-    errno, stdout, stderr = metaids(["--default.config", idsname])
+    args = ["--default.config", idsname]
+    errno, stdout, stderr = metaids(args)
 
-    assert idsname in stdout.decode()
-    assert errno == 0
+    check_command_output(
+        returncode=errno,
+        args=args,
+        stdout=stdout,
+        stderr=stderr,
+        expectedcode=0,
+        expected_stdout=[f"{idsname}"],  # check if idsname is in stdout
+        check_for=["ERROR"],  # check if an IPAL error appears
+    )
+
     check_with_validation_file(
-        "{}.config".format(idsname),
+        f"{idsname}.config",
         stdout.decode("utf-8").replace("\n", ""),
         test_get_default_config.__name__,
     )

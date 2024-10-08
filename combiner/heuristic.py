@@ -1,9 +1,9 @@
 import itertools
-import json
+
+import orjson
 
 import ipal_iids.settings as settings
-
-from .combiner import Combiner
+from combiner.combiner import Combiner
 
 
 class HeuristicCombiner(Combiner):
@@ -27,8 +27,8 @@ class HeuristicCombiner(Combiner):
     def _get_activations(self, alerts):
         if not set(alerts.keys()) == set(self.keys):
             settings.logger.error("Keys of combiner do not match alerts")
-            settings.logger.error("- data keys: {}".format(",".join(alerts.keys())))
-            settings.logger.error("- combiner keys: {}".format(",".join(self.keys)))
+            settings.logger.error(f"- data keys: {','.join(alerts.keys())}")
+            settings.logger.error(f"- combiner keys: {','.join(self.keys)}")
             exit(1)
 
         return [int(alerts[ids]) for ids in self.keys]
@@ -38,8 +38,8 @@ class HeuristicCombiner(Combiner):
 
         settings.logger.info("Loading combiner training file and fitting combiner")
         with self._open_file(file, "r") as f:
-            for line in f.readlines():
-                js = json.loads(line)
+            for line in f:
+                js = orjson.loads(line)
 
                 if self.keys is None:
                     self.keys = sorted(js["scores"].keys())
@@ -73,8 +73,12 @@ class HeuristicCombiner(Combiner):
             "model": list(self.model.items()),
         }
 
-        with self._open_file(self._resolve_model_file_path(), mode="wt") as f:
-            f.write(json.dumps(model, indent=4) + "\n")
+        with self._open_file(self._resolve_model_file_path(), mode="wb") as f:
+            f.write(
+                orjson.dumps(
+                    model, option=orjson.OPT_INDENT_2 | orjson.OPT_APPEND_NEWLINE
+                )
+            )
 
         return True
 
@@ -83,11 +87,11 @@ class HeuristicCombiner(Combiner):
             return False
 
         try:  # Open model file
-            with self._open_file(self._resolve_model_file_path(), mode="rt") as f:
-                model = json.load(f)
+            with self._open_file(self._resolve_model_file_path(), mode="rb") as f:
+                model = orjson.loads(f.read())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(str(self._resolve_model_file_path()))
+                f"Model file {str(self._resolve_model_file_path())} not found."
             )
             return False
 

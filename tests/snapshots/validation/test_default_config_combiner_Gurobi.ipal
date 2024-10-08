@@ -9,7 +9,7 @@
             "use_scores": false
         },
         "combiner_config": "misc/configs/combiner-Gurobi.config",
-        "compresslevel": 9,
+###IGNORE-LINE###
         "config": "misc/configs/combiner-ids.config",
         "hostname": false,
         "idss": {
@@ -26,7 +26,7 @@
                         "features": [
                             "state;switch"
                         ],
-                        "method": "gradient"
+                        "method": "Gradient"
                     }
                 ],
                 "save-training": null,

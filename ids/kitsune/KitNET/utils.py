@@ -13,7 +13,7 @@ def invLogCDF(x, mu, sigma):  # normal distribution cdf
     x = (x - mu) / sigma
     return norm.logcdf(
         -x
-    )  # note: we mutiple by -1 after normalization to better get the 1-cdf
+    )  # note: we multiply by -1 after normalization to better get the 1-cdf
 
 
 def sigmoid(x):

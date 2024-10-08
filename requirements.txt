@@ -4,10 +4,10 @@ graphviz
 scikit-learn
 keras
 torch
-git+https://github.com/RhysU/ar.git
 matplotlib
-git+https://github.com/jmschrei/pomegranate.git@v0.14.9
-tr
+./misc/pomegranate-0.14.9.zip
 pandas
 gurobipy
 cython
+orjson
+zlib-ng

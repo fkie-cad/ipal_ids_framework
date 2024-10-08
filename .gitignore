@@ -5,7 +5,8 @@
 tests/snapshots/output
 tests/snapshots/tmp
 misc/configs/model
-misc/configs/model.kreas/
+misc/configs/model.keras
+misc/file_loading/model
 
 # Editors
 .vscode/

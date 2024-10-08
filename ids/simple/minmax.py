@@ -1,4 +1,4 @@
-import json
+import orjson
 
 import ipal_iids.settings as settings
 from ids.featureids import FeatureIDS
@@ -28,7 +28,7 @@ class MinMax(FeatureIDS):
         events, annotations, _ = super().train(state=state)
 
         # Check input
-        if len(set(annotations) - set([False])) > 0:
+        if len(set(annotations) - {False}) > 0:
             settings.logger.warning("IDS expects benign data only!")
 
         # Train on input
@@ -50,9 +50,7 @@ class MinMax(FeatureIDS):
                 self.deltas[i] = 0  # No threshold for discrete process values
 
             settings.logger.info(
-                "Sensor {} Min: {} Max: {} Delta: {}".format(
-                    i, self.mins[i], self.maxs[i], self.deltas[i]
-                )
+                f"Sensor {i} Min: {self.mins[i]} Max: {self.maxs[i]} Delta: {self.deltas[i]}"
             )
 
     def new_state_msg(self, msg):
@@ -74,7 +72,7 @@ class MinMax(FeatureIDS):
             elif minimum is None or maximum is None:  # we had no training data
                 likelihood = max(likelihood, 0)
 
-            elif minimum <= value and value <= maximum:  # 0: if within min/max region
+            elif minimum <= value <= maximum:  # 0: if within min/max region
                 likelihood = max(likelihood, 0)
 
             else:  # scale from 0 - 1 in error region
@@ -109,8 +107,12 @@ class MinMax(FeatureIDS):
             "deltas": self.deltas,
         }
 
-        with self._open_file(self._resolve_model_file_path(), "wt") as f:
-            f.write(json.dumps(model, indent=4))
+        with self._open_file(self._resolve_model_file_path(), "wb") as f:
+            f.write(
+                orjson.dumps(
+                    model, option=orjson.OPT_INDENT_2 | orjson.OPT_NON_STR_KEYS
+                )
+            )
 
         return True
 
@@ -120,10 +122,10 @@ class MinMax(FeatureIDS):
 
         try:  # Open model file
             with self._open_file(self._resolve_model_file_path(), "rt") as f:
-                model = json.loads(f.read())
+                model = orjson.loads(f.read())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(str(self._resolve_model_file_path()))
+                f"Model file {str(self._resolve_model_file_path())} not found."
             )
             return False
 

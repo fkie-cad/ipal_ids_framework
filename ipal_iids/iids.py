@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
+from __future__ import annotations
+
 import argparse
-import gzip
-import json
 import logging
 import os
 import random
@@ -9,33 +9,79 @@ import socket
 import sys
 import time
 from pathlib import Path
+from typing import IO
 
+import orjson
+from zlib_ng import gzip_ng_threaded as gzip
+
+import combiner.utils
 import ipal_iids.settings as settings
+import preprocessors.utils
 from combiner.utils import get_all_combiner
-from ids.utils import get_all_iidss
+from ids.ids import BatchIDS
+from ids.utils import get_all_iidss, load_ids
+from ids.utils import paths as ids_paths
+from ids.utils import set_idss_to_load
+
+# global variables used by live_idss_batch to track message state
+_FIRST_BATCHED_IPAL_MSG: bool
+_FIRST_BATCHED_STATE_MSG: bool
 
 
-# Wrapper for hiding .gz files
-def open_file(filename, mode):
+def open_file(
+    filename: str | os.PathLike | Path,
+    mode: str = "r",
+    compresslevel: int | None = None,
+    force_gzip: bool = False,
+) -> IO | None:
+    """
+    Wrapper to hide .gz files and stdin/stdout
+
+    :param filename: filename to open
+    :param mode: file mode
+    :param compresslevel: force compresslevel, if None level is taken from settings
+    :param force_gzip: if file should be treated as gzip even without .gz ending
+    :return: file-like object or None
+    """
+
+    # make sure filename is a string and not path-like object
+    filename = str(filename)
+
+    if not compresslevel:
+        compresslevel = settings.compresslevel
+
+    if filename == "-" and force_gzip:
+        # we can give gzip stdin/stdout to read / write from if explicitly wanted
+        if "r" in mode:
+            filename = sys.stdin
+        elif "w" in mode:
+            filename = sys.stdout
+
     if filename is None:
         return None
-    elif filename.endswith(".gz"):
-        return gzip.open(filename, mode=mode, compresslevel=settings.compresslevel)
-    elif filename == "-":
+    elif filename.endswith(".gz") or force_gzip:
+        return gzip.open(filename, mode=mode, compresslevel=compresslevel, threads=-1)
+    elif (filename == "-" or filename == "stdin") and "r" in mode:
         return sys.stdin
+    elif (filename == "-" or filename == "stdout") and "w" in mode:
+        return sys.stdout
     else:
-        return open(filename, mode=mode, buffering=1)
+        # do we *need* files to behave line by line?
+        if "b" in mode:
+            return open(filename, mode=mode)
+        else:
+            return open(filename, mode=mode, buffering=1)
 
 
 def copy_file_to_tmp_file(filein):
-    # Generate temprary file and read stdin to it
-    filename = "tmp-{}.gz".format(random.randint(1000, 9999))
+    # Generate temporary file and read stdin to it
+    filename = f"tmp-{random.randint(1000, 9999)}.gz"
     with open_file(filename, "wt") as ftmp:
         try:
             with open_file(filein, "r") as filein:
                 ftmp.write(filein.read())
         except:  # noqa: E722
-            # Remove tmpfile upon failure
+            # Remove tmp file upon failure
             os.remove(filename)
             raise Exception("Failed copying stdin to temporary file")
     return filename
@@ -46,7 +92,7 @@ def initialize_logger(args):
     # Decide if hostname is added
     if args.hostname:
         settings.hostname = True
-        settings.logformat = f"%(asctime)s:{socket.gethostname()}:" + settings.logformat
+        settings.logformat = f"%(asctime)s:{socket.gethostname()}:{settings.logformat}"
 
     if args.log:
         settings.log = getattr(logging, args.log.upper(), None)
@@ -67,39 +113,39 @@ def initialize_logger(args):
 
 
 def dump_ids_default_config(name):
-    if name not in settings.idss:
-        settings.logger.error("IDS {} not found! Use one of:".format(name))
-        settings.logger.error(", ".join(settings.idss.keys()))
+    if name not in list(ids_paths.keys()):
+        settings.logger.error(f"IDS {name} not found! Use one of:")
+        settings.logger.error(", ".join(list(ids_paths.keys())))
         exit(1)
 
     # Create IDSs default config
     config = {
         name: {
             "_type": name,
-            **get_all_iidss()[name](name=name)._default_settings,
+            **load_ids(name)[name](name=name)._default_settings,
         }
     }
 
     # Output a pre-filled config file
-    print(json.dumps(config, indent=4))
+    print(orjson.dumps(config, option=orjson.OPT_INDENT_2).decode())
     exit(0)
 
 
 def dump_combiner_default_config(name):
-    if name not in get_all_combiner():
-        settings.logger.error("Combiner {} not found! Use one of:".format(name))
-        settings.logger.error(", ".join(get_all_combiner().keys()))
+    if name not in list(combiner.utils.paths.keys()):
+        settings.logger.error(f"Combiner {name} not found! Use one of:")
+        settings.logger.error(", ".join(list(combiner.utils.paths.keys())))
         exit(1)
 
     # Create Combiners default config
     settings.combiner = {"_type": name}
     config = {
         "_type": name,
-        **get_all_combiner()[name]()._default_settings,
+        **combiner.utils.load_combiner(name)[name]()._default_settings,
     }
 
     # Output a pre-filled config file
-    print(json.dumps(config, indent=4))
+    print(orjson.dumps(config, option=orjson.OPT_INDENT_2).decode())
     exit(0)
 
 
@@ -144,7 +190,7 @@ def prepare_arg_parser(parser):
         "--output",
         dest="output",
         metavar="FILE",
-        help="output file to write the anotated IDS output to (Default:none, '-' stdout, '*,gz' compress).",
+        help="output file to write the annotated IDS output to (Default:none, '-' stdout, '*,gz' compress).",
         required=False,
     )
     parser.add_argument(
@@ -167,18 +213,17 @@ def prepare_arg_parser(parser):
         "--default.config",
         dest="defaultconfig",
         metavar="IDS",
-        help="dump the default configuration for the specified IDS to stdout and exit, can be used as a basis for writing IDS config files. Available IIDSs are: {}".format(
-            ",".join(settings.idss.keys())
-        ),
+        help=f"dump the default configuration for the specified IDS to stdout and exit, can be used as a basis for "
+        f"writing IDS config files. Available IIDSs are: {','.join(list(ids_paths.keys()))}",
         required=False,
     )
     parser.add_argument(
         "--combiner.default.config",
         dest="defaultcombinerconfig",
         metavar="Combiner",
-        help="dump the default configuration for the specified Combiner to stdout and exit, can be used as a basis for writing Combiner config files. Available Combiners are: {}".format(
-            ",".join(get_all_combiner().keys())
-        ),
+        help=f"dump the default configuration for the specified Combiner to stdout and exit, can be used as a basis "
+        f"for writing Combiner config files. "
+        f"Available Combiners are: {','.join(list(combiner.utils.paths.keys()))}",
         required=False,
     )
 
@@ -220,14 +265,40 @@ def prepare_arg_parser(parser):
         "--compresslevel",
         dest="compresslevel",
         metavar="INT",
-        default=9,
-        help="set the gzip compress level. 0 no compress, 1 fast/large, ..., 9 slow/tiny. (Default: 9)",
+        default=6,
+        help="set the gzip compress level. 0 no compress, 1 fast/large, ..., 9 slow/tiny. (Default: 6)",
         required=False,
     )
 
     # Version number
     parser.add_argument(
         "--version", action="version", version=f"%(prog)s {settings.version}"
+    )
+
+    parser.add_argument(
+        "--extra.config",
+        dest="extraconfig",
+        help="load IDSs and Combiners residing outside of IPAL",
+        metavar="FILE",
+        required=False,
+    )
+
+    parser.add_argument(
+        "-h",
+        "--help",
+        action="store_true",
+        default=argparse.SUPPRESS,
+        help="Show this help message and exit.",
+    )
+
+    parser.add_argument(
+        "--live.batch",
+        dest="live_batch",
+        metavar="INT",
+        type=int,
+        default=0,
+        help="commands to use batching and defines the batch size",
+        required=False,
     )
 
 
@@ -266,7 +337,7 @@ def load_settings(args):  # noqa: C901
             )
             exit(1)
 
-        if settings.compresslevel < 0 or 9 < settings.compresslevel:
+        if 9 < settings.compresslevel < 0:
             settings.logger.error(
                 "Option '--compresslevel' must be an integer from 0-9"
             )
@@ -289,19 +360,13 @@ def load_settings(args):  # noqa: C901
     if args.live_ipal:
         settings.live_ipal = args.live_ipal
     if settings.live_ipal:
-        if settings.live_ipal != "stdout" and settings.live_ipal != "-":
-            settings.live_ipalfd = open_file(settings.live_ipal, "r")
-        else:
-            settings.live_ipalfd = sys.stdin
+        settings.live_ipalfd = open_file(settings.live_ipal, "r")
 
     # Parse live state input
     if args.live_state:
         settings.live_state = args.live_state
     if settings.live_state:
-        if settings.live_state != "stdin" and settings.live_state != "-":
-            settings.live_statefd = open_file(settings.live_state, "r")
-        else:
-            settings.live_statefd = sys.stdin
+        settings.live_statefd = open_file(settings.live_state, "r")
 
     # Parse retrain
     if args.retrain:
@@ -314,8 +379,8 @@ def load_settings(args):  # noqa: C901
     if settings.output:
         if settings.output != "stdout" and settings.output != "-":
             # clear the file we are about to write to
-            open_file(settings.output, "wt").close()
-            settings.outputfd = open_file(settings.output, "wt")
+            open_file(settings.output, "wb").close()
+            settings.outputfd = open_file(settings.output, "wb")
         else:
             settings.outputfd = sys.stdout
 
@@ -324,15 +389,22 @@ def load_settings(args):  # noqa: C901
 
     config_file = Path(settings.config).resolve()
     if config_file.is_file():
-        with open_file(settings.config, "r") as f:
+        with open_file(settings.config, "rb") as f:
             try:
-                settings.idss = json.load(f)
-            except json.decoder.JSONDecodeError as e:
+                settings.idss = orjson.loads(f.read())
+                # IDSs to be dynamically loaded
+                set_idss_to_load(
+                    [settings.idss[k]["_type"] for k in settings.idss.keys()]
+                )
+
+            except orjson.JSONDecodeError as e:
                 settings.logger.error("Error parsing config file")
                 settings.logger.error(e)
                 exit(1)
     else:
-        settings.logger.error("Could not find config file at {}".format(config_file))
+        settings.logger.error(
+            f"Could not find config file at {os.path.relpath(config_file)}"
+        )
         exit(1)
 
     # Parse Combiner config
@@ -341,22 +413,24 @@ def load_settings(args):  # noqa: C901
 
         config_file = Path(settings.combinerconfig).resolve()
         if config_file.is_file():
-            with open_file(settings.combinerconfig, "r") as f:
+            with open_file(settings.combinerconfig, "rb") as f:
                 try:
-                    settings.combiner = json.load(f)
-                except json.decoder.JSONDecodeError as e:
+                    settings.combiner = orjson.loads(f.read())
+                    combiner.utils.combiner_to_use_name = settings.combiner["_type"]
+                except orjson.JSONDecodeError as e:
                     settings.logger.error("Error parsing config file")
                     settings.logger.error(e)
                     exit(1)
         else:
             settings.logger.error(
-                "Could not find config file at {}".format(config_file)
+                f"Could not find config file at {os.path.relpath(config_file)}"
             )
             exit(1)
 
     else:
         settings.logger.warning("No combiner defined. Using default Any combiner!")
         settings.combiner = {"_type": "Any"}
+        combiner.utils.combiner_to_use_name = settings.combiner["_type"]
 
 
 def train_idss(idss):
@@ -370,11 +444,11 @@ def train_idss(idss):
             if ids.load_trained_model():
                 loaded_from_file.append(ids)
                 settings.logger.info(
-                    "IDS {} loaded a saved model successfully.".format(ids._name)
+                    f"IDS {ids._name} loaded a saved model successfully."
                 )
         except NotImplementedError:
             settings.logger.info(
-                "Loading model from file not implemented for {}.".format(ids._name)
+                f"Loading model from file not implemented for {ids._name}."
             )
 
     # Check if all datasets necessary for the selected IDSs are provided
@@ -386,26 +460,24 @@ def train_idss(idss):
         if ids.requires("train.state") and settings.train_state:
             continue
 
-        settings.logger.error(
-            "Required arguement: {} for IDS {}".format(ids._requires, ids._name)
-        )
+        settings.logger.error(f"Required argument: {ids._requires} for IDS {ids._name}")
         exit(1)
 
     # If training file is stdin, read stdin and save it to a temporary file
     # Because training multiple IIDSs on stdin is not possible since stdin can only be read once
     if settings.train_ipal == "-" and len(idss) > 1:
         settings.logger.info("Copying training stdin to temporary file.")
-        tmpipalfile = copy_file_to_tmp_file(settings.train_ipal)
-        settings.train_ipal = tmpipalfile
+        tmp_ipal_file = copy_file_to_tmp_file(settings.train_ipal)
+        settings.train_ipal = tmp_ipal_file
     else:
-        tmpipalfile = None
+        tmp_ipal_file = None
 
     if settings.train_state == "-" and len(idss) > 1:
         settings.logger.info("Copying training stdin to temporary file.")
-        tmpstatefile = copy_file_to_tmp_file(settings.train_state)
-        settings.train_state = tmpstatefile
+        tmp_state_file = copy_file_to_tmp_file(settings.train_state)
+        settings.train_state = tmp_state_file
     else:
-        tmpstatefile = None
+        tmp_state_file = None
 
     try:
         # Give the various IDSs the dataset they need in their learning phase
@@ -414,34 +486,30 @@ def train_idss(idss):
                 continue
 
             start = time.time()
-            settings.logger.info(
-                "Training of {} started at {}".format(ids._name, start)
-            )
+            settings.logger.info(f"Training of {ids._name} started at {start}")
 
             ids.train(ipal=settings.train_ipal, state=settings.train_state)
 
             end = time.time()
             settings.logger.info(
-                "Training of {} ended at {} ({}s)".format(ids._name, end, end - start)
+                f"Training of {ids._name} ended at {end} ({end - start}s)"
             )
 
             # Try to save the trained model
             try:
                 if ids.save_trained_model():
-                    settings.logger.info(
-                        "Saved trained model of {} to file.".format(ids._name)
-                    )
+                    settings.logger.info(f"Saved trained model of {ids._name} to file.")
             except NotImplementedError:
                 settings.logger.info(
-                    "Saving model to file not implemented for {}.".format(ids._name)
+                    f"Saving model to file not implemented for {ids._name}."
                 )
 
     finally:
         # Remove temporary files
-        if tmpipalfile is not None:
-            os.remove(tmpipalfile)
-        if tmpstatefile is not None:
-            os.remove(tmpstatefile)
+        if tmp_ipal_file is not None:
+            os.remove(tmp_ipal_file)
+        if tmp_state_file is not None:
+            os.remove(tmp_state_file)
 
 
 def train_combiner(combiner):
@@ -450,161 +518,379 @@ def train_combiner(combiner):
         try:
             if combiner.load_trained_model():
                 settings.logger.info(
-                    "Combiner {} loaded a saved model successfully.".format(
-                        combiner._name
-                    )
+                    f"Combiner {combiner._name} loaded a saved model successfully."
                 )
                 return
 
         except NotImplementedError:
             settings.logger.info(
-                "Loading model from file not implemented for {}.".format(combiner._name)
+                f"Loading model from file not implemented for {combiner._name}."
             )
 
-    # Test if trainig data is required and provided
+    # Test if training data is required and provided
     if combiner._requires_training and settings.train_combiner is None:
         settings.logger.error(
-            "Combiner {} requires training data (--train.combiner)".format(
-                combiner._name
-            )
+            f"Combiner {combiner._name} requires training data (--train.combiner)"
         )
         exit(1)
 
     # Train combiner
     start = time.time()
-    settings.logger.info(
-        "Training of {} combiner started at {}".format(combiner._name, start)
-    )
+    settings.logger.info(f"Training of {combiner._name} combiner started at {start}")
 
     combiner.train(settings.train_combiner)
 
     end = time.time()
     settings.logger.info(
-        "Training of {} combiner ended at {} ({}s)".format(
-            combiner._name, end, end - start
-        )
+        f"Training of {combiner._name} combiner ended at {end} ({end - start}s)"
     )
 
     # Try to save the trained model
     try:
         if combiner.save_trained_model():
-            settings.logger.info(
-                "Saved trained model of {} to file.".format(combiner._name)
-            )
+            settings.logger.info(f"Saved trained model of {combiner._name} to file.")
     except NotImplementedError:
         settings.logger.info(
-            "Saving model to file not implemented for {}.".format(combiner._name)
+            f"Saving model to file not implemented for {combiner._name}."
         )
 
 
-def live_idss(idss, combiner):  # noqa: C901
+def write_ipal_msg(msg: dict, msg_combiner, first_msg: bool = False) -> None:
+    """
+    Processes and writes an IPAL message, combining alerts and scores, outputting
+    the final message to the appropriate file descriptor or stdout.
+
+    :param msg:
+        A dictionary representing the IPAL message.
+    :param msg_combiner:
+        The combiner used to combine alerts and scores for the IPAL message.
+    :param first_msg:
+        If True, additional configuration settings are added to the message before it is written.
+    :return:
+        None. The function modifies the `msg` dictionary in place and writes the resulting message to the output file
+        descriptor or stdout.
+    """
+    alert, score, offset = msg_combiner.combine(msg["alerts"], msg["scores"])
+    if offset == 0:
+        msg["ids"] = alert
+        msg["scores"][msg_combiner._name] = score
+    else:
+        msg["ids"] = False
+        if "adjust" not in msg:
+            msg["adjust"] = {}
+        msg["adjust"][msg_combiner._name] = [[offset, alert, score]]
+
+    if settings.output:
+        if first_msg:
+            msg["_iids-config"] = settings.iids_settings_to_dict()
+
+    if settings.output == "-":
+        # flushing for all output formats (not just pipes) results in drastic performance losses
+        settings.outputfd.write(
+            orjson.dumps(
+                msg, option=orjson.OPT_SERIALIZE_NUMPY | orjson.OPT_APPEND_NEWLINE
+            ).decode("utf-8")
+        )
+        settings.outputfd.flush()
+    elif settings.output:
+        settings.outputfd.write(
+            orjson.dumps(
+                msg, option=orjson.OPT_SERIALIZE_NUMPY | orjson.OPT_APPEND_NEWLINE
+            )
+        )
+
+    return
+
+
+def read_live_ipal_msg(
+    ipal_msg: dict | None, state_msg: dict | None
+) -> (dict | None, dict | None, bool | None):
+    """
+    Reads the next IPAL or state message from live input, if available,
+    and determines which message has the earlier timestamp.
+
+    :param ipal_msg:
+        The current IPAL message or None if not yet loaded.
+    :param state_msg:
+        The current state message or None if not yet loaded.
+    :return:
+        A potentially loaded IPAL message, a potentially loaded state message,
+        and a boolean indicating which message is earlier.
+        If no messages are loaded, the boolean is None.
+    """
+    if ipal_msg is None and settings.live_ipal:
+        line = settings.live_ipalfd.readline()
+        if line:
+            ipal_msg = orjson.loads(line)
+
+    # load a new state
+    if state_msg is None and settings.live_state:
+        line = settings.live_statefd.readline()
+        if line:
+            state_msg = orjson.loads(line)
+
+    # Determine smallest timestamp ipal or state?
+    if ipal_msg and state_msg:
+        is_ipal_earlier = ipal_msg["timestamp"] < state_msg["timestamp"]
+    elif ipal_msg:
+        is_ipal_earlier = True
+    elif state_msg:
+        is_ipal_earlier = False
+    else:  # handled all messages from files
+        is_ipal_earlier = None
+
+    return ipal_msg, state_msg, is_ipal_earlier
+
+
+def process_ipal_msg(
+    msg: dict, idss, msg_combiner, first_msg: bool = False, is_ipal: bool = True
+) -> None:
+    """
+    Processes an IPAL or state message by updating alerts and scores provided by the IDSs,
+    then writes the processed message to the appropriate file descriptor or stdout.
+
+    :param msg:
+        A dictionary representing the IPAL or state message to be processed.
+    :param idss:
+        A collection of IDSs that generate alerts and scores for the message.
+    :param msg_combiner:
+        A combiner used to combine the alerts and scores in the message before writing.
+    :param first_msg:
+        A boolean flag indicating whether this is the first message being processed. Default is False.
+    :param is_ipal:
+        A boolean flag indicating if the message is an IPAL message (True) or a state message (False). Default is True.
+    :return:
+        None. The function updates the message and writes it out.
+    """
+    if "scores" not in msg:
+        msg["scores"] = {}
+    if "alerts" not in msg:
+        msg["alerts"] = {}
+
+    required_type = "live.ipal" if is_ipal else "live.state"
+
+    for ids in idss:
+        if ids.requires(required_type):
+            if is_ipal:
+                alert, score = ids.new_ipal_msg(msg)
+            else:
+                alert, score = ids.new_state_msg(msg)
+            msg["alerts"][ids._name] = alert
+            msg["scores"][ids._name] = score
+
+    write_ipal_msg(msg, msg_combiner, first_msg)
+
+    return
+
+
+def process_batched_ipal_msgs(batch: [dict], idss, msg_combiner) -> None:
+    """
+    Processes a batch of IPAL or state messages by updating alerts and scores provided by the IDSs,
+    then writes each message to the appropriate file descriptor or stdout
+
+    :param batch:
+        A list of dictionaries, each representing an IPAL or state message in the batch.
+    :param idss:
+        A collection of IDSs that generate alerts and scores for the message.
+    :param msg_combiner:
+        A combiner used to combine the alerts and scores in the message before writing.
+    :return:
+        None. The function updates and writes each message in the batch.
+    """
+    required_type = []
+
+    global _FIRST_BATCHED_IPAL_MSG
+    global _FIRST_BATCHED_STATE_MSG
+
+    # gather all required types to make sure we handle both
+    for msg in batch:
+        if "scores" not in msg:
+            msg["scores"] = {}
+        if "alerts" not in msg:
+            msg["alerts"] = {}
+        required_type.append(msg["ipal_type"])
+
+    required_types = set(required_type)
+
+    for ids in idss:
+        # check that the ids can handle all message types in the batch
+        if all(ids.requires(req_type) for req_type in required_types):
+            alerts, scores = ids.new_batch(batch)
+            for k, msg in enumerate(batch):
+                msg["alerts"][ids._name] = alerts[k]
+                msg["scores"][ids._name] = scores[k]
+
+    for msg in batch:
+
+        is_first_msg = False
+        if _FIRST_BATCHED_IPAL_MSG and "ipal" in msg["ipal_type"]:
+            is_first_msg = True
+            _FIRST_BATCHED_IPAL_MSG = False
+        elif _FIRST_BATCHED_STATE_MSG and "state" in msg["ipal_type"]:
+            is_first_msg = True
+            _FIRST_BATCHED_STATE_MSG = False
+        msg.pop("ipal_type")
+        write_ipal_msg(msg, msg_combiner, is_first_msg)
+
+    return
+
+
+def live_idss_batch(idss, msg_combiner, batch_size: int) -> None:
+    """
+    Processes live IPAL and state messages in batches by collecting messages,
+    generating alerts and scores using the provided IDSs,
+    and writes them in the correct order to a file descriptor or stdout.
+
+    :param idss:
+        A collection of IDSs that generate alerts and scores for the messages.
+    :param msg_combiner:
+        A combiner used to combine alerts and scores for each message in the batch.
+    :param batch_size:
+        The number of messages to collect and process in each batch.
+    :return:
+        None. The function continuously reads, processes, and writes batches of messages
+        until no more messages are available.
+    """
+
+    assert batch_size > 0
+
+    for ids in idss:
+        if not isinstance(ids, BatchIDS):
+            settings.logger.error(
+                f"'{ids._name}' is not a BatchIDS, can't do batching! Aborting."
+            )
+            exit(1)
+
     # Keep track of the last state and message information. Then we are capable of delivering them in the right order.
     ipal_msg = None
     state_msg = None
-    _first_ipal_msg = True
-    _first_state_msg = True
+    global _FIRST_BATCHED_IPAL_MSG
+    global _FIRST_BATCHED_STATE_MSG
+
+    _FIRST_BATCHED_IPAL_MSG = True
+    _FIRST_BATCHED_STATE_MSG = True
+
+    run = True
+
+    while run:
+        # List of ipal / state messages
+        batch = []
+        # Collect batch_size number of ipal / state messages
+        for b in range(batch_size):
+            # load a new ipal message
+            ipal_msg, state_msg, is_ipal_earlier = read_live_ipal_msg(
+                ipal_msg, state_msg
+            )
+
+            # break loop if we have no more new messages
+            if is_ipal_earlier is None:
+                run = False
+                break
+
+            # Process next message
+            if is_ipal_earlier:
+                ipal_msg["ipal_type"] = "live.ipal"
+                batch.append(ipal_msg)
+                ipal_msg = None
+            else:
+                state_msg["ipal_type"] = "live.state"
+                batch.append(state_msg)
+                state_msg = None
+
+        process_batched_ipal_msgs(batch, idss, msg_combiner)
+
+
+def live_idss(idss, msg_combiner) -> None:
+    """
+    Processes live IPAL and state messages, generating alerts and scores using the provided IDSs,
+    and writes them in the correct order to a file descriptor or stdout.
+
+    :param idss:
+        A collection of IDSs that generate alerts and scores for each message.
+    :param msg_combiner:
+        A combiner used to combine alerts and scores for each message.
+    :return:
+        None. The function continuously reads, processes, and writes batches of messages
+        until no more messages are available.
+    """
+    # Keep track of the last state and message information. Then we are capable of delivering them in the right order.
+    ipal_msg = None
+    state_msg = None
+    first_ipal_msg = True
+    first_state_msg = True
 
     while True:
         # load a new ipal message
-        if ipal_msg is None and settings.live_ipal:
-            line = settings.live_ipalfd.readline()
-            if line:
-                ipal_msg = json.loads(line)
+        ipal_msg, state_msg, is_ipal_earlier = read_live_ipal_msg(ipal_msg, state_msg)
 
-        # load a new state
-        if state_msg is None and settings.live_state:
-            line = settings.live_statefd.readline()
-            if line:
-                state_msg = json.loads(line)
-
-        # Determine smallest timestamp ipal or state?
-        if ipal_msg and state_msg:
-            is_ipal_smaller = ipal_msg.timestamp < state_msg.timestamp
-        elif ipal_msg:
-            is_ipal_smaller = True
-        elif state_msg:
-            is_ipal_smaller = False
-        else:  # handled all messages from files
+        # handled all messages, end loop
+        if is_ipal_earlier is None:
             break
 
         # Process next message
-        if is_ipal_smaller:
-            if "scores" not in ipal_msg:
-                ipal_msg["scores"] = {}
-            if "alerts" not in ipal_msg:
-                ipal_msg["alerts"] = {}
-
-            for ids in idss:
-                if ids.requires("live.ipal"):
-                    alert, score = ids.new_ipal_msg(ipal_msg)
-                    ipal_msg["alerts"][ids._name] = alert
-                    ipal_msg["scores"][ids._name] = score
-
-            alert, score, offset = combiner.combine(
-                ipal_msg["alerts"], ipal_msg["scores"]
+        if is_ipal_earlier:
+            process_ipal_msg(
+                ipal_msg, idss, msg_combiner, first_msg=first_ipal_msg, is_ipal=True
             )
-            if offset == 0:
-                ipal_msg["ids"] = alert
-                ipal_msg["scores"][combiner._name] = score
-            else:
-                ipal_msg["ids"] = False
-                if "adjust" not in ipal_msg:
-                    ipal_msg["adjust"] = {}
-                ipal_msg["adjust"][combiner._name] = [[offset, alert, score]]
-
-            if settings.output:
-                if _first_ipal_msg:
-                    ipal_msg["_iids-config"] = settings.iids_settings_to_dict()
-                    _first_ipal_msg = False
-
-                settings.outputfd.write(json.dumps(ipal_msg) + "\n")
-                settings.outputfd.flush()
-
+            first_ipal_msg = False
             ipal_msg = None
-
         else:
-            if "scores" not in state_msg:
-                state_msg["scores"] = {}
-            if "alerts" not in state_msg:
-                state_msg["alerts"] = {}
-
-            for ids in idss:
-                if ids.requires("live.state"):
-                    alert, score = ids.new_state_msg(state_msg)
-                    state_msg["alerts"][ids._name] = alert
-                    state_msg["scores"][ids._name] = score
-
-            alert, score, offset = combiner.combine(
-                state_msg["alerts"], state_msg["scores"]
+            process_ipal_msg(
+                state_msg, idss, msg_combiner, first_msg=first_state_msg, is_ipal=False
             )
-            if offset == 0:
-                state_msg["ids"] = alert
-                state_msg["scores"][combiner._name] = score
-            else:
-                state_msg["ids"] = False
-                if "adjust" not in state_msg:
-                    state_msg["adjust"] = {}
-                state_msg["adjust"][combiner._name] = [[offset, alert, score]]
-
-            if settings.output:
-                if _first_state_msg:
-                    state_msg["_iids-config"] = settings.iids_settings_to_dict()
-                    _first_state_msg = False
-
-                settings.outputfd.write(json.dumps(state_msg) + "\n")
-                settings.outputfd.flush()
+            first_state_msg = False
             state_msg = None
+
+
+# Load data from extra config file
+def load_extra_config(args):
+    if args.extraconfig:
+        # Load config
+        econf_file = open_file(args.extraconfig, "rb")
+        econf_json = orjson.loads(econf_file.read())
+        # Root path
+        rp = Path(os.path.abspath(args.extraconfig)).parent
+        # Add idss
+        for eo in econf_json["IDS"]:
+            ids_paths[eo["name"]] = os.path.join(rp, eo["path"])
+        # Add combiners
+        for eo in econf_json["Combiner"]:
+            combiner.utils.paths[eo["name"]] = os.path.join(rp, eo["path"])
+        # Add preprocessors
+        for eo in econf_json["Preprocessor"]:
+            preprocessors.utils.preprocessor_paths[eo["name"]] = os.path.join(
+                rp, eo["path"]
+            )
+        # Close file
+        econf_file.close()
+        # Reload settings
+        settings.idss = {
+            ids_name: {"_type": ids_name} for ids_name in list(ids_paths.keys())
+        }
 
 
 def main():
     # Argument parser and settings
     parser = argparse.ArgumentParser(
         prog="ipal-iids",
-        description="This program contains the ipal-iids framework together with implementations of several IIDSs based on the IPAL message and state format.",
+        description="This program contains the ipal-iids framework together with implementations of several IIDSs "
+        "based on the IPAL message and state format.",
+        conflict_handler="resolve",
     )
     prepare_arg_parser(parser)
     args = parser.parse_args()
     initialize_logger(args)
+
+    # Load extra config
+    load_extra_config(args)
+
+    # Hook help to reload help strings, in order to load IDS names potentially added by the extra config
+    if hasattr(args, "help"):
+        prepare_arg_parser(parser)
+        parser.print_help()
+        exit(0)
+
+    # Load settings
     load_settings(args)
 
     # Prepare idss and combiner
@@ -622,7 +908,12 @@ def main():
 
         # Live IDS
         settings.logger.info("Start IDS live...")
-        live_idss(idss, combiner)
+
+        if args.live_batch == 0:
+            live_idss(idss, combiner)
+        else:
+            live_idss_batch(idss, combiner, args.live_batch)
+
     except BrokenPipeError:
         devnull = os.open(os.devnull, os.O_WRONLY)
         os.dup2(devnull, sys.stdout.fileno())

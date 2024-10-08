@@ -1,8 +1,10 @@
+import os
+
 from setuptools import find_packages, setup
 
 setup(
     name="ipal-iids",
-    version="1.4.11",
+    version="1.5.1",
     packages=find_packages(exclude="tests"),
     scripts=["ipal-iids", "ipal-extend-alarms", "ipal-visualize-model"],
     install_requires=[
@@ -12,12 +14,12 @@ setup(
         "scikit-learn",
         "keras",
         "torch",
-        "ar @ git+https://github.com/RhysU/ar.git",
         "matplotlib",
-        "pomegranate @ git+https://github.com/jmschrei/pomegranate.git@v0.14.9",
-        "tr",
+        f"pomegranate @ file://{os.path.dirname(__file__)}/misc/pomegranate-0.14.9.zip",
         "pandas",
         "gurobipy",
+        "orjson",
+        "zlib-ng",
     ],
     tests_require=["pre-commit", "black", "flake8", "pytest", "pytest-cov", "isort"],
     url="https://github.com/fkie-cad/ipal_ids_framework",
@@ -28,8 +30,10 @@ setup(
     keywords="IPAL IDS industrial CPS intrusion detection anomaly detection",
     classifiers=[
         "License :: MIT License",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
     ],
     include_package_data=True,
 )

@@ -1,2 +1,2 @@
 WARNING:ipal-iids:No combiner defined. Using default Any combiner!
-ERROR:ipal-iids:Required arguement: ['train.ipal', 'live.ipal'] for IDS Kitsune
+ERROR:ipal-iids:Required argument: ['train.ipal', 'live.ipal'] for IDS Kitsune

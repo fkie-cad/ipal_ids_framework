@@ -1,23 +1,29 @@
-from .aggregate import AggregatePreprocessor
-from .categorical import CategoricalPreprocessor
-from .gradient import GradientPreprocessor
-from .indicatenone import IndicateNonePreprocessor
-from .labelencoder import LabelEncoderPreprocessor
-from .mean import MeanPreprocessor
-from .minmax import MinMaxPreprocessor
-from .pca import PCAPreprocessor
+import importlib.util
+import os
+import sys
 
-preprocessors = [
-    AggregatePreprocessor,
-    CategoricalPreprocessor,
-    GradientPreprocessor,
-    IndicateNonePreprocessor,
-    LabelEncoderPreprocessor,
-    MeanPreprocessor,
-    MinMaxPreprocessor,
-    PCAPreprocessor,
-]
+module_directory = os.path.dirname(os.path.abspath(__file__))
 
 
-def get_all_preprocessors():
-    return {preprocessor._name: preprocessor for preprocessor in preprocessors}
+preprocessor_paths = {
+    "Aggregate": os.path.join(module_directory, "aggregate.py"),
+    "Categorical": os.path.join(module_directory, "categorical.py"),
+    "Gradient": os.path.join(module_directory, "gradient.py"),
+    "IndicateNone": os.path.join(module_directory, "indicatenone.py"),
+    "LabelEncoder": os.path.join(module_directory, "labelencoder.py"),
+    "Mean": os.path.join(module_directory, "mean.py"),
+    "MinMax": os.path.join(module_directory, "minmax.py"),
+    "PCA": os.path.join(module_directory, "pca.py"),
+}
+
+
+def load_preprocessor(name):
+    # Load preprocessor
+    spec = importlib.util.spec_from_file_location(
+        f"{name}Preprocessor", preprocessor_paths[name]
+    )
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[f"{name}Preprocessor"] = mod
+    spec.loader.exec_module(mod)
+    # Return preprocessor
+    return getattr(mod, f"{name}Preprocessor")

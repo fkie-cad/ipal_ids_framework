@@ -1,8 +1,8 @@
-import gzip
-import json
-import sys
 from pathlib import Path
 
+import orjson
+
+import ipal_iids.iids as iids
 import ipal_iids.settings as settings
 
 
@@ -27,16 +27,8 @@ class Combiner:
             if key not in self.settings:
                 self.settings[key] = value
 
-    def _open_file(self, filename, mode="r"):
-        filename = str(filename)
-        if filename is None:
-            return None
-        elif filename.endswith(".gz"):
-            return gzip.open(filename, mode)
-        elif filename == "-":
-            return sys.stdin
-        else:
-            return open(filename, mode)
+    def _open_file(self, filename, mode="r", force_gzip=False):
+        return iids.open_file(filename, mode, force_gzip=force_gzip)
 
     def _relative_to_config(self, file: str) -> Path:
         """
@@ -78,8 +70,8 @@ class Combiner:
 
         settings.logger.info("Loading combiner training file")
         with self._open_file(file, "r") as f:
-            for line in f.readlines():
-                js = json.loads(line)
+            for line in f:
+                js = orjson.loads(line)
 
                 events.append(self._get_activations(js["alerts"], js["scores"]))
                 annotations.append(js["malicious"] is not False)

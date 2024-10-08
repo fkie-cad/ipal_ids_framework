@@ -1,6 +1,5 @@
 import ipal_iids.settings as settings
-
-from .combiner import Combiner
+from combiner.combiner import Combiner
 
 
 class AnyCombiner(Combiner):

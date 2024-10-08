@@ -1,9 +1,9 @@
-import gzip
 import hashlib
-import json
-import sys
 from pathlib import Path
 
+import orjson
+
+import ipal_iids.iids as iids
 import ipal_iids.settings as settings
 
 
@@ -30,16 +30,8 @@ class MetaIDS:
             if key not in self.settings:
                 self.settings[key] = value
 
-    def _open_file(self, filename, mode="r"):
-        filename = str(filename)
-        if filename is None:
-            return None
-        elif filename.endswith(".gz"):
-            return gzip.open(filename, mode)
-        elif filename == "-":
-            return sys.stdin
-        else:
-            return open(filename, mode)
+    def _open_file(self, filename, mode="r", force_gzip=False):
+        return iids.open_file(filename, mode, force_gzip=force_gzip)
 
     def _relative_to_config(self, file: str) -> Path:
         """
@@ -60,7 +52,7 @@ class MetaIDS:
         return self._relative_to_config(self.settings["model-file"])
 
     def _add_msg_hash(self, msg, nbytes=2):
-        fingerprint = json.dumps(
+        fingerprint = orjson.dumps(
             [
                 msg["src"],
                 msg["dest"],
@@ -74,27 +66,24 @@ class MetaIDS:
         )
 
         # Create n-byte hash of the fingerprint
-        fingerprint = fingerprint.encode("utf-8")
         msg["hash"] = int(hashlib.sha1(fingerprint).hexdigest()[: nbytes * 2], 16)
 
-    # what data (ipal messages / state informatin) does this IDS need for its learning and intrusion detection phase?
+    # what data (ipal messages / state information) does this IDS need for its learning and intrusion detection phase?
     def requires(self, dataformat):
         if dataformat not in ["train.state", "live.state", "train.ipal", "live.ipal"]:
-            settings.logger.critical(
-                "Unexpected format requested: {}".format(dataformat)
-            )
+            settings.logger.critical(f"Unexpected format requested: {dataformat}")
         return dataformat in self._requires
 
     # the IDS is given the path to file(s) containing its requested training data
     def train(self, ipal=None, state=None):
         raise NotImplementedError
 
-    # if a new ipal message is available during the intrustion detection phase, this function is called
+    # if a new ipal message is available during the intrusion detection phase, this function is called
     # with the message in json format. Return if an alert is thrown by this IDS
     def new_ipal_msg(self, msg):
         raise NotImplementedError
 
-    # if new state information is available during the intrustion detection phase, this function is called
+    # if new state information is available during the intrusion detection phase, this function is called
     # with the message in json format. Return if an alert is thrown by this IDS
     def new_state_msg(self, msg):
         raise NotImplementedError
@@ -106,4 +95,25 @@ class MetaIDS:
         raise NotImplementedError
 
     def visualize_model(self):
+        raise NotImplementedError
+
+
+class BatchIDS(MetaIDS):
+
+    def __init__(self, name=None):
+        super().__init__(name)
+
+    # what data (ipal messages / state information) does this IDS need for its learning and intrusion detection phase?
+    def requires(self, dataformat):
+        if dataformat not in [
+            "train.state",
+            "live.state",
+            "train.ipal",
+            "live.ipal",
+            "live.batch",
+        ]:
+            settings.logger.critical(f"Unexpected format requested: {dataformat}")
+        return dataformat in self._requires
+
+    def new_batch(self, batch):
         raise NotImplementedError

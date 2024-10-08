@@ -1,8 +1,8 @@
-from .preprocessor import Preprocessor
+from preprocessors.preprocessor import Preprocessor
 
 
 class GradientPreprocessor(Preprocessor):
-    _name = "gradient"  # NOTE Does not consider time!
+    _name = "Gradient"  # NOTE Does not consider time!
     _description = "Calculate gradient"
 
     def __init__(self, features, window_size=1):

@@ -1,12 +1,13 @@
-import json
 import random
+
+import orjson
 
 import ipal_iids.settings as settings
 from ids.ids import MetaIDS
 
 
 class DummyIDS(MetaIDS):
-    _name = "Dummy"
+    _name = "DummyIDS"
     _description = "Dummy IDS returns either True, False, or random."
     _requires = ["train.ipal", "live.ipal", "train.state", "live.state"]
     _optimalids_default_settings = {
@@ -42,8 +43,12 @@ class DummyIDS(MetaIDS):
             return False
 
         model = {"_name": self._name, "settings": self.settings}
-        with self._open_file(self._resolve_model_file_path(), mode="wt") as f:
-            f.write(json.dumps(model, indent=4) + "\n")
+        with self._open_file(self._resolve_model_file_path(), mode="wb") as f:
+            f.write(
+                orjson.dumps(
+                    model, option=orjson.OPT_INDENT_2 | orjson.OPT_APPEND_NEWLINE
+                )
+            )
 
         return True
 
@@ -52,11 +57,11 @@ class DummyIDS(MetaIDS):
             return False
 
         try:  # Open model file
-            with self._open_file(self._resolve_model_file_path(), mode="rt") as f:
-                model = json.load(f)
+            with self._open_file(self._resolve_model_file_path(), mode="rb") as f:
+                model = orjson.loads(f.read())
         except FileNotFoundError:
             settings.logger.info(
-                "Model file {} not found.".format(str(self._resolve_model_file_path()))
+                f"Model file {str(self._resolve_model_file_path())} not found."
             )
             return False
 

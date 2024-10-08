@@ -222,7 +222,7 @@ cdef class incStat_cov:
 
 
     def __init__(self, incStat incS1,incStat incS2, double init_time = 0):
-        # store references tot he streams' incStats
+        # store references to the stream's incStats
         self.incS1 = incS1
         self.incS2 = incS2
 
@@ -237,7 +237,7 @@ cdef class incStat_cov:
 
     #other_incS_decay is the decay factor of the other incstat
     # ID: the stream ID which produced (v,t)
-    cdef update_cov(self, str ID, double v, double t):  # it is assumes that incStat "ID" has ALREADY been updated with (t,v) [this si performed automatically in method incStat.insert()]
+    cdef update_cov(self, str ID, double v, double t):  # it is assumed that incStat "ID" has ALREADY been updated with (t,v) [this is performed automatically in method incStat.insert()]
         # find incStat
         cdef int inc
         if ID == self.incS1.ID:
@@ -245,12 +245,12 @@ cdef class incStat_cov:
         else:
             inc = 1
 
-        # Decay residules
+        # Decay residuals
         self.processDecay(t)
 
         # Update extrapolator for current stream AND
         # Extrapolate other stream AND
-        # Compute and update residule
+        # Compute and update residual
         cdef double v_other
         if inc == 0:
             self.ex1.insert(t,v)
@@ -269,7 +269,7 @@ cdef class incStat_cov:
         cdef double timeDiffs_cf3
         timeDiffs_cf3 = t - self.lastTimestamp_cf3
         if timeDiffs_cf3 > 0:
-            factor = math.pow(2, (-(self.incS1.Lambda) * timeDiffs_cf3))
+            factor = math.pow(2, (-self.incS1.Lambda * timeDiffs_cf3))
             self.CF3 *= factor
             self.w3 *= factor
             self.lastTimestamp_cf3 = t
@@ -435,7 +435,7 @@ cdef class incStatDB:
         cdef incStat incS1
         incS1 = self.HT.get(ID + "_" + str(Lambda))
         if incS1 is None:  # does not exist
-            return ([],[])
+            return [],[]
 
         # find relevant cov entry
         stats = []
@@ -520,8 +520,10 @@ cdef class incStatDB:
         hdrs2D = self.getHeaders_2D(L,IDs, ver)
         return hdrs1D + hdrs2D
 
-    def getHeaders_nD(self,Lambda=1,IDs=[]): #IDs is a n-element list or tuple
+    def getHeaders_nD(self, Lambda=1, IDs=None): #IDs is a n-element list or tuple
         # Default Lambda?
+        if IDs is None:
+            IDs = []
         cdef double L
         L = Lambda
         ID = ":"
@@ -671,7 +673,7 @@ class incHist:
             if w == 0:
                 return np.Inf  # no stat history, anomaly!
             else:
-                return np.log(self.W[self.tallestBin] / (w))  # log(  1/(  p/p_max  )    )
+                return np.log(self.W[self.tallestBin] / w)  # log(  1/(  p/p_max  )    )
 
 
     def getFreq(self,val,timestamp=-1): #HBOS for one dimension

@@ -5,12 +5,12 @@
             "model-file": null
         },
         "combiner_config": null,
-        "compresslevel": 9,
-        "config": "misc/configs/DTMC.config",
+###IGNORE-LINE###
+        "config": "misc/configs/Dtmc.config",
         "hostname": false,
         "idss": {
             "DTMC": {
-                "_type": "DTMC",
+                "_type": "Dtmc",
                 "alert_unknown": true,
                 "bisimulation": 0,
                 "buffer": 5,

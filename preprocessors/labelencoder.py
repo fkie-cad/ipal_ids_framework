@@ -3,12 +3,11 @@ from typing import List, Optional
 from sklearn.preprocessing import LabelEncoder
 
 import ipal_iids.settings as settings
-
-from .preprocessor import Preprocessor
+from preprocessors.preprocessor import Preprocessor
 
 
 class LabelEncoderPreprocessor(Preprocessor):
-    _name = "label"
+    _name = "LabelEncoder"
     _description = "Encode as labels"
     encoder: List[Optional[LabelEncoder]]
     fitdata: List[Optional[List[set]]]
@@ -41,9 +40,7 @@ class LabelEncoderPreprocessor(Preprocessor):
             try:
                 value[i] = float(self.encoder[i].transform([value[i]])[0])
             except ValueError:
-                settings.logger.critical(
-                    "Value {} not in trained categories".format(value[i])
-                )
+                settings.logger.critical(f"Value {value[i]} not in trained categories")
 
         return value
 

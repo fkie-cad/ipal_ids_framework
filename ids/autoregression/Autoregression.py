@@ -1,9 +1,15 @@
-import json
-
+import orjson
 from ar import arsel
 
 import ipal_iids.settings as settings
 from ids.ids import MetaIDS
+
+"""
+Deprecation Note:
+This IDS bases on the 'ar' library from https://github.com/RhysU/ar.git
+Since numpy version 2 the installation of this library fails. Therefore, this
+IDS is currently marked as deprecated.
+"""
 
 
 class Autoregression(MetaIDS):
@@ -39,16 +45,14 @@ class Autoregression(MetaIDS):
 
         # Load training data for each sensor
         with self._open_file(state) as f:
-            for line in f.readlines():
-                cur_state = json.loads(line)
+            for line in f:
+                cur_state = orjson.loads(line)
 
                 if self.settings["sensor"] in cur_state["state"]:
                     training_data.append(cur_state["state"][self.settings["sensor"]])
                 else:
                     settings.logger.info(
-                        "Sensor {} not in current state.".format(
-                            self.settings["sensor"]
-                        )
+                        f"Sensor {self.settings['sensor']} not in current state."
                     )
 
         if self.settings["firstN"] is None:
@@ -68,9 +72,7 @@ class Autoregression(MetaIDS):
         )
 
         settings.logger.info(
-            "Autoregression model for sensor {} is {}".format(
-                self.settings["sensor"], self.model
-            )
+            f"Autoregression model for sensor {self.settings['sensor']} is {self.model}"
         )
 
         # Find threshold delta
@@ -96,7 +98,7 @@ class Autoregression(MetaIDS):
 
         self.delta /= len(training_data) - self.settings["firstN"]
         settings.logger.info(
-            "Delta for sensor '{}' is {}".format(self.settings["sensor"], self.delta)
+            f"Delta for sensor '{self.settings['sensor']}' is {self.delta}"
         )
 
         # Reset values
@@ -123,7 +125,7 @@ class Autoregression(MetaIDS):
         self.cusum = max(0, self.cusum + abs(rk) - self.delta)
 
         if self.settings["eval"]:
-            settings.logger.info("{},{}".format(abs(rk), self.cusum))
+            settings.logger.info(f"{abs(rk)},{self.cusum}")
 
         # TODO decide on anomaly
         return None, self.cusum

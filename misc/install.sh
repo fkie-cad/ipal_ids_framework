@@ -13,7 +13,7 @@ echo "Installing python packages"
 pip3 install numpy # for ar to install correctly
 pip3 install -r requirements.txt
 
-read -n1 -p "Setup developer tools too? [y,n]" doit 
+read -r -n1 -p "Setup developer tools too? [y,n]" doit
 case $doit in  
   y|Y) pwd && pip3 install -r requirements-dev.txt && pre-commit install ;; 
   *) echo "Skipping developer tools" ;; 

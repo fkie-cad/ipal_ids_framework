@@ -1,10 +1,9 @@
 import ipal_iids.settings as settings
-
-from .preprocessor import Preprocessor
+from preprocessors.preprocessor import Preprocessor
 
 
 class IndicateNonePreprocessor(Preprocessor):
-    _name = "indicate-none"
+    _name = "IndicateNone"
     _description = "Set None to 0 and indicate with new feature"
 
     def __init__(self, features):

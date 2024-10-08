@@ -18,7 +18,7 @@ class KitNET:
     # learning_rate: the default stochastic gradient descent learning rate for all autoencoders in the KitNET instance.
     # hidden_ratio: the default ratio of hidden to visible neurons. E.g., 0.75 will cause roughly a 25% compression in the hidden layer.
     # feature_map: One may optionally provide a feature map instead of learning one. The map must be a list,
-    #           where the i-th entry contains a list of the feature indices to be assingned to the i-th autoencoder in the ensemble.
+    #           where the i-th entry contains a list of the feature indices to be assigned to the i-th autoencoder in the ensemble.
     #           For example, [[2,5,3],[4,0,1],[6,7]]
     def __init__(
         self,
@@ -54,7 +54,7 @@ class KitNET:
             )
         self.FM = CC.corClust(
             self.n
-        )  # incremental feature cluatering for the feature mapping process
+        )  # incremental feature clustering for the feature mapping process
         self.ensembleLayer = []
         self.outputLayer = None
 
@@ -64,7 +64,7 @@ class KitNET:
         if (
             self.n_trained <= self.FM_grace_period and self.v is None
         ):  # If the FM is in train-mode, and the user has not supplied a feature mapping
-            # update the incremetnal correlation matrix
+            # update the incremental correlation matrix
             self.FM.update(x)
             if (
                 self.n_trained == self.FM_grace_period
@@ -72,11 +72,7 @@ class KitNET:
                 self.v = self.FM.cluster(self.m)
                 self.__createAD__()
                 settings.logger.info(
-                    "The Feature-Mapper found a mapping: "
-                    + str(self.n)
-                    + " features to "
-                    + str(len(self.v))
-                    + " autoencoders."
+                    f"The Feature-Mapper found a mapping: {str(self.n)} features to {str(len(self.v))} autoencoders."
                 )
                 settings.logger.info(
                     "Feature-Mapper: execute-mode, Anomaly-Detector: train-mode"

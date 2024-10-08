@@ -55,7 +55,7 @@ class dA:
                 numpy.ceil(self.params.n_visible * self.params.hiddenRatio)
             )
 
-        # for 0-1 normlaization
+        # for 0-1 normalization
         self.norm_max = numpy.ones((self.params.n_visible,)) * -numpy.Inf
         self.norm_min = numpy.ones((self.params.n_visible,)) * numpy.Inf
         self.n = 0

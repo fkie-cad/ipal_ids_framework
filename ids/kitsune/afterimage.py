@@ -127,8 +127,8 @@ class incStat:
         else:
             s0 = "_0"
         if suffix:
-            s0 = "_" + self.ID
-        headers = ["weight" + s0, "mean" + s0, "std" + s0]
+            s0 = f"_{self.ID}"
+        headers = [f"weight{s0}", f"mean{s0}", f"std{s0}"]
         return headers
 
     def getHeaders_2D(self, ID2, suffix=True):
@@ -140,13 +140,13 @@ class incStat:
             s0 = "_0"
             s1 = "_1"
         if suffix:
-            s0 = "_" + self.ID
-            s1 = "_" + ID2
+            s0 = f"_{self.ID}"
+            s1 = f"_{ID2}"
         hdrs2D = [
-            "radius_" + s0 + "_" + s1,
-            "magnitude_" + s0 + "_" + s1,
-            "covariance_" + s0 + "_" + s1,
-            "pcc_" + s0 + "_" + s1,
+            f"radius_{s0}_{s1}",
+            f"magnitude_{s0}_{s1}",
+            f"covariance_{s0}_{s1}",
+            f"pcc_{s0}_{s1}",
         ]
         return hdrs1D + hdrs2D
 
@@ -154,14 +154,14 @@ class incStat:
 # like incStat, but maintains stats between two streams
 class incStat_cov:
     def __init__(self, incS1, incS2, init_time=0):
-        # store references tot he streams' incStats
+        # store references to the streams incStats
         self.incStats = [incS1, incS2]
         self.lastRes = [0, 0]
         # init extrapolators
         # self.EXs = [extrapolator(),extrapolator()]
 
         # init sum product residuals
-        self.CF3 = 0  # sum of residule products (A-uA)(B-uB)
+        self.CF3 = 0  # sum of residual products (A-uA)(B-uB)
         self.w3 = 1e-20
         self.lastTimestamp_cf3 = init_time
 
@@ -169,7 +169,7 @@ class incStat_cov:
     # ID: the stream ID which produced (v,t)
     def update_cov(
         self, ID, v, t
-    ):  # it is assumes that incStat "ID" has ALREADY been updated with (t,v) [this si performed automatically in method incStat.insert()]
+    ):  # it is assumed that incStat "ID" has ALREADY been updated with (t,v) [this is performed automatically in method incStat.insert()]
         # find incStat
         if ID == self.incStats[0].ID:
             inc = 0
@@ -180,9 +180,9 @@ class incStat_cov:
             return  # error
 
         # Decay other incStat
-        self.incStats[not (inc)].processDecay(t)
+        self.incStats[not inc].processDecay(t)
 
-        # Decay residules
+        # Decay residuals
         self.processDecay(t, inc)
 
         # Update extrapolator for current stream
@@ -191,9 +191,9 @@ class incStat_cov:
         # Extrapolate other stream
         # v_other = self.EXs[not(inc)].predict(t)
 
-        # Compute and update residule
+        # Compute and update residuals
         res = v - self.incStats[inc].mean()
-        resid = (v - self.incStats[inc].mean()) * self.lastRes[not (inc)]
+        resid = (v - self.incStats[inc].mean()) * self.lastRes[not inc]
         self.CF3 += resid
         self.w3 += 1
         self.lastRes[inc] = res
@@ -204,7 +204,7 @@ class incStat_cov:
         timeDiffs_cf3 = t - self.lastTimestamp_cf3
         if timeDiffs_cf3 > 0:
             factor = math.pow(
-                2, (-(self.incStats[micro_inc_indx].Lambda) * timeDiffs_cf3)
+                2, (-self.incStats[micro_inc_indx].Lambda * timeDiffs_cf3)
             )
             self.CF3 *= factor
             self.w3 *= factor
@@ -276,45 +276,45 @@ class incStat_cov:
             s1 = self.incStats[1].ID
 
         if ver == 1:
-            headers = ["covariance_" + s0 + "_" + s1, "pcc_" + s0 + "_" + s1]
+            headers = [f"covariance_{s0}_{s1}", f"pcc_{s0}_{s1}"]
         if ver == 2:
             headers = [
-                "radius_" + s0 + "_" + s1,
-                "magnitude_" + s0 + "_" + s1,
-                "covariance_" + s0 + "_" + s1,
-                "pcc_" + s0 + "_" + s1,
+                f"radius_{s0}_{s1}",
+                f"magnitude_{s0}_{s1}",
+                f"covariance_{s0}_{s1}",
+                f"pcc_{s0}_{s1}",
             ]
         if ver == 3:
             headers = [
-                "weight_" + s0,
-                "mean_" + s0,
-                "std_" + s0,
-                "weight_" + s1,
-                "mean_" + s1,
-                "std_" + s1,
-                "covariance_" + s0 + "_" + s1,
-                "pcc_" + s0 + "_" + s1,
+                f"weight_{s0}",
+                f"mean_{s0}",
+                f"std_{s0}",
+                f"weight_{s1}",
+                f"mean_{s1}",
+                f"std_{s1}",
+                f"covariance_{s0}_{s1}",
+                f"pcc_{s0}_{s1}",
             ]
         if ver == 4:
             headers = [
-                "weight_" + s0,
-                "mean_" + s0,
-                "std_" + s0,
-                "covariance_" + s0 + "_" + s1,
-                "pcc_" + s0 + "_" + s1,
+                f"weight_{s0}",
+                f"mean_{s0}",
+                f"std_{s0}",
+                f"covariance_{s0}_{s1}",
+                f"pcc_{s0}_{s1}",
             ]
         if ver == 5:
             headers = [
-                "weight_" + s0,
-                "mean_" + s0,
-                "std_" + s0,
-                "weight_" + s1,
-                "mean_" + s1,
-                "std_" + s1,
-                "radius_" + s0 + "_" + s1,
-                "magnitude_" + s0 + "_" + s1,
-                "covariance_" + s0 + "_" + s1,
-                "pcc_" + s0 + "_" + s1,
+                f"weight_{s0}",
+                f"mean_{s0}",
+                f"std_{s0}",
+                f"weight_{s1}",
+                f"mean_{s1}",
+                f"std_{s1}",
+                f"radius_{s0}_{s1}",
+                f"magnitude_{s0}_{s1}",
+                f"covariance_{s0}_{s1}",
+                f"pcc_{s0}_{s1}",
             ]
         return headers
 
@@ -337,16 +337,12 @@ class incStatDB:
         Lambda = self.get_lambda(Lambda)
 
         # Retrieve incStat
-        key = ID + "_" + str(Lambda)
+        key = f"{ID}_{str(Lambda)}"
         incS = self.HT.get(key)
         if incS is None:  # does not already exist
             if len(self.HT) + 1 > self.limit:
                 raise LookupError(
-                    "Adding Entry:\n"
-                    + key
-                    + "\nwould exceed incStatHT 1D limit of "
-                    + str(self.limit)
-                    + ".\nObservation Rejected."
+                    f"Adding Entry:\n{key}\nwould exceed incStatHT 1D limit of {str(self.limit)}.\nObservation Rejected."
                 )
             incS = incStat(Lambda, ID, init_time, isTypeDiff)
             self.HT[key] = incS  # add new entry
@@ -384,7 +380,7 @@ class incStatDB:
         Lambda = self.get_lambda(Lambda)
 
         # Get incStat
-        incS = self.HT.get(ID + "_" + str(Lambda))
+        incS = self.HT.get(f"{ID}_{str(Lambda)}")
         if incS is None:  # does not already exist
             return [np.na] * 3
         else:
@@ -396,7 +392,7 @@ class incStatDB:
         Lambda = self.get_lambda(Lambda)
 
         # Get incStat
-        incS1 = self.HT.get(ID1 + "_" + str(Lambda))
+        incS1 = self.HT.get(f"{ID1}_{str(Lambda)}")
         if incS1 is None:  # does not exist
             return [np.na] * 2
 
@@ -410,9 +406,9 @@ class incStatDB:
         Lambda = self.get_lambda(Lambda)
 
         # Get incStat
-        incS1 = self.HT.get(ID + "_" + str(Lambda))
+        incS1 = self.HT.get(f"{ID}_{str(Lambda)}")
         if incS1 is None:  # does not exist
-            return ([], [])
+            return [], []
 
         # find relevant cov entry
         stats = []
@@ -430,7 +426,7 @@ class incStatDB:
         # Get incStats
         incStats = []
         for ID in IDs:
-            incS = self.HT.get(ID + "_" + str(Lambda))
+            incS = self.HT.get(f"{ID}_{str(Lambda)}")
             if incS is not None:  # exists
                 incStats.append(incS)
 
@@ -474,7 +470,7 @@ class incStatDB:
         # Default Lambda?
         Lambda = self.get_lambda(Lambda)
         hdrs = incStat(Lambda, ID).getHeaders_1D(suffix=False)
-        return [str(Lambda) + "_" + s for s in hdrs]
+        return [f"{str(Lambda)}_{s}" for s in hdrs]
 
     def getHeaders_2D(
         self, Lambda=1, IDs=None, ver=1
@@ -486,7 +482,7 @@ class incStatDB:
         hdrs = incStat_cov(
             incStat(Lambda, IDs[0]), incStat(Lambda, IDs[0]), Lambda
         ).getHeaders(ver, suffix=False)
-        return [str(Lambda) + "_" + s for s in hdrs]
+        return [f"{str(Lambda)}_{s}" for s in hdrs]
 
     def getHeaders_1D2D(self, Lambda=1, IDs=None, ver=1):
         # Default Lambda?
@@ -497,14 +493,16 @@ class incStatDB:
         hdrs2D = self.getHeaders_2D(Lambda, IDs, ver)
         return hdrs1D + hdrs2D
 
-    def getHeaders_nD(self, Lambda=1, IDs=[]):  # IDs is a n-element list or tuple
+    def getHeaders_nD(self, Lambda=1, IDs=None):  # IDs is a n-element list or tuple
         # Default Lambda?
+        if IDs is None:
+            IDs = []
         ID = ":"
         for s in IDs:
-            ID += "_" + s
+            ID += f"_{s}"
         Lambda = self.get_lambda(Lambda)
-        hdrs = ["radius" + ID, "magnitude" + ID]
-        return [str(Lambda) + "_" + s for s in hdrs]
+        hdrs = [f"radius{ID}", f"magnitude{ID}"]
+        return [f"{str(Lambda)}_{s}" for s in hdrs]
 
     # cleans out records that have a weight less than the cutoff.
     # returns number or removed records.

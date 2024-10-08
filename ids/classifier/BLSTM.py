@@ -1,11 +1,11 @@
 import itertools
-import json
 import logging
 
 # Silence tensorflow
 import os
 
 import numpy as np
+import orjson
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 logging.getLogger("tensorflow").setLevel(logging.FATAL)
@@ -97,7 +97,7 @@ class BLSTM(FeatureIDS):
 
         if len(set(annotation)) <= 1:
             settings.logger.warning(
-                "Training with a single class ({}) only!".format(set(annotation))
+                f"Training with a single class ({set(annotation)}) only!"
             )
 
         label_dim = 1  # True and False
@@ -117,9 +117,7 @@ class BLSTM(FeatureIDS):
         }
         keys, values = zip(*tuned_parameters.items())
         tuned_parameters = [dict(zip(keys, v)) for v in itertools.product(*values)]
-        settings.logger.info(
-            "Training on {} combinations".format(len(tuned_parameters))
-        )
+        settings.logger.info(f"Training on {len(tuned_parameters)} combinations")
 
         best_loss = None
         for parameters in tuned_parameters:
@@ -156,7 +154,6 @@ class BLSTM(FeatureIDS):
             )
             h.history["loss"] = [float(x) for x in h.history["loss"]]
             h.history["acc"] = [float(x) for x in h.history["acc"]]
-            h.history["lr"] = [float(x) for x in h.history["lr"]]
 
             if best_loss is None or h.history["loss"][-1] < best_loss:
                 best_loss = h.history["loss"][-1]
@@ -165,12 +162,7 @@ class BLSTM(FeatureIDS):
                 self.history = h.history
 
             settings.logger.info(
-                "Model loss {}, acc {}, learning rate {}, best loss {}".format(
-                    h.history["loss"][-1],
-                    h.history["acc"][-1],
-                    h.history["lr"][-1],
-                    best_loss,
-                )
+                f"Model loss {h.history['loss'][-1]}, acc {h.history['acc'][-1]}, best loss {best_loss}"
             )
 
     def new_state_msg(self, msg):
@@ -183,7 +175,7 @@ class BLSTM(FeatureIDS):
             return False, 0
 
         predict = self.blstm.predict(
-            [self.buffer],
+            np.array([self.buffer]),
             batch_size=self.parameters["batch_size"],
             verbose=self.settings["verbose"],
         ).astype("float32")
@@ -217,9 +209,9 @@ class BLSTM(FeatureIDS):
             "history": self.history,
         }
 
-        with self._open_file(self._resolve_model_file_path(), "wt") as f:
-            f.write(json.dumps(model, indent=4))
-        self.blstm.save(str(self._resolve_model_file_path()) + ".kreas")
+        with self._open_file(self._resolve_model_file_path(), "wb") as f:
+            f.write(orjson.dumps(model, option=orjson.OPT_INDENT_2))
+        self.blstm.save(f"{str(self._resolve_model_file_path())}.keras")
 
         return True
 
@@ -230,13 +222,11 @@ class BLSTM(FeatureIDS):
         model_file_path = self._resolve_model_file_path()
 
         try:  # Open model file
-            with self._open_file(model_file_path, mode="rt") as f:
-                model = json.load(f)
+            with self._open_file(model_file_path, mode="rb") as f:
+                model = orjson.loads(f.read())
 
         except FileNotFoundError:
-            settings.logger.info(
-                "Model file {} not found.".format(self.settings["model-file"])
-            )
+            settings.logger.info(f"Model file {self.settings['model-file']} not found.")
             return False
 
         # Load basic model
@@ -245,7 +235,7 @@ class BLSTM(FeatureIDS):
         super().load_trained_model(model["preprocessors"])
         self.parameters = model["parameters"]
         self.history = model["history"]
-        self.blstm = tensorflow.keras.models.load_model(str(model_file_path) + ".kreas")
+        self.blstm = tensorflow.keras.models.load_model(f"{str(model_file_path)}.keras")
 
         return True
 
@@ -255,22 +245,11 @@ class BLSTM(FeatureIDS):
         fig, ax = plt.subplots(1)
         ax.plot(range(len(self.history["loss"])), self.history["loss"], label="loss")
         ax.plot(range(len(self.history["loss"])), self.history["acc"], label="accuracy")
-        ax.plot(
-            range(len(self.history["loss"])), self.history["lr"], label="learning rate"
-        )
         ax.set_xlim(0, self.settings["epochs"])
 
         ax.set_ylabel("Training Loss/Accuracy/Learning Rate")
         ax.set_title(
-            "Epochs: {} Seq-Len: {} Step: {} LR: {} BS: {} DR: {} HL: {}".format(
-                self.parameters["epochs"],
-                self.parameters["sequence_length"],
-                self.parameters["step"],
-                self.parameters["learning_rate"],
-                self.parameters["batch_size"],
-                self.parameters["dropout"],
-                self.parameters["hidden_layer_size"],
-            )
+            f"Epochs: {self.parameters['epochs']} Seq-Len: {self.parameters['sequence_length']} Step: {self.parameters['step']} LR: {self.parameters['learning_rate']} BS: {self.parameters['batch_size']} DR: {self.parameters['dropout']} HL: {self.parameters['hidden_layer_size']}"
         )
 
         ax.legend()

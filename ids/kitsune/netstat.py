@@ -1,12 +1,14 @@
 ## Prep AfterImage cython package
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List
 
 import numpy as np
-import pyximport
-
-pyximport.install()
 
 import ids.kitsune.afterimage as af  # noqa: E402
+
+# import pyximport
+
+# pyximport.install()
+
 
 # import AfterImage_NDSS as af
 
@@ -35,7 +37,7 @@ import ids.kitsune.afterimage as af  # noqa: E402
 
 
 class netStat:
-    # Datastructure for efficent network stat queries
+    # Datastructure for efficient network stat queries
     # HostLimit: no more that this many Host identifiers will be tracked
     # HostSimplexLimit: no more that this many outgoing channels from each host will be tracked (purged periodically)
     # Lambdas: a list of 'window sizes' (decay factors) to track for each stream. nan resolved to default [5,3,1,.1,.01]

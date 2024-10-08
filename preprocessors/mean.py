@@ -3,12 +3,11 @@ from typing import List
 import numpy as np
 
 import ipal_iids.settings as settings
-
-from .preprocessor import Preprocessor
+from preprocessors.preprocessor import Preprocessor
 
 
 class MeanPreprocessor(Preprocessor):
-    _name = "mean"
+    _name = "Mean"
     _description = "Scale by mean-standard deviation"
     means: List[float]
     stds: List[float]
@@ -32,9 +31,7 @@ class MeanPreprocessor(Preprocessor):
 
             if self.stds[i] == 0:
                 settings.logger.info(
-                    "Standard deviation is zero. Adjusting values of {} to std 1.0".format(
-                        i
-                    )
+                    f"Standard deviation is zero. Adjusting values of {i} to std 1.0"
                 )
                 self.stds[i] = 1
 
