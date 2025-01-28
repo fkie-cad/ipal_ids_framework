@@ -3,7 +3,7 @@ from io import BytesIO, TextIOWrapper
 
 import ids.utils
 
-version = "v1.5.1"
+version = "v1.5.2"
 
 # Gzip options
 compresslevel = 6  # 0 no compress, 1 large/fast, 9 small/slow

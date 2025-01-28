@@ -1,12 +1,11 @@
 import itertools
 import logging
-
-# Silence tensorflow
 import os
 
 import numpy as np
 import orjson
 
+# Silence tensorflow
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 logging.getLogger("tensorflow").setLevel(logging.FATAL)
 

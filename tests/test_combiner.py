@@ -2,6 +2,7 @@ import pytest
 
 from .conftest import (
     COMBINERNAMES,
+    _filter_tensorflow_errors,
     check_command_output,
     check_with_validation_file,
     metaids,
@@ -12,6 +13,13 @@ from .conftest import (
 def test_default_combiner_config(combinername):
     args = ["--combiner.default.config", combinername]
     errno, stdout, stderr = metaids(args)
+    stderr = _filter_tensorflow_errors(stderr)
+
+    check_with_validation_file(
+        f"{combinername}.config",
+        stdout.decode("utf-8").replace("\n", ""),
+        test_default_combiner_config.__name__,
+    )
 
     check_command_output(
         returncode=errno,
@@ -21,12 +29,6 @@ def test_default_combiner_config(combinername):
         expectedcode=0,
         expected_stdout=[f"{combinername}"],  # check if combinername is in stdout
         check_for=["ERROR"],  # check if an IPAL error appears
-    )
-
-    check_with_validation_file(
-        f"{combinername}.config",
-        stdout.decode("utf-8").replace("\n", ""),
-        test_default_combiner_config.__name__,
     )
 
 
@@ -49,15 +51,7 @@ def test_default_config_combiner(combinername):
     ]
 
     errno, stdout, stderr = metaids(args)
-
-    check_command_output(
-        returncode=errno,
-        args=args,
-        stdout=stdout,
-        stderr=stderr,
-        expectedcode=0,
-        check_for=["ERROR"],  # check if an IPAL error appears
-    )
+    stderr = _filter_tensorflow_errors(stderr)
 
     check_with_validation_file(
         f"{combinername}-stderr.ipal",
@@ -70,4 +64,13 @@ def test_default_config_combiner(combinername):
         f"{combinername}.ipal",
         stdout.decode("utf-8"),
         test_default_config_combiner.__name__,
+    )
+
+    check_command_output(
+        returncode=errno,
+        args=args,
+        stdout=stdout,
+        stderr=stderr,
+        expectedcode=0,
+        check_for=["ERROR"],  # check if an IPAL error appears
     )

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 import os
 import random
@@ -627,7 +628,7 @@ def read_live_ipal_msg(
     if state_msg is None and settings.live_state:
         line = settings.live_statefd.readline()
         if line:
-            state_msg = orjson.loads(line)
+            state_msg = json.loads(line)
 
     # Determine smallest timestamp ipal or state?
     if ipal_msg and state_msg:

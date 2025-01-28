@@ -1,0 +1,3 @@
+WARNING:ipal-iids:No combiner defined. Using default Any combiner!
+WARNING:ipal-iids:Number of sensors (1) is smaller than max_formel_length (3).
+WARNING:ipal-iids:Setting max_formel_length to 1

@@ -20,15 +20,6 @@ def test_file_loading():
 
     errno, stdout, stderr = metaids(args)
 
-    check_command_output(
-        returncode=errno,
-        args=args,
-        stdout=stdout,
-        stderr=stderr,
-        expectedcode=0,
-        check_for=["ERROR"],
-    )
-
     check_with_validation_file(
         "ExtraIDS-stderr.ipal",
         stderr.decode("utf-8"),
@@ -40,4 +31,13 @@ def test_file_loading():
         "ExtraIDS.ipal",
         stdout.decode("utf-8"),
         test_file_loading.__name__,
+    )
+
+    check_command_output(
+        returncode=errno,
+        args=args,
+        stdout=stdout,
+        stderr=stderr,
+        expectedcode=0,
+        check_for=["ERROR"],
     )

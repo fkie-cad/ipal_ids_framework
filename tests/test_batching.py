@@ -55,15 +55,6 @@ def test_batching(batchidsname):
 
     errno, stdout, stderr = metaids(args)
 
-    check_command_output(
-        returncode=errno,
-        args=args,
-        stdout=stdout,
-        stderr=stderr,
-        expectedcode=0,
-        check_for=["ERROR"],  # check if an IPAL error appears
-    )
-
     check_with_validation_file(
         f"{batchidsname}-stderr.state",
         stderr.decode("utf-8"),
@@ -75,4 +66,13 @@ def test_batching(batchidsname):
         f"{batchidsname}.state",
         stdout.decode("utf-8"),
         test_batching.__name__,
+    )
+
+    check_command_output(
+        returncode=errno,
+        args=args,
+        stdout=stdout,
+        stderr=stderr,
+        expectedcode=0,
+        check_for=["ERROR"],  # check if an IPAL error appears
     )

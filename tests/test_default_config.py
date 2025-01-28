@@ -2,6 +2,7 @@ import pytest
 
 from .conftest import (
     IDSNAMES,
+    _filter_tensorflow_errors,
     check_command_output,
     check_with_validation_file,
     metaids,
@@ -23,9 +24,22 @@ def test_default_config_ipal(idsname):
     ]
 
     errno, stdout, stderr = metaids(args)
+    stderr = _filter_tensorflow_errors(stderr)
+
+    check_with_validation_file(
+        f"{idsname}-stderr.ipal",
+        stderr.decode("utf-8"),
+        test_default_config_ipal.__name__,
+        normalize_data=False,
+    )
+
+    check_with_validation_file(
+        f"{idsname}.ipal",
+        stdout.decode("utf-8"),
+        test_default_config_ipal.__name__,
+    )
 
     ids_without_ipal_support = ["InvariantRules", "PASAD", "Seq2SeqNN", "TABOR", "GeCo"]
-
     ids_without_ipal_support = [x.lower() for x in ids_without_ipal_support]
 
     expected_state_error = (
@@ -51,19 +65,6 @@ def test_default_config_ipal(idsname):
             check_for=["ERROR"],
         )
 
-    check_with_validation_file(
-        f"{idsname}-stderr.ipal",
-        stderr.decode("utf-8"),
-        test_default_config_ipal.__name__,
-        normalize_data=False,
-    )
-
-    check_with_validation_file(
-        f"{idsname}.ipal",
-        stdout.decode("utf-8"),
-        test_default_config_ipal.__name__,
-    )
-
 
 @pytest.mark.parametrize("idsname", IDSNAMES)
 def test_default_config_state(idsname):
@@ -80,6 +81,20 @@ def test_default_config_state(idsname):
     ]
 
     errno, stdout, stderr = metaids(args)
+    stderr = _filter_tensorflow_errors(stderr)
+
+    check_with_validation_file(
+        f"{idsname}-stderr.state",
+        stderr.decode("utf-8"),
+        test_default_config_state.__name__,
+        normalize_data=False,
+    )
+
+    check_with_validation_file(
+        f"{idsname}.state",
+        stdout.decode("utf-8"),
+        test_default_config_state.__name__,
+    )
 
     ids_without_state_support = [
         "Kitsune",
@@ -112,16 +127,3 @@ def test_default_config_state(idsname):
             expectedcode=0,
             check_for=["ERROR"] if idsname.lower() == "TABOR" else None,
         )
-
-    check_with_validation_file(
-        f"{idsname}-stderr.state",
-        stderr.decode("utf-8"),
-        test_default_config_state.__name__,
-        normalize_data=False,
-    )
-
-    check_with_validation_file(
-        f"{idsname}.state",
-        stdout.decode("utf-8"),
-        test_default_config_state.__name__,
-    )

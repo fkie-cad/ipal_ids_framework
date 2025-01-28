@@ -27,6 +27,7 @@ IDSNAMES = [
     "RandomForest",
     "SVM",
     "SteadyTime",
+    "GeCo",
     "InterArrivalTimeMean",
     "InterArrivalTimeRange",
 ]
@@ -63,6 +64,21 @@ def metaids(args):
 ########################
 # Helper methods
 ########################
+
+
+def _filter_tensorflow_errors(stderr_orig):
+    stderr = []
+
+    for line in stderr_orig.decode().split("\n"):
+        if "WARNING: All log messages before absl::InitializeLog" in line:
+            continue
+        if "Unable to register cuDNN factory" in line:
+            continue
+        if "Unable to register cuBLAS factory" in line:
+            continue
+        stderr.append(line)
+
+    return "\n".join(stderr).encode()
 
 
 def normalize(content):
