@@ -1,5 +1,7 @@
 {
     "_iids-config": {
+        "alerts": null,
+        "alerts_update": false,
         "combiner": {
             "_type": "Extra",
             "model-file": null

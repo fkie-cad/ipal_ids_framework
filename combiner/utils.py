@@ -29,5 +29,4 @@ def load_combiner(name):
 
 
 def get_all_combiner():
-    global combiner_to_use_name
     return load_combiner(combiner_to_use_name)

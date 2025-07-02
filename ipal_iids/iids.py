@@ -195,6 +195,20 @@ def prepare_arg_parser(parser):
         required=False,
     )
     parser.add_argument(
+        "--alerts",
+        dest="alerts",
+        metavar="FILE",
+        help="output file to write the verbose IDS alerts to (Default:none, '-' stdout, '*,gz' compress).",
+        required=False,
+    )
+    parser.add_argument(
+        "--alerts.update",
+        dest="alerts_update",
+        help="output also updates on ongoing IDS alerts (Default:False).",
+        action="store_true",
+        required=False,
+    )
+    parser.add_argument(
         "--config",
         dest="config",
         metavar="FILE",
@@ -206,6 +220,13 @@ def prepare_arg_parser(parser):
         dest="combiner_config",
         metavar="FILE",
         help="load Combiner configuration and parameters from the specified file ('*.gz' compressed).",
+        required=False,
+    )
+    parser.add_argument(
+        "--extra.config",
+        dest="extraconfig",
+        help="load IDSs and Combiners residing outside of IPAL",
+        metavar="FILE",
         required=False,
     )
 
@@ -274,14 +295,6 @@ def prepare_arg_parser(parser):
     # Version number
     parser.add_argument(
         "--version", action="version", version=f"%(prog)s {settings.version}"
-    )
-
-    parser.add_argument(
-        "--extra.config",
-        dest="extraconfig",
-        help="load IDSs and Combiners residing outside of IPAL",
-        metavar="FILE",
-        required=False,
     )
 
     parser.add_argument(
@@ -384,6 +397,19 @@ def load_settings(args):  # noqa: C901
             settings.outputfd = open_file(settings.output, "wb")
         else:
             settings.outputfd = sys.stdout
+
+    # Parse alerts
+    if args.alerts:
+        settings.alerts = args.alerts
+    if settings.alerts:
+        if settings.alerts != "stdout" and settings.alerts != "-":
+            # append alerts to file
+            settings.alertsfd = open_file(settings.alerts, "a")
+        else:
+            settings.alertsfd = sys.stdout
+
+    if args.alerts_update:
+        settings.alerts_update = True
 
     # Parse IDS config
     settings.config = args.config
@@ -926,6 +952,8 @@ def main():
         settings.live_ipalfd.close()
     if settings.live_state:
         settings.live_statefd.close()
+    if settings.alerts:
+        settings.alertsfd.close()
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="ipal-iids",
-    version="1.5.2",
+    version="1.5.3",
     packages=find_packages(exclude="tests"),
     scripts=["ipal-iids", "ipal-extend-alarms", "ipal-visualize-model"],
     install_requires=[
@@ -15,7 +15,6 @@ setup(
         "keras",
         "torch",
         "matplotlib",
-        f"pomegranate @ file://{os.path.dirname(__file__)}/misc/pomegranate-0.14.9.zip",
         "pandas",
         "gurobipy",
         "orjson",

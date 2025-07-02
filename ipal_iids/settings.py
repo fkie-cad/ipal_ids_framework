@@ -3,7 +3,7 @@ from io import BytesIO, TextIOWrapper
 
 import ids.utils
 
-version = "v1.5.2"
+version = "v1.5.3"
 
 # Gzip options
 compresslevel = 6  # 0 no compress, 1 large/fast, 9 small/slow
@@ -20,6 +20,9 @@ live_statefd: TextIOWrapper
 retrain = False
 output = None
 outputfd: TextIOWrapper | BytesIO
+alerts = None
+alertsfd: TextIOWrapper | BytesIO
+alerts_update = False
 
 # Logging settings
 hostname = False
@@ -33,6 +36,9 @@ idss = {ids_name: {"_type": ids_name} for ids_name in list(ids.utils.paths.keys(
 
 combinerconfig = None
 combiner = None
+
+# Alerts
+alert_purge_time = 3600 * 24 * 1  # Purge alerts older than one day
 
 
 def iids_settings_to_dict():
@@ -50,6 +56,8 @@ def iids_settings_to_dict():
         "live_state": live_state,
         "retrain": retrain,
         "output": output,
+        "alerts": alerts,
+        "alerts_update": alerts_update,
         "hostname": hostname,
         "log": log,
         "logformat": logformat,

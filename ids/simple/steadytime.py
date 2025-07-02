@@ -2,6 +2,7 @@ import orjson
 
 import ipal_iids.settings as settings
 from ids.featureids import FeatureIDS
+from ipal_iids.alerts import raise_alert, withdraw_alert
 
 
 class SteadyTime(FeatureIDS):
@@ -130,10 +131,19 @@ class SteadyTime(FeatureIDS):
         for i in range(len(state)):
             if self.time[i] is None:  # Ignore sensors with too many values
                 continue
+            sensor = self._get_feature_name(i).removeprefix("state;")
 
             if state[i] not in self.time[i]:  # Alert unknown value
                 alert |= True
                 likelihood = max(likelihood, 1)
+
+                raise_alert(
+                    f"{self._name}",
+                    f"{sensor}",
+                    msg["timestamp"],
+                    f"Values of {sensor} is unknown",
+                    f"{sensor}={state[i]} has never been seen before.",
+                )
                 continue
 
             complete, val, time = self._update(i, state[i])
@@ -145,6 +155,14 @@ class SteadyTime(FeatureIDS):
 
             if not is_valid:  # found a violation
                 alert |= True
+
+                raise_alert(
+                    f"{self._name}",
+                    f"{sensor}",
+                    msg["timestamp"],
+                    f"Values of {sensor} is constant for too short or long",
+                    f"{sensor}={val} has stayed constant for {time} but usually is constant for {self.time[i][val][0]}-{self.time[i][val][1]}.",
+                )
 
                 # Add alarm adjustment information if required
                 if self.settings["adjust"]:
@@ -158,6 +176,9 @@ class SteadyTime(FeatureIDS):
                         [t, True, likelihood] for t in range(-int(time), 0)
                     ]
                     msg["adjust"][self._name] += [[0, False, 0]]  # Reset current alarm
+
+            else:
+                withdraw_alert(f"{self._name}", f"{sensor}", msg["timestamp"])
 
         return alert, likelihood
 

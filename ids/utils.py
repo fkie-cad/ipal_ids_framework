@@ -57,7 +57,6 @@ def set_idss_to_load(arr):
 
 
 def load_ids(name):
-    global ids_cache
     # Check if module was already loaded
     if name in list(ids_cache.keys()):
         # If so return it

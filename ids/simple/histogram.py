@@ -2,6 +2,7 @@ import json
 
 import ipal_iids.settings as settings
 from ids.featureids import FeatureIDS
+from ipal_iids.alerts import raise_alert, withdraw_alert
 
 
 class Histogram(FeatureIDS):
@@ -123,10 +124,19 @@ class Histogram(FeatureIDS):
         for i in range(len(state)):
             if self.hist[i] is None:  # Ignore sensors with too many values
                 continue
+            sensor = self._get_feature_name(i).removeprefix("state;")
 
             if state[i] not in self.hist[i]:  # Alert unknown value
                 alert |= True
                 likelihood = max(likelihood, 1)
+
+                raise_alert(
+                    f"{self._name}",
+                    f"{sensor}",
+                    msg["timestamp"],
+                    f"Values of {sensor} is unknown",
+                    f"{sensor}={state[i]} has never been seen before.",
+                )
                 continue
 
             complete = self._update(i, state[i])
@@ -136,6 +146,18 @@ class Histogram(FeatureIDS):
             is_valid, local_likelihood = self._is_valid(i)
             likelihood = max(likelihood, local_likelihood)
             alert |= not is_valid
+
+            if not is_valid:
+                raise_alert(
+                    f"{self._name}",
+                    f"{sensor}",
+                    msg["timestamp"],
+                    f"{sensor} has a unusual histogram.",
+                    f"{sensor}={state[i]} violates the distribution of values.",
+                )
+
+            else:
+                withdraw_alert(f"{self._name}", f"{sensor}", msg["timestamp"])
 
         return alert, likelihood
 

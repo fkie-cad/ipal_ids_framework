@@ -11,6 +11,7 @@ from scipy.optimize import curve_fit
 import ipal_iids.settings as settings
 from ids.geco.equations import equations, get_equation
 from ids.ids import MetaIDS
+from ipal_iids.alerts import raise_alert, withdraw_alert
 
 _DATAPOINTS = {}  # Shared global variable for faster multiprocessing
 _SKIP = []
@@ -20,7 +21,6 @@ _EPS = 0.0000000001
 # Has to be a standalone method since otherwise multiprocessing/fork would try to
 # clone the entire GeCo class for each subprocess
 def _system_identification(args):
-    global _DATAPOINTS, _SKIP
     target, equation, combination = args
 
     # Omit combinations that contain the target, since we add the target down anyhow.
@@ -250,6 +250,17 @@ class GeCo(MetaIDS):
             if self.cusum[sensor] > ci["threshold"] * self.settings["threshold_factor"]:
                 alert |= True
 
+                raise_alert(
+                    f"{self._name}",
+                    f"{sensor}",
+                    msg["timestamp"],
+                    f"Deviation in {sensor}",
+                    f"{sensor}={state[sensor]} deviates from prediction {estimate:.4} = {ci['equation'].print(ci['combination'], ci['parameters'], precision=4)}.",
+                )
+
+            else:
+                withdraw_alert(f"{self._name}", f"{sensor}", msg["timestamp"])
+
         # Update values
         self.last_value = state
         return alert, [self.cusum[s] for s in self.CI]
@@ -300,12 +311,7 @@ class GeCo(MetaIDS):
         assert (
             model["settings"]["max_formel_length"] == self.settings["max_formel_length"]
         )
-        assert all(
-            [
-                a == b
-                for a, b in zip(model["settings"]["ignore"], self.settings["ignore"])
-            ]
-        )
+        assert set(model["settings"]["ignore"]) == set(self.settings["ignore"])
 
         if model["incomplete"]:
             settings.logger.warning("Model incomplete. Training did not finish?")

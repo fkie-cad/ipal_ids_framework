@@ -1,7 +1,10 @@
+import json
+
 import orjson
 
 import ipal_iids.settings as settings
 from ids.featureids import FeatureIDS
+from ipal_iids.alerts import raise_alert, withdraw_alert
 
 
 class MinMax(FeatureIDS):
@@ -61,8 +64,12 @@ class MinMax(FeatureIDS):
         if state is None:
             return alert, likelihood
 
-        for value, minimum, maximum, delta in zip(
-            state, self.mins.values(), self.maxs.values(), self.deltas.values()
+        for value, minimum, maximum, delta, N in zip(
+            state,
+            self.mins.values(),
+            self.maxs.values(),
+            self.deltas.values(),
+            range(len(state)),
         ):
             err = delta * self.settings["threshold"]
 
@@ -83,10 +90,27 @@ class MinMax(FeatureIDS):
 
             # Trigger alert
             if minimum is not None and maximum is not None:
+                sensor = self._get_feature_name(N).removeprefix("state;")
+
                 if value is not None and (
                     value < minimum - err or maximum + err < value
                 ):
                     alert |= True
+
+                    raise_alert(
+                        f"{self._name}",
+                        f"{sensor}",
+                        msg["timestamp"],
+                        f"Values of {sensor} is too high or too low",
+                        f"{sensor}={value} deviates from acceptable range {minimum - err}-{maximum + err}.",
+                    )
+
+                else:
+                    withdraw_alert(
+                        f"{self._name}",
+                        f"{sensor}",
+                        msg["timestamp"],
+                    )
 
         return alert, likelihood
 
@@ -107,12 +131,8 @@ class MinMax(FeatureIDS):
             "deltas": self.deltas,
         }
 
-        with self._open_file(self._resolve_model_file_path(), "wb") as f:
-            f.write(
-                orjson.dumps(
-                    model, option=orjson.OPT_INDENT_2 | orjson.OPT_NON_STR_KEYS
-                )
-            )
+        with self._open_file(self._resolve_model_file_path(), "w") as f:
+            f.write(json.dumps(model, indent=4))
 
         return True
 
@@ -122,7 +142,7 @@ class MinMax(FeatureIDS):
 
         try:  # Open model file
             with self._open_file(self._resolve_model_file_path(), "rt") as f:
-                model = orjson.loads(f.read())
+                model = json.loads(f.read())
         except FileNotFoundError:
             settings.logger.info(
                 f"Model file {str(self._resolve_model_file_path())} not found."

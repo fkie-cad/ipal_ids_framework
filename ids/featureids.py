@@ -37,6 +37,10 @@ class FeatureIDS(MetaIDS):
         self.preprocessors = []
         self.features = []
 
+    def _get_feature_name(self, pos):
+        assert 0 <= pos and pos < len(self.features)
+        return ";".join(self.features[pos])
+
     def _get_val(self, msg, val):
         # Lookup value
         for index in val:

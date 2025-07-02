@@ -1,0 +1,11 @@
+{
+    "count": 1,
+    "description": "switch=1.0 has never been seen before.",
+    "end": null,
+###IGNORE-LINE###
+    "ids": "Steadytime",
+    "point": "switch",
+    "reason": "Values of switch is unknown",
+    "start": 121,
+    "status": "new"
+}

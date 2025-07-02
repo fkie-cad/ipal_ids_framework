@@ -4,6 +4,7 @@ from .conftest import (
     COMBINERNAMES,
     _filter_tensorflow_errors,
     check_command_output,
+    check_tensorflow_support,
     check_with_validation_file,
     metaids,
 )
@@ -11,6 +12,8 @@ from .conftest import (
 
 @pytest.mark.parametrize("combinername", COMBINERNAMES)
 def test_default_combiner_config(combinername):
+    check_tensorflow_support(combinername)
+
     args = ["--combiner.default.config", combinername]
     errno, stdout, stderr = metaids(args)
     stderr = _filter_tensorflow_errors(stderr)
@@ -34,6 +37,8 @@ def test_default_combiner_config(combinername):
 
 @pytest.mark.parametrize("combinername", COMBINERNAMES)
 def test_default_config_combiner(combinername):
+    check_tensorflow_support(combinername)
+
     args = [
         "--retrain",
         "--train.ipal",

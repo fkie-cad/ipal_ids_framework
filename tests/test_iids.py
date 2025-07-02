@@ -4,6 +4,7 @@ from .conftest import (
     IDSNAMES,
     _filter_tensorflow_errors,
     check_command_output,
+    check_tensorflow_support,
     check_with_validation_file,
     metaids,
 )
@@ -47,6 +48,8 @@ def test_metaids_static_commands(args):
 
 @pytest.mark.parametrize("idsname", IDSNAMES)
 def test_get_default_config(idsname):
+    check_tensorflow_support(idsname)
+
     args = ["--default.config", idsname]
     errno, stdout, stderr = metaids(args)
     stderr = _filter_tensorflow_errors(stderr)

@@ -3,8 +3,10 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
-from subprocess import PIPE, Popen
+from subprocess import PIPE, Popen, call
 from typing import List, Union
+
+import pytest
 
 # Exclude output paths
 collect_ignore = ["snapshots"]
@@ -44,6 +46,15 @@ COMBINERNAMES = [
     "Matrix",
     "SVM",
 ]
+
+no_tensorflow_support = call(["python3", "-c", "import tensorflow"]) != 0
+
+
+def check_tensorflow_support(idsname):
+    needs_tensorflow = ["LSTM", "BLSTM"]
+
+    if no_tensorflow_support and idsname in needs_tensorflow:
+        pytest.skip("Hardware does not support Tensorflow")
 
 
 def metaids(args):

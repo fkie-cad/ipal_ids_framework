@@ -4,6 +4,7 @@ from .conftest import (
     IDSNAMES,
     _filter_tensorflow_errors,
     check_command_output,
+    check_tensorflow_support,
     check_with_validation_file,
     metaids,
 )
@@ -11,6 +12,8 @@ from .conftest import (
 
 @pytest.mark.parametrize("idsname", IDSNAMES)
 def test_default_config_ipal(idsname):
+    check_tensorflow_support(idsname)
+
     args = [
         "--retrain",
         "--train.ipal",
@@ -68,6 +71,8 @@ def test_default_config_ipal(idsname):
 
 @pytest.mark.parametrize("idsname", IDSNAMES)
 def test_default_config_state(idsname):
+    check_tensorflow_support(idsname)
+
     args = [
         "--retrain",
         "--train.state",

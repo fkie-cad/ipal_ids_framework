@@ -100,34 +100,40 @@ The `ipal-iids` consists of two phases. During training, the parameters `--train
 Each IIDS has its own options which can be retrieved by ```ipal-iids --default.config [ids-name]```.
 
 ```bash
-usage: ipal-iids [-h] [--train.ipal FILE] [--train.state FILE] [--train.combiner FILE] [--live.ipal FILE] [--live.state FILE] [--output FILE] [--config FILE] [--combiner.config FILE] [--default.config IDS]
-                 [--combiner.default.config Combiner] [--retrain] [--log STR] [--logfile FILE] [--compresslevel INT] [--version]
+usage: ipal-iids [--train.ipal FILE] [--train.state FILE] [--train.combiner FILE] [--live.ipal FILE] [--live.state FILE] [--output FILE] [--alerts FILE] [--alerts.update] [--config FILE]
+                 [--combiner.config FILE] [--extra.config FILE] [--default.config IDS] [--combiner.default.config Combiner] [--retrain] [--hostname] [--log STR] [--logfile FILE] [--compresslevel INT]
+                 [--version] [-h] [--live.batch INT]
 
 This program contains the ipal-iids framework together with implementations of several IIDSs based on the IPAL message and state format.
 
 options:
-  -h, --help            show this help message and exit
   --train.ipal FILE     input file of IPAL messages to train the IDS on ('-' stdin, '*.gz' compressed).
   --train.state FILE    input file of IPAL state messages to train the IDS on ('-' stdin, '*.gz' compressed).
   --train.combiner FILE
                         input file of IPAL or state messages to train the combiner on ('-' stdin, '*.gz' compressed).
   --live.ipal FILE      input file of IPAL messages to perform the live detection on ('-' stdin, '*.gz' compressed).
   --live.state FILE     input file of IPAL state messages to perform the live detection on ('-' stdin, '*.gz' compressed).
-  --output FILE         output file to write the anotated IDS output to (Default:none, '-' stdout, '*,gz' compress).
+  --output FILE         output file to write the annotated IDS output to (Default:none, '-' stdout, '*,gz' compress).
+  --alerts FILE         output file to write the verbose IDS alerts to (Default:none, '-' stdout, '*,gz' compress).
+  --alerts.update       output also updates on ongoing IDS alerts (Default:False).
   --config FILE         load IDS configuration and parameters from the specified file ('*.gz' compressed).
   --combiner.config FILE
                         load Combiner configuration and parameters from the specified file ('*.gz' compressed).
-  --default.config IDS  dump the default configuration for the specified IDS to stdout and exit, can be used as a basis for writing IDS config files. Available IIDSs are:
-                        Autoregression,BLSTM,DecimalPlaces,DecisionTree,DTMC,Dummy,Exists,ExtraTrees,Histogram,inter-arrival-mean,inter-arrival-
-                        range,InvariantRules,IsolationForest,MinMax,NaiveBayes,Optimal,PASAD,RandomForest,SVM,Seq2SeqNN,Steadytime,TABOR
+  --extra.config FILE   load IDSs and Combiners residing outside of IPAL
+  --default.config IDS  dump the default configuration for the specified IDS to stdout and exit, can be used as a basis for writing IDS config files. Available IIDSs are: BLSTM,GeCo,DecimalPlaces,DecisionTree,D
+                        tmc,DummyIDS,ExistsIDS,ExtraTrees,Histogram,InterArrivalTimeMean,InterArrivalTimeRange,InvariantRules,IsolationForest,Kitsune,MinMax,NaiveBayes,OptimalIDS,Pasad,RandomForest,SVM,Seq2SeqN
+                        N,SteadyTime,TABOR,DummyBatchIDS
   --combiner.default.config Combiner
                         dump the default configuration for the specified Combiner to stdout and exit, can be used as a basis for writing Combiner config files. Available Combiners are:
-                        Any,Matrix,Gurobi,Heuristic,LogisticRegression,SVM,LSTM
+                        Any,Matrix,Gurobi,Heuristic,LogisticRegression,MLP,SVM,LSTM
   --retrain             retrain regardless of a trained model file being present.
+  --hostname            Add the hostname to the output.
   --log STR             define logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL) (Default: WARNING).
   --logfile FILE        file to log to (Default: stderr).
-  --compresslevel INT   set the gzip compress level. 0 no compress, 1 fast/large, ..., 9 slow/tiny. (Default: 9)
+  --compresslevel INT   set the gzip compress level. 0 no compress, 1 fast/large, ..., 9 slow/tiny. (Default: 6)
   --version             show program's version number and exit
+  -h, --help            Show this help message and exit.
+  --live.batch INT      commands to use batching and defines the batch size
 ```
 
 #### Usage configuration files
@@ -220,6 +226,28 @@ Multiple preprocessors can be used in series. The following example shows how pr
     }
 }
 ```
+
+#### Usage Alerts
+
+By default, each IDS adds the `ids` key to an IPAL message indicating whether the combined IDS system (all individual IDSs and the combiner) emits an alert (True or False). This is helpful for research, e.g., when calculating the detection performance. Yet, for practical use, this type of alert does not provide any context for users. To this end, some IDSs implement context-enriched alerts. These can be enabled and saved to a dedicated file with the `--alerts` option. These alerts are in JSON format and of the following structure:
+
+```json
+{
+    "status": "new", # Can be new, closed, or updated
+    "ids": "Steadytime",
+    "point": "switch", # Source of the alert if identifiable
+    "reason": "Values of switch is unknown",
+    "start": 1751361777,
+    "end": 1751361779,
+    "description": "switch=1.0 has never been seen before.",
+    "count": 1, # Counts the occurrences of this alert
+    "id": "30b29eba-b140-4de6-9f59-b8cc1f015356",
+}
+```
+
+Note that not all IDSs support this feature yet.
+
+Note that an `update` is not emitted unless the `--alerts.update` option is set.
 
 #### Usage `ipal-visualize-model`
 

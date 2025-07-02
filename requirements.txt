@@ -5,7 +5,6 @@ scikit-learn
 keras
 torch
 matplotlib
-./misc/pomegranate-0.14.9.zip
 pandas
 gurobipy
 cython
