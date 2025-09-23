@@ -78,7 +78,9 @@ class FeatureIDS(MetaIDS):
         # Build preprocessors from settings
         for pre in self.settings["preprocessors"]:
             apply = [f in pre["features"] for f in self.settings["features"]]
-            self.preprocessors.append(load_preprocessor(pre["method"])(apply))
+            self.preprocessors.append(
+                load_preprocessor(pre["method"])(apply, names=self.settings["features"])
+            )
 
         self.features = [f.split(";") for f in self.settings["features"]]
 

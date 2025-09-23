@@ -5,8 +5,8 @@ class AggregatePreprocessor(Preprocessor):
     _name = "aggregate"
     _description = "Aggregates multiple vectors into one feature"
 
-    def __init__(self, features):
-        super().__init__(features)
+    def __init__(self, features, names=None):
+        super().__init__(features, names=names)
 
         self.num = 90
         self.N = 0

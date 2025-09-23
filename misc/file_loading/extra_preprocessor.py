@@ -14,8 +14,8 @@ class ExtraPreprocessor(Preprocessor):
     means: List[float]
     stds: List[float]
 
-    def __init__(self, features):
-        super().__init__(features)
+    def __init__(self, features, names=None):
+        super().__init__(features, names=names)
         self.means = [None] * len(self.features)
         self.stds = [None] * len(self.features)
 

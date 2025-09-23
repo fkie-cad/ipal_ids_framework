@@ -9,8 +9,15 @@ class Preprocessor:
     features: List[bool]
 
     # Features is a list of booleans. True indicates preprocessing on this feature.
-    def __init__(self, features: List[bool]):
+    def __init__(self, features: List[bool], names: None):
         self.features = features
+        self.names = names
+
+    def _lookup_feature_name(self, i):
+        if self.names and i < len(self.names):
+            return self.names[i]
+        else:
+            return "unknown"
 
     def fit(self, values):
         raise NotImplementedError

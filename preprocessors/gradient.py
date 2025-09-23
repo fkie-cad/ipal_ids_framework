@@ -5,8 +5,8 @@ class GradientPreprocessor(Preprocessor):
     _name = "Gradient"  # NOTE Does not consider time!
     _description = "Calculate gradient"
 
-    def __init__(self, features, window_size=1):
-        super().__init__(features)
+    def __init__(self, features, names=None, window_size=1):
+        super().__init__(features, names=names)
         self.window_size = window_size
 
         self.last_value = [None] * len(self.features)

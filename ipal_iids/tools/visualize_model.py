@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 import argparse
 import logging
+import os
 import sys
+from pathlib import Path
 
 import orjson
 
 import ipal_iids.iids as iids
 import ipal_iids.settings as settings
-from ids.utils import get_all_iidss, set_idss_to_load
+from ids.utils import get_all_iidss
+from ids.utils import paths as ids_paths
+from ids.utils import set_idss_to_load
 
 
 # Initialize logger
@@ -43,6 +47,14 @@ def prepare_arg_parser(parser):
         "--output",
         metavar="output",
         help="file to save the plot to (Default: '': show in matplotlib window)",
+        required=False,
+    )
+
+    parser.add_argument(
+        "--extra.config",
+        dest="extraconfig",
+        help="load IDSs and Combiners residing outside of IPAL",
+        metavar="FILE",
         required=False,
     )
 
@@ -135,13 +147,44 @@ def plot_models(idss, args):
             plt.close()
 
 
+# Load data from extra config file
+def load_extra_config(args):
+    if args.extraconfig:
+        # Load config
+        econf_file = iids.open_file(args.extraconfig, "rb")
+        econf_json = orjson.loads(econf_file.read())
+        # Root path
+        rp = Path(os.path.abspath(args.extraconfig)).parent
+        # Add idss
+        for eo in econf_json["IDS"]:
+            ids_paths[eo["name"]] = os.path.join(rp, eo["path"])
+        # Close file
+        econf_file.close()
+        # Reload settings
+        settings.idss = {
+            ids_name: {"_type": ids_name} for ids_name in list(ids_paths.keys())
+        }
+
+
 def main():
     # Argument parser and settings
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        prog="ipal-visualize-model",
+        description="This program helps to visualize trained IDS models if the given IDS supports it.",
+    )
     prepare_arg_parser(parser)
 
     args = parser.parse_args()
     initialize_logger(args)
+
+    # Load extra config
+    load_extra_config(args)
+
+    # Hook help to reload help strings, in order to load IDS names potentially added by the extra config
+    if hasattr(args, "help"):
+        prepare_arg_parser(parser)
+        parser.print_help()
+        exit(0)
 
     idss = load_settings(args)
     plot_models(idss, args)

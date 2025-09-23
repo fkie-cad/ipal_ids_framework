@@ -6,8 +6,8 @@ class IndicateNonePreprocessor(Preprocessor):
     _name = "IndicateNone"
     _description = "Set None to 0 and indicate with new feature"
 
-    def __init__(self, features):
-        super().__init__(features)
+    def __init__(self, features, names=None):
+        super().__init__(features, names=names)
 
     def fit(self, values):
         pass

@@ -12,8 +12,8 @@ class MeanPreprocessor(Preprocessor):
     means: List[float]
     stds: List[float]
 
-    def __init__(self, features):
-        super().__init__(features)
+    def __init__(self, features, names=None):
+        super().__init__(features, names=names)
         self.means = [None] * len(self.features)
         self.stds = [None] * len(self.features)
 
@@ -31,7 +31,7 @@ class MeanPreprocessor(Preprocessor):
 
             if self.stds[i] == 0:
                 settings.logger.info(
-                    f"Standard deviation is zero. Adjusting values of {i} to std 1.0"
+                    f"Standard deviation of {self._lookup_feature_name(i)} is zero. Adjusting values of {i} to std 1.0"
                 )
                 self.stds[i] = 1
 

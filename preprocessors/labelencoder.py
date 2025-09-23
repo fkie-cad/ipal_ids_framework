@@ -12,8 +12,8 @@ class LabelEncoderPreprocessor(Preprocessor):
     encoder: List[Optional[LabelEncoder]]
     fitdata: List[Optional[List[set]]]
 
-    def __init__(self, features):
-        super().__init__(features)
+    def __init__(self, features, names=None):
+        super().__init__(features, names=names)
         self.encoder = [None] * len(self.features)
         self.fitdata = [None] * len(self.features)
 
@@ -40,7 +40,9 @@ class LabelEncoderPreprocessor(Preprocessor):
             try:
                 value[i] = float(self.encoder[i].transform([value[i]])[0])
             except ValueError:
-                settings.logger.critical(f"Value {value[i]} not in trained categories")
+                settings.logger.critical(
+                    f"Value {value[i]} of feature {self._lookup_feature_name(i)} has not been seen during category training"
+                )
 
         return value
 

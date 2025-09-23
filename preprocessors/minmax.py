@@ -12,8 +12,8 @@ class MinMaxPreprocessor(Preprocessor):
     mins: List[float]
     maxs: List[float]
 
-    def __init__(self, features):
-        super().__init__(features)
+    def __init__(self, features, names=None):
+        super().__init__(features, names=names)
         self.mins = [None] * len(self.features)
         self.maxs = [None] * len(self.features)
 
@@ -31,7 +31,7 @@ class MinMaxPreprocessor(Preprocessor):
 
             if self.mins[i] == self.maxs[i]:
                 settings.logger.info(
-                    f"Min Max is the same. Adjusting values of feature {i} to 0.5"
+                    f"Min Max of feature {self._lookup_feature_name(i)} are the same. Adjusting values to 0.5"
                 )
                 self.mins[i] -= 1
                 self.maxs[i] += 1
@@ -48,7 +48,7 @@ class MinMaxPreprocessor(Preprocessor):
 
             if value[i] < self.mins[i] or self.maxs[i] < value[i]:
                 settings.logger.warning(
-                    f"Value {value[i]} out of trained range ({self.mins[i]} - {self.maxs[i]})"
+                    f"Value {value[i]} of feature {self._lookup_feature_name(i)} is out of the trained range ({self.mins[i]} - {self.maxs[i]})"
                 )
 
             value[i] = (value[i] - self.mins[i]) / (self.maxs[i] - self.mins[i])

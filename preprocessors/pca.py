@@ -12,8 +12,8 @@ class PCAPreprocessor(Preprocessor):
     _name = "PCA"
     _description = "Performs a principal component analysis"
 
-    def __init__(self, features):
-        super().__init__(features)
+    def __init__(self, features, names=None):
+        super().__init__(features, names=names)
         self.encoder = None
 
     def fit(self, values):

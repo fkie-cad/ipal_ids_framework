@@ -11,8 +11,8 @@ class CategoricalPreprocessor(Preprocessor):
     _description = "Encode as categorical"
     encoder: List[Union[Dict[str, Any], None]]
 
-    def __init__(self, features):
-        super().__init__(features)
+    def __init__(self, features, names=None):
+        super().__init__(features, names=names)
 
         self.encoder = [None] * len(self.features)
 
@@ -26,6 +26,9 @@ class CategoricalPreprocessor(Preprocessor):
 
             X = list(set([v[i] for v in values]))
             classes = np.eye(len(X))
+            settings.logger.info(
+                f"Feature {self._lookup_feature_name(i)} has {len(X)} categories."
+            )
             self.encoder[i] = {str(x): list(classes[X.index(x)]) for x in X}
 
     def transform(self, value):
@@ -39,7 +42,9 @@ class CategoricalPreprocessor(Preprocessor):
             try:
                 value[i] = self.encoder[i][str(value[i])]
             except ValueError:
-                settings.logger.critical(f"Value {value[i]} not in trained categories")
+                settings.logger.critical(
+                    f"Value {value[i]} of feature {self._lookup_feature_name(i)} has not been seen during category training"
+                )
 
         return value
 
